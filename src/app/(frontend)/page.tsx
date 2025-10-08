@@ -91,6 +91,140 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* Manufacturer Logos Section */}
+      <section className="manufacturers-section">
+        <div className="manufacturers-container">
+          <div className="manufacturers-grid">
+            <div className="manufacturer-item">
+              <Image
+                src="/manufacturers/astonmartin.webp"
+                alt="Aston Martin"
+                width={120}
+                height={80}
+                style={{ objectFit: 'contain' }}
+              />
+            </div>
+            <div className="manufacturer-item">
+              <Image
+                src="/manufacturers/audi.webp"
+                alt="Audi"
+                width={120}
+                height={80}
+                style={{ objectFit: 'contain' }}
+              />
+            </div>
+            <div className="manufacturer-item">
+              <Image
+                src="/manufacturers/bentley.webp"
+                alt="Bentley"
+                width={120}
+                height={80}
+                style={{ objectFit: 'contain' }}
+              />
+            </div>
+            <div className="manufacturer-item">
+              <Image
+                src="/manufacturers/bmw.webp"
+                alt="BMW"
+                width={120}
+                height={80}
+                style={{ objectFit: 'contain' }}
+              />
+            </div>
+            <div className="manufacturer-item">
+              <Image
+                src="/manufacturers/ferrari.webp"
+                alt="Ferrari"
+                width={120}
+                height={80}
+                style={{ objectFit: 'contain' }}
+              />
+            </div>
+            <div className="manufacturer-item">
+              <Image
+                src="/manufacturers/lamborghini.webp"
+                alt="Lamborghini"
+                width={120}
+                height={80}
+                style={{ objectFit: 'contain' }}
+              />
+            </div>
+            <div className="manufacturer-item">
+              <Image
+                src="/manufacturers/maserati.webp"
+                alt="Maserati"
+                width={120}
+                height={80}
+                style={{ objectFit: 'contain' }}
+              />
+            </div>
+            <div className="manufacturer-item">
+              <Image
+                src="/manufacturers/mclaren.webp"
+                alt="McLaren"
+                width={120}
+                height={80}
+                style={{ objectFit: 'contain' }}
+              />
+            </div>
+            <div className="manufacturer-item">
+              <Image
+                src="/manufacturers/mercedes.webp"
+                alt="Mercedes-Benz"
+                width={120}
+                height={80}
+                style={{ objectFit: 'contain' }}
+              />
+            </div>
+            <div className="manufacturer-item">
+              <Image
+                src="/manufacturers/mini.webp"
+                alt="Mini"
+                width={120}
+                height={80}
+                style={{ objectFit: 'contain' }}
+              />
+            </div>
+            <div className="manufacturer-item">
+              <Image
+                src="/manufacturers/porsche.webp"
+                alt="Porsche"
+                width={120}
+                height={80}
+                style={{ objectFit: 'contain' }}
+              />
+            </div>
+            <div className="manufacturer-item">
+              <Image
+                src="/manufacturers/rangerover.webp"
+                alt="Range Rover"
+                width={120}
+                height={80}
+                style={{ objectFit: 'contain' }}
+              />
+            </div>
+            <div className="manufacturer-item">
+              <Image
+                src="/manufacturers/rollsroyce.webp"
+                alt="Rolls-Royce"
+                width={120}
+                height={80}
+                style={{ objectFit: 'contain' }}
+              />
+            </div>
+            <div className="manufacturer-item">
+              <Image
+                src="/manufacturers/vw.webp"
+                alt="Volkswagen"
+                width={120}
+                height={80}
+                style={{ objectFit: 'contain' }}
+              />
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   )
 }
