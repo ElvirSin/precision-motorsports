@@ -96,7 +96,7 @@ export default function HomePage() {
       <section className="manufacturers-section">
         <div className="manufacturers-container">
           <div className="manufacturers-grid">
-            <div className="manufacturer-item">
+            <Link href="/manufacturers/aston-martin" className="manufacturer-item">
               <Image
                 src="/manufacturers/astonmartin.webp"
                 alt="Aston Martin"
@@ -104,8 +104,8 @@ export default function HomePage() {
                 height={80}
                 style={{ objectFit: 'contain' }}
               />
-            </div>
-            <div className="manufacturer-item">
+            </Link>
+            <Link href="/manufacturers/audi" className="manufacturer-item">
               <Image
                 src="/manufacturers/audi.webp"
                 alt="Audi"
@@ -113,8 +113,8 @@ export default function HomePage() {
                 height={80}
                 style={{ objectFit: 'contain' }}
               />
-            </div>
-            <div className="manufacturer-item">
+            </Link>
+            <Link href="/manufacturers/bentley" className="manufacturer-item">
               <Image
                 src="/manufacturers/bentley.webp"
                 alt="Bentley"
@@ -122,8 +122,8 @@ export default function HomePage() {
                 height={80}
                 style={{ objectFit: 'contain' }}
               />
-            </div>
-            <div className="manufacturer-item">
+            </Link>
+            <Link href="/manufacturers/bmw" className="manufacturer-item">
               <Image
                 src="/manufacturers/bmw.webp"
                 alt="BMW"
@@ -131,8 +131,8 @@ export default function HomePage() {
                 height={80}
                 style={{ objectFit: 'contain' }}
               />
-            </div>
-            <div className="manufacturer-item">
+            </Link>
+            <Link href="/manufacturers/ferrari" className="manufacturer-item">
               <Image
                 src="/manufacturers/ferrari.webp"
                 alt="Ferrari"
@@ -140,8 +140,8 @@ export default function HomePage() {
                 height={80}
                 style={{ objectFit: 'contain' }}
               />
-            </div>
-            <div className="manufacturer-item">
+            </Link>
+            <Link href="/manufacturers/lamborghini" className="manufacturer-item">
               <Image
                 src="/manufacturers/lamborghini.webp"
                 alt="Lamborghini"
@@ -149,8 +149,8 @@ export default function HomePage() {
                 height={80}
                 style={{ objectFit: 'contain' }}
               />
-            </div>
-            <div className="manufacturer-item">
+            </Link>
+            <Link href="/manufacturers/maserati" className="manufacturer-item">
               <Image
                 src="/manufacturers/maserati.webp"
                 alt="Maserati"
@@ -158,8 +158,8 @@ export default function HomePage() {
                 height={80}
                 style={{ objectFit: 'contain' }}
               />
-            </div>
-            <div className="manufacturer-item">
+            </Link>
+            <Link href="/manufacturers/mclaren" className="manufacturer-item">
               <Image
                 src="/manufacturers/mclaren.webp"
                 alt="McLaren"
@@ -167,8 +167,8 @@ export default function HomePage() {
                 height={80}
                 style={{ objectFit: 'contain' }}
               />
-            </div>
-            <div className="manufacturer-item">
+            </Link>
+            <Link href="/manufacturers/mercedes" className="manufacturer-item">
               <Image
                 src="/manufacturers/mercedes.webp"
                 alt="Mercedes-Benz"
@@ -176,8 +176,8 @@ export default function HomePage() {
                 height={80}
                 style={{ objectFit: 'contain' }}
               />
-            </div>
-            <div className="manufacturer-item">
+            </Link>
+            <Link href="/manufacturers/mini" className="manufacturer-item">
               <Image
                 src="/manufacturers/mini.webp"
                 alt="Mini"
@@ -185,8 +185,8 @@ export default function HomePage() {
                 height={80}
                 style={{ objectFit: 'contain' }}
               />
-            </div>
-            <div className="manufacturer-item">
+            </Link>
+            <Link href="/manufacturers/porsche" className="manufacturer-item">
               <Image
                 src="/manufacturers/porsche.webp"
                 alt="Porsche"
@@ -194,8 +194,8 @@ export default function HomePage() {
                 height={80}
                 style={{ objectFit: 'contain' }}
               />
-            </div>
-            <div className="manufacturer-item">
+            </Link>
+            <Link href="/manufacturers/range-rover" className="manufacturer-item">
               <Image
                 src="/manufacturers/rangerover.webp"
                 alt="Range Rover"
@@ -203,8 +203,8 @@ export default function HomePage() {
                 height={80}
                 style={{ objectFit: 'contain' }}
               />
-            </div>
-            <div className="manufacturer-item">
+            </Link>
+            <Link href="/manufacturers/rolls-royce" className="manufacturer-item">
               <Image
                 src="/manufacturers/rollsroyce.webp"
                 alt="Rolls-Royce"
@@ -212,8 +212,8 @@ export default function HomePage() {
                 height={80}
                 style={{ objectFit: 'contain' }}
               />
-            </div>
-            <div className="manufacturer-item">
+            </Link>
+            <Link href="/manufacturers/volkswagen" className="manufacturer-item">
               <Image
                 src="/manufacturers/vw.webp"
                 alt="Volkswagen"
@@ -221,7 +221,7 @@ export default function HomePage() {
                 height={80}
                 style={{ objectFit: 'contain' }}
               />
-            </div>
+            </Link>
           </div>
         </div>
       </section>
