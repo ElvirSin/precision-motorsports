@@ -10,6 +10,7 @@ interface NavigationProps {
 export default function Navigation({ activePage }: NavigationProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isServicesDropdownOpen, setIsServicesDropdownOpen] = useState(false)
+  const [isMobileServicesOpen, setIsMobileServicesOpen] = useState(false)
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen)
@@ -25,6 +26,10 @@ export default function Navigation({ activePage }: NavigationProps) {
 
   const closeServicesDropdown = () => {
     setIsServicesDropdownOpen(false)
+  }
+
+  const toggleMobileServices = () => {
+    setIsMobileServicesOpen(!isMobileServicesOpen)
   }
 
   const manufacturers = [
@@ -141,13 +146,37 @@ export default function Navigation({ activePage }: NavigationProps) {
         >
           HOME
         </Link>
-        <Link
-          href="/services"
-          className={`nav-link ${activePage === 'services' ? 'active' : ''}`}
-          onClick={closeMobileMenu}
-        >
-          SERVICES
-        </Link>
+
+        {/* Mobile Services Section */}
+        <div className="mobile-services-section">
+          <button
+            className={`nav-link mobile-services-toggle ${activePage === 'services' ? 'active' : ''}`}
+            onClick={toggleMobileServices}
+          >
+            SERVICES
+            <span className={`mobile-arrow ${isMobileServicesOpen ? 'active' : ''}`}>▼</span>
+          </button>
+          <div className={`mobile-services-menu ${isMobileServicesOpen ? 'active' : ''}`}>
+            <Link href="/services" className="mobile-services-link" onClick={closeMobileMenu}>
+              <span className="mobile-icon">⚙️</span>
+              All Services
+            </Link>
+            <div className="mobile-services-divider"></div>
+            <div className="mobile-services-title">Manufacturer Services</div>
+            {manufacturers.map((manufacturer) => (
+              <Link
+                key={manufacturer.slug}
+                href={`/manufacturers/${manufacturer.slug}`}
+                className="mobile-services-link"
+                onClick={closeMobileMenu}
+              >
+                <span className="mobile-icon">🚗</span>
+                {manufacturer.name}
+              </Link>
+            ))}
+          </div>
+        </div>
+
         <Link
           href="/about"
           className={`nav-link ${activePage === 'about' ? 'active' : ''}`}
