@@ -15,27 +15,7 @@ body {
 
 .homepage {
   min-height: 100vh;
-  background: linear-gradient(
-    135deg,
-    #0a0a0a 0%,
-    #1a1a1a 25%,
-    #2a2a2a 50%,
-    #1a1a1a 75%,
-    #0a0a0a 100%
-  );
-  position: relative;
-}
-
-.homepage::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: radial-gradient(ellipse at center, rgba(74, 158, 255, 0.02) 0%, transparent 70%);
-  pointer-events: none;
-  z-index: 0;
+  background: #000;
 }
 
 /* Header Styles */
@@ -187,20 +167,11 @@ body {
 
 /* Content Section */
 .content-section {
-  background: linear-gradient(
-    135deg,
-    #0a0a0a 0%,
-    #1a1a1a 25%,
-    #2a2a2a 50%,
-    #1a1a1a 75%,
-    #0a0a0a 100%
-  );
+  background: #000;
   min-height: 50vh;
   display: flex;
   align-items: center;
   padding: 60px 0;
-  position: relative;
-  z-index: 1;
 }
 
 .content-container {
@@ -886,18 +857,9 @@ body {
 
 /* Manufacturer Logos Section */
 .manufacturers-section {
-  background: linear-gradient(
-    135deg,
-    #0a0a0a 0%,
-    #1a1a1a 25%,
-    #2a2a2a 50%,
-    #1a1a1a 75%,
-    #0a0a0a 100%
-  );
+  background: #000;
   padding: 60px 0;
   margin-top: 40px;
-  position: relative;
-  z-index: 1;
 }
 
 .manufacturers-container {
@@ -1259,22 +1221,22 @@ body {
   .homepage .manufacturer-hero {
     padding: 120px 0 10px !important;
   }
-  
+
   .manufacturer-hero-container {
     grid-template-columns: 1fr;
     gap: 30px;
     text-align: center;
   }
-  
+
   .hero-title {
     font-size: 32px;
   }
-  
+
   .service-descriptions-container {
     grid-template-columns: repeat(2, 1fr);
     gap: 30px;
   }
-  
+
   .service-options-grid {
     grid-template-columns: repeat(2, 1fr);
   }
