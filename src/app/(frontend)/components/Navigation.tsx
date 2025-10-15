@@ -9,6 +9,7 @@ interface NavigationProps {
 
 export default function Navigation({ activePage }: NavigationProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [isServicesDropdownOpen, setIsServicesDropdownOpen] = useState(false)
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen)
@@ -17,6 +18,31 @@ export default function Navigation({ activePage }: NavigationProps) {
   const closeMobileMenu = () => {
     setIsMobileMenuOpen(false)
   }
+
+  const toggleServicesDropdown = () => {
+    setIsServicesDropdownOpen(!isServicesDropdownOpen)
+  }
+
+  const closeServicesDropdown = () => {
+    setIsServicesDropdownOpen(false)
+  }
+
+  const manufacturers = [
+    { name: 'Aston Martin', slug: 'aston-martin' },
+    { name: 'Audi', slug: 'audi' },
+    { name: 'Bentley', slug: 'bentley' },
+    { name: 'BMW', slug: 'bmw' },
+    { name: 'Ferrari', slug: 'ferrari' },
+    { name: 'Lamborghini', slug: 'lamborghini' },
+    { name: 'Maserati', slug: 'maserati' },
+    { name: 'McLaren', slug: 'mclaren' },
+    { name: 'Mercedes-Benz', slug: 'mercedes' },
+    { name: 'Mini', slug: 'mini' },
+    { name: 'Porsche', slug: 'porsche' },
+    { name: 'Range Rover', slug: 'range-rover' },
+    { name: 'Rolls-Royce', slug: 'rolls-royce' },
+    { name: 'Volkswagen', slug: 'volkswagen' },
+  ]
 
   return (
     <header className="header">
@@ -38,12 +64,43 @@ export default function Navigation({ activePage }: NavigationProps) {
           <Link href="/" className={`nav-link ${activePage === 'home' ? 'active' : ''}`}>
             HOME
           </Link>
-          <Link
-            href="/services"
-            className={`nav-link ${activePage === 'services' ? 'active' : ''}`}
+          <div
+            className="nav-dropdown"
+            onMouseEnter={() => setIsServicesDropdownOpen(true)}
+            onMouseLeave={() => setIsServicesDropdownOpen(false)}
           >
-            SERVICES
-          </Link>
+            <button
+              className={`nav-link nav-button ${activePage === 'services' ? 'active' : ''}`}
+              onClick={toggleServicesDropdown}
+            >
+              SERVICES
+            </button>
+            <div className={`dropdown-menu ${isServicesDropdownOpen ? 'active' : ''}`}>
+              <Link
+                href="/services"
+                className="dropdown-link dropdown-main"
+                onClick={closeServicesDropdown}
+              >
+                <span className="dropdown-icon">⚙️</span>
+                All Services
+              </Link>
+              <div className="dropdown-divider"></div>
+              <div className="dropdown-section">
+                <div className="dropdown-section-title">Manufacturer Services</div>
+                {manufacturers.map((manufacturer) => (
+                  <Link
+                    key={manufacturer.slug}
+                    href={`/manufacturers/${manufacturer.slug}`}
+                    className="dropdown-link dropdown-manufacturer"
+                    onClick={closeServicesDropdown}
+                  >
+                    <span className="dropdown-icon">🚗</span>
+                    {manufacturer.name}
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </div>
           <Link href="/about" className={`nav-link ${activePage === 'about' ? 'active' : ''}`}>
             ABOUT US
           </Link>
