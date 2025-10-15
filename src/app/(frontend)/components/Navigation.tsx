@@ -33,20 +33,20 @@ export default function Navigation({ activePage }: NavigationProps) {
   }
 
   const manufacturers = [
-    { name: 'Aston Martin', slug: 'aston-martin' },
-    { name: 'Audi', slug: 'audi' },
-    { name: 'Bentley', slug: 'bentley' },
-    { name: 'BMW', slug: 'bmw' },
-    { name: 'Ferrari', slug: 'ferrari' },
-    { name: 'Lamborghini', slug: 'lamborghini' },
-    { name: 'Maserati', slug: 'maserati' },
-    { name: 'McLaren', slug: 'mclaren' },
-    { name: 'Mercedes-Benz', slug: 'mercedes' },
-    { name: 'Mini', slug: 'mini' },
-    { name: 'Porsche', slug: 'porsche' },
-    { name: 'Range Rover', slug: 'range-rover' },
-    { name: 'Rolls-Royce', slug: 'rolls-royce' },
-    { name: 'Volkswagen', slug: 'volkswagen' },
+    { name: 'Aston Martin', slug: 'aston-martin', icon: '/manufacturers/astonmartin.webp' },
+    { name: 'Audi', slug: 'audi', icon: '/manufacturers/audi.webp' },
+    { name: 'Bentley', slug: 'bentley', icon: '/manufacturers/bentley.webp' },
+    { name: 'BMW', slug: 'bmw', icon: '/manufacturers/bmw.webp' },
+    { name: 'Ferrari', slug: 'ferrari', icon: '/manufacturers/ferrari.webp' },
+    { name: 'Lamborghini', slug: 'lamborghini', icon: '/manufacturers/lamborghini.webp' },
+    { name: 'Maserati', slug: 'maserati', icon: '/manufacturers/maserati.webp' },
+    { name: 'McLaren', slug: 'mclaren', icon: '/manufacturers/mclaren.webp' },
+    { name: 'Mercedes-Benz', slug: 'mercedes', icon: '/manufacturers/mercedes.webp' },
+    { name: 'Mini', slug: 'mini', icon: '/manufacturers/mini.webp' },
+    { name: 'Porsche', slug: 'porsche', icon: '/manufacturers/porsche.webp' },
+    { name: 'Range Rover', slug: 'range-rover', icon: '/manufacturers/rangerover.webp' },
+    { name: 'Rolls-Royce', slug: 'rolls-royce', icon: '/manufacturers/rollsroyce.webp' },
+    { name: 'Volkswagen', slug: 'volkswagen', icon: '/manufacturers/vw.webp' },
   ]
 
   return (
@@ -99,7 +99,13 @@ export default function Navigation({ activePage }: NavigationProps) {
                     className="dropdown-link dropdown-manufacturer"
                     onClick={closeServicesDropdown}
                   >
-                    <span className="dropdown-icon">🚗</span>
+                    <Image
+                      src={manufacturer.icon}
+                      alt={manufacturer.name}
+                      width={20}
+                      height={20}
+                      className="dropdown-manufacturer-icon"
+                    />
                     {manufacturer.name}
                   </Link>
                 ))}
@@ -170,7 +176,13 @@ export default function Navigation({ activePage }: NavigationProps) {
                 className="mobile-services-link"
                 onClick={closeMobileMenu}
               >
-                <span className="mobile-icon">🚗</span>
+                <Image
+                  src={manufacturer.icon}
+                  alt={manufacturer.name}
+                  width={20}
+                  height={20}
+                  className="mobile-manufacturer-icon"
+                />
                 {manufacturer.name}
               </Link>
             ))}
