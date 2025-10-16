@@ -13,6 +13,7 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
     <html lang="en">
       <body>
         <main>{children}</main>
+        <button className="floating-book-button">Book Appointment</button>
       </body>
     </html>
   )
