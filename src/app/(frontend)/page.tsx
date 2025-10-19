@@ -24,7 +24,6 @@ export default function HomePage() {
           <h3 className="hero-subtitle">EUROPEAN AND EXOTIC AUTOMOTIVE SPECIALISTS</h3>
           <h2 className="hero-title">PREMIUM SERVICE. BEYOND EXPECTATIONS.</h2>
           <Link href="/services" className="cta-button">
-            <span className="button-icon">⚙️</span>
             BROWSE SERVICES
           </Link>
         </div>
