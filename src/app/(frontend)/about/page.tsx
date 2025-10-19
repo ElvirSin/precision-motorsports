@@ -13,14 +13,13 @@ export default function AboutPage() {
         <div className="about-hero-content">
           <div className="about-logo">
             <Image
-              src="/about-us/big-logo.webp"
+              src="/about-us/long-logo.png"
               alt="Precision Motorsports"
               width={600}
               height={180}
               style={{ objectFit: 'contain' }}
             />
           </div>
-          <h1 className="about-hero-title">ABOUT US</h1>
         </div>
       </section>
 
