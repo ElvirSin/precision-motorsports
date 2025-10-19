@@ -643,6 +643,26 @@ body {
     padding: 0 15px;
   }
 
+  .cta-buttons {
+    flex-direction: row;
+    gap: 12px;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .cta-button {
+    flex: 1;
+    min-width: 160px;
+    max-width: 200px;
+    padding: 12px 18px;
+    font-size: 13px;
+  }
+
+  .button-separator {
+    margin: 0 8px;
+  }
+
   .logo h1 {
     font-size: 20px;
   }
@@ -1928,6 +1948,11 @@ body {
     max-width: 110px;
   }
 
+  .reviews-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 10px;
+  }
+
   .logo img {
     width: 100%;
     max-width: 110px;
@@ -1940,7 +1965,7 @@ body {
 .reviews-section {
   background: #000;
   color: #fff;
-  padding: 60px 0;
+  padding: 40px 0;
 }
 
 .reviews-container {
@@ -1951,7 +1976,7 @@ body {
 
 .reviews-header {
   text-align: center;
-  margin-bottom: 50px;
+  margin-bottom: 40px;
 }
 
 .reviews-title {
@@ -2201,7 +2226,7 @@ body {
   }
 
   .reviews-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr) !important;
     gap: 15px;
   }
 
@@ -2413,17 +2438,23 @@ body {
   }
 
   .cta-buttons {
-    flex-direction: column;
-    gap: 5px;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
   }
 
   .cta-button {
-    width: 100%;
-    max-width: 300px;
+    flex: 1;
+    min-width: 140px;
+    max-width: 180px;
+    padding: 12px 15px;
+    font-size: 12px;
   }
 
   .button-separator {
-    order: -1;
+    margin: 0 5px;
   }
 
   .info-map-section {
@@ -2470,10 +2501,24 @@ body {
     font-size: 14px;
   }
 
+  .cta-buttons {
+    flex-direction: row;
+    gap: 8px;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
   .cta-button {
-    padding: 12px 25px;
-    font-size: 13px;
-    min-width: auto;
+    flex: 1;
+    min-width: 120px;
+    max-width: 160px;
+    padding: 10px 12px;
+    font-size: 11px;
+  }
+
+  .button-separator {
+    margin: 0 3px;
   }
 
   .business-info {

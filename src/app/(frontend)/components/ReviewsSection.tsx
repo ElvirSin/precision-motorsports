@@ -68,7 +68,7 @@ const reviews: Review[] = [
 
 export default function ReviewsSection() {
   const [currentIndex, setCurrentIndex] = useState(0)
-  const [itemsPerView, setItemsPerView] = useState(4)
+  const [itemsPerView, setItemsPerView] = useState(2)
   const [expandedReviews, setExpandedReviews] = useState<Set<number>>(new Set())
 
   // Update items per view based on screen size
@@ -76,10 +76,8 @@ export default function ReviewsSection() {
     const updateItemsPerView = () => {
       if (window.innerWidth >= 1024) {
         setItemsPerView(4)
-      } else if (window.innerWidth >= 768) {
-        setItemsPerView(2)
       } else {
-        setItemsPerView(1)
+        setItemsPerView(2)
       }
     }
 
