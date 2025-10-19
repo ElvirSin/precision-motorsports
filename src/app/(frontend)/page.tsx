@@ -38,9 +38,9 @@ export default function HomePage() {
               <Image
                 src="/maserati-mc20.jpg"
                 alt="Maserati MC20"
-                width={400}
-                height={300}
-                style={{ objectFit: 'cover' }}
+                width={800}
+                height={400}
+                style={{ objectFit: 'contain' }}
               />
             </div>
             <Link href="/about" className="learn-more-button">
