@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Footer from './components/Footer'
 import ContactSection from './components/ContactSection'
+import ReviewsSection from './components/ReviewsSection'
 import './styles.css'
 
 export default function RootLayout(props: { children: React.ReactNode }) {
@@ -47,6 +48,7 @@ export default function RootLayout(props: { children: React.ReactNode }) {
     <html lang="en">
       <body>
         <main>{children}</main>
+        <ReviewsSection />
         <ContactSection />
         <Footer />
         <div className="floating-inquire-container">
