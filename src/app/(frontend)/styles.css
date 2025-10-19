@@ -602,6 +602,26 @@ body {
 
 .mobile-services-menu.active {
   max-height: 400px;
+  overflow-y: auto;
+}
+
+/* Custom scrollbar for mobile services menu */
+.mobile-services-menu::-webkit-scrollbar {
+  width: 4px;
+}
+
+.mobile-services-menu::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+}
+
+.mobile-services-menu::-webkit-scrollbar-thumb {
+  background: rgba(74, 158, 255, 0.5);
+  border-radius: 2px;
+}
+
+.mobile-services-menu::-webkit-scrollbar-thumb:hover {
+  background: rgba(74, 158, 255, 0.7);
 }
 
 .mobile-services-link {
@@ -2144,6 +2164,131 @@ body {
   }
 }
 
+/* Book Appointment Page Styles */
+.booking-coming-soon {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.booking-icon {
+  font-size: 64px;
+  margin-bottom: 30px;
+  opacity: 0.8;
+}
+
+.section-description {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #ccc;
+  margin-bottom: 40px;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.booking-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  align-items: center;
+}
+
+.booking-info {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(74, 158, 255, 0.3);
+  border-radius: 10px;
+  padding: 25px;
+  text-align: left;
+  max-width: 300px;
+  width: 100%;
+}
+
+.booking-info h3 {
+  font-size: 18px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 15px;
+  color: #fff;
+  text-align: center;
+}
+
+.booking-info p {
+  font-size: 14px;
+  color: #ccc;
+  margin: 8px 0;
+  line-height: 1.4;
+}
+
+/* Book Appointment Page Responsive Styles */
+@media (max-width: 768px) {
+  .booking-coming-soon {
+    padding: 30px 15px;
+  }
+
+  .booking-icon {
+    font-size: 48px;
+    margin-bottom: 25px;
+  }
+
+  .section-description {
+    font-size: 14px;
+    margin-bottom: 30px;
+  }
+
+  .booking-actions {
+    gap: 25px;
+  }
+
+  .booking-info {
+    padding: 20px;
+    max-width: 280px;
+  }
+
+  .booking-info h3 {
+    font-size: 16px;
+  }
+
+  .booking-info p {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .booking-coming-soon {
+    padding: 25px 10px;
+  }
+
+  .booking-icon {
+    font-size: 40px;
+    margin-bottom: 20px;
+  }
+
+  .section-description {
+    font-size: 13px;
+    margin-bottom: 25px;
+  }
+
+  .booking-actions {
+    gap: 20px;
+  }
+
+  .booking-info {
+    padding: 15px;
+    max-width: 250px;
+  }
+
+  .booking-info h3 {
+    font-size: 14px;
+  }
+
+  .booking-info p {
+    font-size: 12px;
+  }
+}
+
 /* Reviews Section Styles */
 .reviews-section {
   background: #000;
@@ -3141,6 +3286,7 @@ body {
   flex-direction: column;
   align-items: flex-end;
   gap: 10px;
+  touch-action: manipulation;
 }
 
 /* Main Inquire Button */
@@ -3165,6 +3311,8 @@ body {
   min-width: 120px;
   justify-content: center;
   animation: pulse-glow 3s ease-in-out infinite;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .floating-inquire-button:hover {
@@ -3206,6 +3354,8 @@ body {
   gap: 6px;
   min-width: 160px;
   justify-content: center;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .floating-call-button:hover {
@@ -3236,6 +3386,8 @@ body {
   min-width: 160px;
   justify-content: center;
   text-decoration: none !important;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .floating-book-button-expanded:hover {

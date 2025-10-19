@@ -10,9 +10,15 @@ export default function RootLayout(props: { children: React.ReactNode }) {
   const { children } = props
   const [isExpanded, setIsExpanded] = useState(false)
 
-  // Close expanded buttons when user interacts with page
+  // Close expanded buttons when user interacts with page (but not with floating buttons)
   useEffect(() => {
-    const handleInteraction = () => {
+    const handleInteraction = (e: Event) => {
+      // Check if the click/touch is within the floating button container
+      const floatingContainer = document.querySelector('.floating-inquire-container')
+      if (floatingContainer && floatingContainer.contains(e.target as Node)) {
+        return // Don't close if clicking within floating buttons
+      }
+
       if (isExpanded) {
         setIsExpanded(false)
       }
@@ -29,19 +35,16 @@ export default function RootLayout(props: { children: React.ReactNode }) {
     }
   }, [isExpanded])
 
-  const handleButtonClick = (e: React.MouseEvent) => {
+  const handleButtonClick = (e: React.MouseEvent | React.TouchEvent) => {
     e.stopPropagation()
+    e.preventDefault()
     setIsExpanded(!isExpanded)
   }
 
-  const handleCallClick = (e: React.MouseEvent) => {
+  const handleCallClick = (e: React.MouseEvent | React.TouchEvent) => {
     e.stopPropagation()
+    e.preventDefault()
     window.location.href = 'tel:+12483818200'
-  }
-
-  const handleBookClick = (e: React.MouseEvent) => {
-    e.stopPropagation()
-    // Will navigate to booking page
   }
 
   return (
@@ -54,17 +57,28 @@ export default function RootLayout(props: { children: React.ReactNode }) {
         <div className="floating-inquire-container">
           {isExpanded ? (
             <div className="floating-buttons-expanded">
-              <button className="floating-call-button" onClick={handleCallClick}>
+              <button
+                className="floating-call-button"
+                onClick={handleCallClick}
+                onTouchEnd={handleCallClick}
+              >
                 📞 (248) 381-8200
               </button>
               <Link href="/book-appointment">
-                <button className="floating-book-button-expanded" onClick={handleBookClick}>
+                <button
+                  className="floating-book-button-expanded"
+                  onClick={() => setIsExpanded(false)}
+                >
                   📅 Book Appointment
                 </button>
               </Link>
             </div>
           ) : (
-            <button className="floating-inquire-button" onClick={handleButtonClick}>
+            <button
+              className="floating-inquire-button"
+              onClick={handleButtonClick}
+              onTouchEnd={handleButtonClick}
+            >
               Inquire Now
             </button>
           )}
