@@ -64,7 +64,7 @@ export default function RootLayout(props: { children: React.ReactNode }) {
               >
                 📞 (248) 381-8200
               </button>
-              <Link href="/book-appointment">
+              <Link href="/book-now">
                 <button
                   className="floating-book-button-expanded"
                   onClick={() => setIsExpanded(false)}
