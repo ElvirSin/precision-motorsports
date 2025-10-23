@@ -1,5 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 import Navigation from '../../components/Navigation'
 import '../../styles.css'
 
@@ -23,10 +24,12 @@ export default function LamborghiniPage() {
               maintenance to tasteful cosmetic upgrades and restorations, all delivered with
               craftsmanship that matches the brand's refined luxury.
             </p>
-            <button className="inquire-button">
-              INQUIRE NOW
-              <span className="button-arrow">→</span>
-            </button>
+            <Link href="/book-now">
+              <button className="inquire-button">
+                INQUIRE NOW
+                <span className="button-arrow">→</span>
+              </button>
+            </Link>
           </div>
           <div className="hero-image">
             <Image
