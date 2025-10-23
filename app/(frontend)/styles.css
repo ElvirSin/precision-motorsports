@@ -3507,12 +3507,23 @@ a[href='/book-now'] * {
   max-width: 100%;
   margin: 0 auto;
   padding: 0;
+  position: relative;
 }
 
 .vendor-partners-header {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   text-align: center;
-  margin-bottom: 60px;
-  padding: 0 40px;
+  z-index: 20;
+  width: 100%;
+  max-width: 800px;
+  padding: 40px;
+  pointer-events: none;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  backdrop-filter: blur(5px);
 }
 
 .vendor-partners-title {
@@ -3549,6 +3560,10 @@ a[href='/book-now'] * {
   position: relative;
   width: 100%;
   overflow: hidden;
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .vendor-row {
@@ -3656,8 +3671,12 @@ a[href='/book-now'] * {
   }
 
   .vendor-partners-header {
-    margin-bottom: 50px;
-    padding: 0 30px;
+    padding: 30px;
+    max-width: 700px;
+  }
+
+  .vendor-logos-container {
+    min-height: 350px;
   }
 
   .vendor-partners-title {
@@ -3702,8 +3721,12 @@ a[href='/book-now'] * {
   }
 
   .vendor-partners-header {
-    margin-bottom: 40px;
-    padding: 0 20px;
+    padding: 25px;
+    max-width: 600px;
+  }
+
+  .vendor-logos-container {
+    min-height: 300px;
   }
 
   .vendor-partners-title {
@@ -3749,8 +3772,12 @@ a[href='/book-now'] * {
   }
 
   .vendor-partners-header {
-    margin-bottom: 30px;
-    padding: 0 15px;
+    padding: 20px;
+    max-width: 500px;
+  }
+
+  .vendor-logos-container {
+    min-height: 250px;
   }
 
   .vendor-partners-title {
