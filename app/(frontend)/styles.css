@@ -3569,8 +3569,8 @@ a[href='/book-now'] * {
 }
 
 .vendor-row {
-  height: 80px;
-  margin-bottom: 20px;
+  height: 90px;
+  margin-bottom: 30px;
   position: relative;
   overflow: hidden;
 }
@@ -3594,7 +3594,7 @@ a[href='/book-now'] * {
 
 .vendor-logo {
   flex-shrink: 0;
-  height: 60px;
+  height: 70px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -3608,7 +3608,7 @@ a[href='/book-now'] * {
 
 .vendor-logo img {
   max-height: 100%;
-  max-width: 120px;
+  max-width: 140px;
   width: auto;
   height: auto;
   filter: brightness(0) invert(1);
@@ -3689,8 +3689,8 @@ a[href='/book-now'] * {
   }
 
   .vendor-row {
-    height: 70px;
-    margin-bottom: 15px;
+    height: 80px;
+    margin-bottom: 25px;
   }
 
   .vendor-logos-track {
@@ -3699,11 +3699,11 @@ a[href='/book-now'] * {
   }
 
   .vendor-logo {
-    height: 50px;
+    height: 60px;
   }
 
   .vendor-logo img {
-    max-width: 100px;
+    max-width: 120px;
   }
 
   .vendor-logos-container::before,
@@ -3740,8 +3740,8 @@ a[href='/book-now'] * {
   }
 
   .vendor-row {
-    height: 60px;
-    margin-bottom: 12px;
+    height: 70px;
+    margin-bottom: 20px;
   }
 
   .vendor-logos-track {
@@ -3750,11 +3750,11 @@ a[href='/book-now'] * {
   }
 
   .vendor-logo {
-    height: 45px;
+    height: 55px;
   }
 
   .vendor-logo img {
-    max-width: 80px;
+    max-width: 100px;
   }
 
   .vendor-logos-container::before,
@@ -3791,8 +3791,8 @@ a[href='/book-now'] * {
   }
 
   .vendor-row {
-    height: 50px;
-    margin-bottom: 10px;
+    height: 60px;
+    margin-bottom: 15px;
   }
 
   .vendor-logos-track {
@@ -3801,11 +3801,11 @@ a[href='/book-now'] * {
   }
 
   .vendor-logo {
-    height: 40px;
+    height: 50px;
   }
 
   .vendor-logo img {
-    max-width: 60px;
+    max-width: 80px;
   }
 
   .vendor-logos-container::before,
