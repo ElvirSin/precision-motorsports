@@ -242,89 +242,137 @@ export default function HomePage() {
             <div className="vendor-row vendor-row-1">
               <div className="vendor-logos-track">
                 <div className="vendor-logo">
-                  <img src="/vendors/chemical-guys.svg" alt="Chemical Guys" />
+                  <img src="/vendors/chemical-guys.png" alt="Chemical Guys" />
                 </div>
                 <div className="vendor-logo">
-                  <img src="/vendors/bosch.svg" alt="Bosch" />
+                  <img src="/vendors/bosch.png" alt="Bosch" />
                 </div>
                 <div className="vendor-logo">
-                  <img src="/vendors/borgwarner.svg" alt="BorgWarner Turbo Systems" />
+                  <img src="/vendors/borgwagner.png" alt="BorgWarner Turbo Systems" />
                 </div>
                 <div className="vendor-logo">
-                  <img src="/vendors/air-lift.svg" alt="Air Lift Performance" />
+                  <img src="/vendors/air-lift.png" alt="Air Lift Performance" />
                 </div>
                 <div className="vendor-logo">
-                  <img src="/vendors/aeromotive.svg" alt="Aeromotive" />
+                  <img src="/vendors/aeromotive.png" alt="Aeromotive" />
                 </div>
                 <div className="vendor-logo">
-                  <img src="/vendors/airaid.svg" alt="Airaid" />
+                  <img src="/vendors/airaid.png" alt="Airaid" />
                 </div>
                 <div className="vendor-logo">
-                  <img src="/vendors/bbs.svg" alt="BBS" />
+                  <img src="/vendors/bbs.png" alt="BBS" />
                 </div>
                 <div className="vendor-logo">
-                  <img src="/vendors/mvforged.svg" alt="MVFORGED" />
+                  <img src="/vendors/mvforged.png" alt="MVFORGED" />
                 </div>
                 <div className="vendor-logo">
-                  <img src="/vendors/clutch-masters.svg" alt="Clutch Masters" />
+                  <img src="/vendors/clutch-masters.png" alt="Clutch Masters" />
                 </div>
                 <div className="vendor-logo">
-                  <img src="/vendors/brembo.svg" alt="Brembo" />
+                  <img src="/vendors/brembo.png" alt="Brembo" />
                 </div>
                 <div className="vendor-logo">
-                  <img src="/vendors/szt-tuning.svg" alt="SZT Stage 4 Tuning" />
+                  <img src="/vendors/s4t.png" alt="S4T Tuning" />
                 </div>
                 <div className="vendor-logo">
-                  <img src="/vendors/bmc.svg" alt="BMC Air Filter" />
+                  <img src="/vendors/bmc.png" alt="BMC Air Filter" />
                 </div>
                 <div className="vendor-logo">
-                  <img src="/vendors/corsa.svg" alt="Corsa Performance Exhausts" />
+                  <img src="/vendors/corsa.png" alt="Corsa Performance Exhausts" />
                 </div>
                 <div className="vendor-logo">
-                  <img src="/vendors/gfb.svg" alt="GFB Go Fast Bits" />
+                  <img src="/vendors/gfb.png" alt="GFB Go Fast Bits" />
+                </div>
+                <div className="vendor-logo">
+                  <img src="/vendors/akrapovic.png" alt="Akrapovic" />
+                </div>
+                <div className="vendor-logo">
+                  <img src="/vendors/ams.png" alt="AMS Performance" />
+                </div>
+                <div className="vendor-logo">
+                  <img src="/vendors/bilstein.png" alt="Bilstein" />
+                </div>
+                <div className="vendor-logo">
+                  <img src="/vendors/bmwairfilter.png" alt="BMW Air Filter" />
+                </div>
+                <div className="vendor-logo">
+                  <img src="/vendors/brixton.png" alt="Brixton Forged" />
+                </div>
+                <div className="vendor-logo">
+                  <img src="/vendors/csf.png" alt="CSF" />
+                </div>
+                <div className="vendor-logo">
+                  <img src="/vendors/hre.png" alt="HRE Wheels" />
+                </div>
+                <div className="vendor-logo">
+                  <img src="/vendors/agencypower.png" alt="Agency Power" />
                 </div>
                 {/* Duplicate logos for seamless loop */}
                 <div className="vendor-logo">
-                  <img src="/vendors/chemical-guys.svg" alt="Chemical Guys" />
+                  <img src="/vendors/chemical-guys.png" alt="Chemical Guys" />
                 </div>
                 <div className="vendor-logo">
-                  <img src="/vendors/bosch.svg" alt="Bosch" />
+                  <img src="/vendors/bosch.png" alt="Bosch" />
                 </div>
                 <div className="vendor-logo">
-                  <img src="/vendors/borgwarner.svg" alt="BorgWarner Turbo Systems" />
+                  <img src="/vendors/borgwagner.png" alt="BorgWarner Turbo Systems" />
                 </div>
                 <div className="vendor-logo">
-                  <img src="/vendors/air-lift.svg" alt="Air Lift Performance" />
+                  <img src="/vendors/air-lift.png" alt="Air Lift Performance" />
                 </div>
                 <div className="vendor-logo">
-                  <img src="/vendors/aeromotive.svg" alt="Aeromotive" />
+                  <img src="/vendors/aeromotive.png" alt="Aeromotive" />
                 </div>
                 <div className="vendor-logo">
-                  <img src="/vendors/airaid.svg" alt="Airaid" />
+                  <img src="/vendors/airaid.png" alt="Airaid" />
                 </div>
                 <div className="vendor-logo">
-                  <img src="/vendors/bbs.svg" alt="BBS" />
+                  <img src="/vendors/bbs.png" alt="BBS" />
                 </div>
                 <div className="vendor-logo">
-                  <img src="/vendors/mvforged.svg" alt="MVFORGED" />
+                  <img src="/vendors/mvforged.png" alt="MVFORGED" />
                 </div>
                 <div className="vendor-logo">
-                  <img src="/vendors/clutch-masters.svg" alt="Clutch Masters" />
+                  <img src="/vendors/clutch-masters.png" alt="Clutch Masters" />
                 </div>
                 <div className="vendor-logo">
-                  <img src="/vendors/brembo.svg" alt="Brembo" />
+                  <img src="/vendors/brembo.png" alt="Brembo" />
                 </div>
                 <div className="vendor-logo">
-                  <img src="/vendors/szt-tuning.svg" alt="SZT Stage 4 Tuning" />
+                  <img src="/vendors/s4t.png" alt="S4T Tuning" />
                 </div>
                 <div className="vendor-logo">
-                  <img src="/vendors/bmc.svg" alt="BMC Air Filter" />
+                  <img src="/vendors/bmc.png" alt="BMC Air Filter" />
                 </div>
                 <div className="vendor-logo">
-                  <img src="/vendors/corsa.svg" alt="Corsa Performance Exhausts" />
+                  <img src="/vendors/corsa.png" alt="Corsa Performance Exhausts" />
                 </div>
                 <div className="vendor-logo">
-                  <img src="/vendors/gfb.svg" alt="GFB Go Fast Bits" />
+                  <img src="/vendors/gfb.png" alt="GFB Go Fast Bits" />
+                </div>
+                <div className="vendor-logo">
+                  <img src="/vendors/akrapovic.png" alt="Akrapovic" />
+                </div>
+                <div className="vendor-logo">
+                  <img src="/vendors/ams.png" alt="AMS Performance" />
+                </div>
+                <div className="vendor-logo">
+                  <img src="/vendors/bilstein.png" alt="Bilstein" />
+                </div>
+                <div className="vendor-logo">
+                  <img src="/vendors/bmwairfilter.png" alt="BMW Air Filter" />
+                </div>
+                <div className="vendor-logo">
+                  <img src="/vendors/brixton.png" alt="Brixton Forged" />
+                </div>
+                <div className="vendor-logo">
+                  <img src="/vendors/csf.png" alt="CSF" />
+                </div>
+                <div className="vendor-logo">
+                  <img src="/vendors/hre.png" alt="HRE Wheels" />
+                </div>
+                <div className="vendor-logo">
+                  <img src="/vendors/agencypower.png" alt="Agency Power" />
                 </div>
               </div>
             </div>
@@ -333,89 +381,137 @@ export default function HomePage() {
             <div className="vendor-row vendor-row-2">
               <div className="vendor-logos-track vendor-logos-track-reverse">
                 <div className="vendor-logo">
-                  <img src="/vendors/brembo.svg" alt="Brembo" />
+                  <img src="/vendors/hre.png" alt="HRE Wheels" />
                 </div>
                 <div className="vendor-logo">
-                  <img src="/vendors/corsa.svg" alt="Corsa Performance Exhausts" />
+                  <img src="/vendors/agencypower.png" alt="Agency Power" />
                 </div>
                 <div className="vendor-logo">
-                  <img src="/vendors/gfb.svg" alt="GFB Go Fast Bits" />
+                  <img src="/vendors/csf.png" alt="CSF" />
                 </div>
                 <div className="vendor-logo">
-                  <img src="/vendors/bmc.svg" alt="BMC Air Filter" />
+                  <img src="/vendors/brixton.png" alt="Brixton Forged" />
                 </div>
                 <div className="vendor-logo">
-                  <img src="/vendors/szt-tuning.svg" alt="SZT Stage 4 Tuning" />
+                  <img src="/vendors/bmwairfilter.png" alt="BMW Air Filter" />
                 </div>
                 <div className="vendor-logo">
-                  <img src="/vendors/clutch-masters.svg" alt="Clutch Masters" />
+                  <img src="/vendors/bilstein.png" alt="Bilstein" />
                 </div>
                 <div className="vendor-logo">
-                  <img src="/vendors/mvforged.svg" alt="MVFORGED" />
+                  <img src="/vendors/ams.png" alt="AMS Performance" />
                 </div>
                 <div className="vendor-logo">
-                  <img src="/vendors/bbs.svg" alt="BBS" />
+                  <img src="/vendors/akrapovic.png" alt="Akrapovic" />
                 </div>
                 <div className="vendor-logo">
-                  <img src="/vendors/airaid.svg" alt="Airaid" />
+                  <img src="/vendors/gfb.png" alt="GFB Go Fast Bits" />
                 </div>
                 <div className="vendor-logo">
-                  <img src="/vendors/aeromotive.svg" alt="Aeromotive" />
+                  <img src="/vendors/corsa.png" alt="Corsa Performance Exhausts" />
                 </div>
                 <div className="vendor-logo">
-                  <img src="/vendors/air-lift.svg" alt="Air Lift Performance" />
+                  <img src="/vendors/bmc.png" alt="BMC Air Filter" />
                 </div>
                 <div className="vendor-logo">
-                  <img src="/vendors/borgwarner.svg" alt="BorgWarner Turbo Systems" />
+                  <img src="/vendors/s4t.png" alt="S4T Tuning" />
                 </div>
                 <div className="vendor-logo">
-                  <img src="/vendors/bosch.svg" alt="Bosch" />
+                  <img src="/vendors/brembo.png" alt="Brembo" />
                 </div>
                 <div className="vendor-logo">
-                  <img src="/vendors/chemical-guys.svg" alt="Chemical Guys" />
+                  <img src="/vendors/clutch-masters.png" alt="Clutch Masters" />
+                </div>
+                <div className="vendor-logo">
+                  <img src="/vendors/mvforged.png" alt="MVFORGED" />
+                </div>
+                <div className="vendor-logo">
+                  <img src="/vendors/bbs.png" alt="BBS" />
+                </div>
+                <div className="vendor-logo">
+                  <img src="/vendors/airaid.png" alt="Airaid" />
+                </div>
+                <div className="vendor-logo">
+                  <img src="/vendors/aeromotive.png" alt="Aeromotive" />
+                </div>
+                <div className="vendor-logo">
+                  <img src="/vendors/air-lift.png" alt="Air Lift Performance" />
+                </div>
+                <div className="vendor-logo">
+                  <img src="/vendors/borgwagner.png" alt="BorgWarner Turbo Systems" />
+                </div>
+                <div className="vendor-logo">
+                  <img src="/vendors/bosch.png" alt="Bosch" />
+                </div>
+                <div className="vendor-logo">
+                  <img src="/vendors/chemical-guys.png" alt="Chemical Guys" />
                 </div>
                 {/* Duplicate logos for seamless loop */}
                 <div className="vendor-logo">
-                  <img src="/vendors/brembo.svg" alt="Brembo" />
+                  <img src="/vendors/hre.png" alt="HRE Wheels" />
                 </div>
                 <div className="vendor-logo">
-                  <img src="/vendors/corsa.svg" alt="Corsa Performance Exhausts" />
+                  <img src="/vendors/agencypower.png" alt="Agency Power" />
                 </div>
                 <div className="vendor-logo">
-                  <img src="/vendors/gfb.svg" alt="GFB Go Fast Bits" />
+                  <img src="/vendors/csf.png" alt="CSF" />
                 </div>
                 <div className="vendor-logo">
-                  <img src="/vendors/bmc.svg" alt="BMC Air Filter" />
+                  <img src="/vendors/brixton.png" alt="Brixton Forged" />
                 </div>
                 <div className="vendor-logo">
-                  <img src="/vendors/szt-tuning.svg" alt="SZT Stage 4 Tuning" />
+                  <img src="/vendors/bmwairfilter.png" alt="BMW Air Filter" />
                 </div>
                 <div className="vendor-logo">
-                  <img src="/vendors/clutch-masters.svg" alt="Clutch Masters" />
+                  <img src="/vendors/bilstein.png" alt="Bilstein" />
                 </div>
                 <div className="vendor-logo">
-                  <img src="/vendors/mvforged.svg" alt="MVFORGED" />
+                  <img src="/vendors/ams.png" alt="AMS Performance" />
                 </div>
                 <div className="vendor-logo">
-                  <img src="/vendors/bbs.svg" alt="BBS" />
+                  <img src="/vendors/akrapovic.png" alt="Akrapovic" />
                 </div>
                 <div className="vendor-logo">
-                  <img src="/vendors/airaid.svg" alt="Airaid" />
+                  <img src="/vendors/gfb.png" alt="GFB Go Fast Bits" />
                 </div>
                 <div className="vendor-logo">
-                  <img src="/vendors/aeromotive.svg" alt="Aeromotive" />
+                  <img src="/vendors/corsa.png" alt="Corsa Performance Exhausts" />
                 </div>
                 <div className="vendor-logo">
-                  <img src="/vendors/air-lift.svg" alt="Air Lift Performance" />
+                  <img src="/vendors/bmc.png" alt="BMC Air Filter" />
                 </div>
                 <div className="vendor-logo">
-                  <img src="/vendors/borgwarner.svg" alt="BorgWarner Turbo Systems" />
+                  <img src="/vendors/s4t.png" alt="S4T Tuning" />
                 </div>
                 <div className="vendor-logo">
-                  <img src="/vendors/bosch.svg" alt="Bosch" />
+                  <img src="/vendors/brembo.png" alt="Brembo" />
                 </div>
                 <div className="vendor-logo">
-                  <img src="/vendors/chemical-guys.svg" alt="Chemical Guys" />
+                  <img src="/vendors/clutch-masters.png" alt="Clutch Masters" />
+                </div>
+                <div className="vendor-logo">
+                  <img src="/vendors/mvforged.png" alt="MVFORGED" />
+                </div>
+                <div className="vendor-logo">
+                  <img src="/vendors/bbs.png" alt="BBS" />
+                </div>
+                <div className="vendor-logo">
+                  <img src="/vendors/airaid.png" alt="Airaid" />
+                </div>
+                <div className="vendor-logo">
+                  <img src="/vendors/aeromotive.png" alt="Aeromotive" />
+                </div>
+                <div className="vendor-logo">
+                  <img src="/vendors/air-lift.png" alt="Air Lift Performance" />
+                </div>
+                <div className="vendor-logo">
+                  <img src="/vendors/borgwagner.png" alt="BorgWarner Turbo Systems" />
+                </div>
+                <div className="vendor-logo">
+                  <img src="/vendors/bosch.png" alt="Bosch" />
+                </div>
+                <div className="vendor-logo">
+                  <img src="/vendors/chemical-guys.png" alt="Chemical Guys" />
                 </div>
               </div>
             </div>
@@ -424,89 +520,137 @@ export default function HomePage() {
             <div className="vendor-row vendor-row-3">
               <div className="vendor-logos-track">
                 <div className="vendor-logo">
-                  <img src="/vendors/air-lift.svg" alt="Air Lift Performance" />
+                  <img src="/vendors/akrapovic.png" alt="Akrapovic" />
                 </div>
                 <div className="vendor-logo">
-                  <img src="/vendors/brembo.svg" alt="Brembo" />
+                  <img src="/vendors/ams.png" alt="AMS Performance" />
                 </div>
                 <div className="vendor-logo">
-                  <img src="/vendors/szt-tuning.svg" alt="SZT Stage 4 Tuning" />
+                  <img src="/vendors/bilstein.png" alt="Bilstein" />
                 </div>
                 <div className="vendor-logo">
-                  <img src="/vendors/bmc.svg" alt="BMC Air Filter" />
+                  <img src="/vendors/bmwairfilter.png" alt="BMW Air Filter" />
                 </div>
                 <div className="vendor-logo">
-                  <img src="/vendors/clutch-masters.svg" alt="Clutch Masters" />
+                  <img src="/vendors/brixton.png" alt="Brixton Forged" />
                 </div>
                 <div className="vendor-logo">
-                  <img src="/vendors/corsa.svg" alt="Corsa Performance Exhausts" />
+                  <img src="/vendors/csf.png" alt="CSF" />
                 </div>
                 <div className="vendor-logo">
-                  <img src="/vendors/borgwarner.svg" alt="BorgWarner Turbo Systems" />
+                  <img src="/vendors/hre.png" alt="HRE Wheels" />
                 </div>
                 <div className="vendor-logo">
-                  <img src="/vendors/chemical-guys.svg" alt="Chemical Guys" />
+                  <img src="/vendors/agencypower.png" alt="Agency Power" />
                 </div>
                 <div className="vendor-logo">
-                  <img src="/vendors/gfb.svg" alt="GFB Go Fast Bits" />
+                  <img src="/vendors/chemical-guys.png" alt="Chemical Guys" />
                 </div>
                 <div className="vendor-logo">
-                  <img src="/vendors/bosch.svg" alt="Bosch" />
+                  <img src="/vendors/bosch.png" alt="Bosch" />
                 </div>
                 <div className="vendor-logo">
-                  <img src="/vendors/aeromotive.svg" alt="Aeromotive" />
+                  <img src="/vendors/borgwagner.png" alt="BorgWarner Turbo Systems" />
                 </div>
                 <div className="vendor-logo">
-                  <img src="/vendors/airaid.svg" alt="Airaid" />
+                  <img src="/vendors/air-lift.png" alt="Air Lift Performance" />
                 </div>
                 <div className="vendor-logo">
-                  <img src="/vendors/bbs.svg" alt="BBS" />
+                  <img src="/vendors/aeromotive.png" alt="Aeromotive" />
                 </div>
                 <div className="vendor-logo">
-                  <img src="/vendors/mvforged.svg" alt="MVFORGED" />
+                  <img src="/vendors/airaid.png" alt="Airaid" />
+                </div>
+                <div className="vendor-logo">
+                  <img src="/vendors/bbs.png" alt="BBS" />
+                </div>
+                <div className="vendor-logo">
+                  <img src="/vendors/mvforged.png" alt="MVFORGED" />
+                </div>
+                <div className="vendor-logo">
+                  <img src="/vendors/clutch-masters.png" alt="Clutch Masters" />
+                </div>
+                <div className="vendor-logo">
+                  <img src="/vendors/brembo.png" alt="Brembo" />
+                </div>
+                <div className="vendor-logo">
+                  <img src="/vendors/s4t.png" alt="S4T Tuning" />
+                </div>
+                <div className="vendor-logo">
+                  <img src="/vendors/bmc.png" alt="BMC Air Filter" />
+                </div>
+                <div className="vendor-logo">
+                  <img src="/vendors/corsa.png" alt="Corsa Performance Exhausts" />
+                </div>
+                <div className="vendor-logo">
+                  <img src="/vendors/gfb.png" alt="GFB Go Fast Bits" />
                 </div>
                 {/* Duplicate logos for seamless loop */}
                 <div className="vendor-logo">
-                  <img src="/vendors/air-lift.svg" alt="Air Lift Performance" />
+                  <img src="/vendors/akrapovic.png" alt="Akrapovic" />
                 </div>
                 <div className="vendor-logo">
-                  <img src="/vendors/brembo.svg" alt="Brembo" />
+                  <img src="/vendors/ams.png" alt="AMS Performance" />
                 </div>
                 <div className="vendor-logo">
-                  <img src="/vendors/szt-tuning.svg" alt="SZT Stage 4 Tuning" />
+                  <img src="/vendors/bilstein.png" alt="Bilstein" />
                 </div>
                 <div className="vendor-logo">
-                  <img src="/vendors/bmc.svg" alt="BMC Air Filter" />
+                  <img src="/vendors/bmwairfilter.png" alt="BMW Air Filter" />
                 </div>
                 <div className="vendor-logo">
-                  <img src="/vendors/clutch-masters.svg" alt="Clutch Masters" />
+                  <img src="/vendors/brixton.png" alt="Brixton Forged" />
                 </div>
                 <div className="vendor-logo">
-                  <img src="/vendors/corsa.svg" alt="Corsa Performance Exhausts" />
+                  <img src="/vendors/csf.png" alt="CSF" />
                 </div>
                 <div className="vendor-logo">
-                  <img src="/vendors/borgwarner.svg" alt="BorgWarner Turbo Systems" />
+                  <img src="/vendors/hre.png" alt="HRE Wheels" />
                 </div>
                 <div className="vendor-logo">
-                  <img src="/vendors/chemical-guys.svg" alt="Chemical Guys" />
+                  <img src="/vendors/agencypower.png" alt="Agency Power" />
                 </div>
                 <div className="vendor-logo">
-                  <img src="/vendors/gfb.svg" alt="GFB Go Fast Bits" />
+                  <img src="/vendors/chemical-guys.png" alt="Chemical Guys" />
                 </div>
                 <div className="vendor-logo">
-                  <img src="/vendors/bosch.svg" alt="Bosch" />
+                  <img src="/vendors/bosch.png" alt="Bosch" />
                 </div>
                 <div className="vendor-logo">
-                  <img src="/vendors/aeromotive.svg" alt="Aeromotive" />
+                  <img src="/vendors/borgwagner.png" alt="BorgWarner Turbo Systems" />
                 </div>
                 <div className="vendor-logo">
-                  <img src="/vendors/airaid.svg" alt="Airaid" />
+                  <img src="/vendors/air-lift.png" alt="Air Lift Performance" />
                 </div>
                 <div className="vendor-logo">
-                  <img src="/vendors/bbs.svg" alt="BBS" />
+                  <img src="/vendors/aeromotive.png" alt="Aeromotive" />
                 </div>
                 <div className="vendor-logo">
-                  <img src="/vendors/mvforged.svg" alt="MVFORGED" />
+                  <img src="/vendors/airaid.png" alt="Airaid" />
+                </div>
+                <div className="vendor-logo">
+                  <img src="/vendors/bbs.png" alt="BBS" />
+                </div>
+                <div className="vendor-logo">
+                  <img src="/vendors/mvforged.png" alt="MVFORGED" />
+                </div>
+                <div className="vendor-logo">
+                  <img src="/vendors/clutch-masters.png" alt="Clutch Masters" />
+                </div>
+                <div className="vendor-logo">
+                  <img src="/vendors/brembo.png" alt="Brembo" />
+                </div>
+                <div className="vendor-logo">
+                  <img src="/vendors/s4t.png" alt="S4T Tuning" />
+                </div>
+                <div className="vendor-logo">
+                  <img src="/vendors/bmc.png" alt="BMC Air Filter" />
+                </div>
+                <div className="vendor-logo">
+                  <img src="/vendors/corsa.png" alt="Corsa Performance Exhausts" />
+                </div>
+                <div className="vendor-logo">
+                  <img src="/vendors/gfb.png" alt="GFB Go Fast Bits" />
                 </div>
               </div>
             </div>

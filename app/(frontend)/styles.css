@@ -3583,13 +3583,13 @@ a[href='/book-now'] * {
   display: flex;
   align-items: center;
   height: 100%;
-  animation: scroll-right 30s linear infinite;
+  animation: scroll-right 27s linear infinite;
   gap: 60px;
   padding: 0 30px;
 }
 
 .vendor-logos-track-reverse {
-  animation: scroll-left 35s linear infinite;
+  animation: scroll-left 31.5s linear infinite;
 }
 
 .vendor-logo {
@@ -3659,11 +3659,6 @@ a[href='/book-now'] * {
   100% {
     transform: translateX(0);
   }
-}
-
-/* Pause animation on hover */
-.vendor-logos-track:hover {
-  animation-play-state: paused;
 }
 
 /* Responsive adjustments */
