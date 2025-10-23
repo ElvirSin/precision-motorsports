@@ -3498,7 +3498,7 @@ a[href='/book-now'] * {
 /* Vendor Partners Section Styles */
 .vendor-partners-section {
   background: #000;
-  padding: 80px 0;
+  padding: 40px 0;
   overflow: hidden;
   position: relative;
 }
@@ -3520,8 +3520,8 @@ a[href='/book-now'] * {
   width: 100%;
   padding: 60px 40px;
   pointer-events: none;
-  background: rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(2px);
+  background: rgba(0, 0, 0, 0.05);
+  backdrop-filter: blur(1px);
   min-height: 280px;
   display: flex;
   flex-direction: column;
