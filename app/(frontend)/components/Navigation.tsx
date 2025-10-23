@@ -123,12 +123,6 @@ export default function Navigation({ activePage }: NavigationProps) {
           </Link>
         </nav>
 
-        {/* Desktop Icons */}
-        <div className="header-icons desktop-icons">
-          <span className="icon">📞</span>
-          <span className="icon">🔍</span>
-        </div>
-
         {/* Mobile Menu Button */}
         <button
           className="mobile-menu-button"
@@ -156,7 +150,9 @@ export default function Navigation({ activePage }: NavigationProps) {
         {/* Mobile Services Section */}
         <div className="mobile-services-section">
           <button
-            className={`nav-link mobile-services-toggle ${activePage === 'services' ? 'active' : ''}`}
+            className={`nav-link mobile-services-toggle ${
+              activePage === 'services' ? 'active' : ''
+            }`}
             onClick={toggleMobileServices}
           >
             SERVICES
@@ -210,10 +206,6 @@ export default function Navigation({ activePage }: NavigationProps) {
         >
           CONTACT US
         </Link>
-        <div className="mobile-icons">
-          <span className="icon">📞</span>
-          <span className="icon">🔍</span>
-        </div>
       </nav>
     </header>
   )
