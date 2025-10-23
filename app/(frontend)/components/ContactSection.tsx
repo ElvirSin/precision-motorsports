@@ -1,5 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 
 export default function ContactSection() {
   const handleCallClick = () => {
@@ -22,7 +23,9 @@ export default function ContactSection() {
               (248) 381-8200
             </button>
             <span className="button-separator">OR</span>
-            <button className="cta-button inquire-button">INQUIRE NOW</button>
+            <Link href="/book-now">
+              <button className="cta-button inquire-button">INQUIRE NOW</button>
+            </Link>
           </div>
         </div>
 
