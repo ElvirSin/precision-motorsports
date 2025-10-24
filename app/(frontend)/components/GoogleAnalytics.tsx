@@ -3,11 +3,13 @@
 import Script from 'next/script'
 
 export default function GoogleAnalytics() {
-  const GA_TRACKING_ID = process.env.NEXT_PUBLIC_GA_ID
+  // Try environment variable first, fallback to hardcoded ID
+  const GA_TRACKING_ID = process.env.NEXT_PUBLIC_GA_ID || 'G-H969BSXKZS'
 
-  // Don't render anything if GA_TRACKING_ID is not set
-  if (!GA_TRACKING_ID) {
-    return null
+  // Debug: Log the GA_TRACKING_ID to console in production
+  if (typeof window !== 'undefined') {
+    console.log('GA_TRACKING_ID in production:', GA_TRACKING_ID)
+    console.log('Environment variable available:', !!process.env.NEXT_PUBLIC_GA_ID)
   }
 
   return (
