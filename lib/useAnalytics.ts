@@ -1,17 +1,18 @@
 'use client'
 
 import { useEffect } from 'react'
-import { usePathname, useSearchParams } from 'next/navigation'
+import { usePathname } from 'next/navigation'
 import { pageview } from './gtag'
 
 export function useAnalytics() {
   const pathname = usePathname()
-  const searchParams = useSearchParams()
 
   useEffect(() => {
     if (pathname) {
-      const url = pathname + (searchParams?.toString() ? `?${searchParams.toString()}` : '')
+      // Use window.location.search to get search params on client side
+      const searchParams = typeof window !== 'undefined' ? window.location.search : ''
+      const url = pathname + searchParams
       pageview(url)
     }
-  }, [pathname, searchParams])
+  }, [pathname])
 }

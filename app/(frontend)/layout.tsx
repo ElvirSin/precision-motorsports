@@ -5,15 +5,12 @@ import Footer from './components/Footer'
 import ContactSection from './components/ContactSection'
 import ReviewsSection from './components/ReviewsSection'
 import GoogleAnalytics from './components/GoogleAnalytics'
-import { useAnalytics } from '../../lib/useAnalytics'
+import AnalyticsProvider from './components/AnalyticsProvider'
 import './styles.css'
 
 export default function RootLayout(props: { children: React.ReactNode }) {
   const { children } = props
   const [isExpanded, setIsExpanded] = useState(false)
-
-  // Initialize analytics tracking
-  useAnalytics()
 
   // Close expanded buttons when user interacts with page (but not with floating buttons)
   useEffect(() => {
@@ -58,6 +55,7 @@ export default function RootLayout(props: { children: React.ReactNode }) {
         <GoogleAnalytics />
       </head>
       <body>
+        <AnalyticsProvider />
         <main>{children}</main>
         <ReviewsSection />
         <ContactSection />
