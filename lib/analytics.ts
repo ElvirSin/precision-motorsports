@@ -1,4 +1,5 @@
-// Google Analytics configuration and utilities
+// Enhanced Google Analytics tracking for Next.js App Router
+
 export const GA_TRACKING_ID = process.env.NEXT_PUBLIC_GA_ID || 'G-H969BSXKZS'
 
 // Track page views
@@ -7,6 +8,15 @@ export const pageview = (url: string) => {
     window.gtag('config', GA_TRACKING_ID, {
       page_path: url,
     })
+
+    // Also send a page_view event for better tracking
+    window.gtag('event', 'page_view', {
+      page_title: document.title,
+      page_location: window.location.href,
+      page_path: url,
+    })
+
+    console.log('Analytics: Page view tracked for:', url)
   }
 }
 
@@ -28,6 +38,7 @@ export const event = ({
       event_label: label,
       value: value,
     })
+    console.log('Analytics: Event tracked:', { action, category, label, value })
   }
 }
 
