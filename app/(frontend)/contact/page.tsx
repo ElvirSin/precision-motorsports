@@ -8,7 +8,7 @@ export default function ContactPage() {
       <section className="hero">
         <div className="hero-background">
           <Image
-            src="/hero-bg.jpg"
+            src="/home-page/hero1.jpg"
             alt="BMW M Power Engine"
             fill
             style={{ objectFit: 'cover' }}
