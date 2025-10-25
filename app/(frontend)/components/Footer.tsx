@@ -9,7 +9,7 @@ export default function Footer() {
     <footer className="footer">
       <div className="footer-background">
         <Image
-          src="/footer-bg.webp"
+          src="/footer/footer-bg.webp"
           alt="Footer background"
           fill
           className="footer-bg-image"
@@ -24,10 +24,24 @@ export default function Footer() {
               <h3 className="footer-heading">GET IN TOUCH</h3>
               <div className="contact-info">
                 <p className="contact-item">
-                  <span className="contact-label">PHONE:</span> (248) 381-8200
+                  <span className="contact-label">PHONE:</span>{' '}
+                  <a
+                    href="tel:+12483818200"
+                    className="contact-link phone-link"
+                    aria-label="Call Precision Motorsports"
+                  >
+                    (248) 381-8200
+                  </a>
                 </p>
                 <p className="contact-item">
-                  <span className="contact-label">EMAIL:</span> SUPPORT@PRECISION-MOTORSPORTS.COM
+                  <span className="contact-label">EMAIL:</span>{' '}
+                  <a
+                    href="mailto:support@precision-motorsports.com"
+                    className="contact-link email-link"
+                    aria-label="Email Precision Motorsports"
+                  >
+                    SUPPORT@PRECISION-MOTORSPORTS.COM
+                  </a>
                 </p>
               </div>
               <div className="social-section">
