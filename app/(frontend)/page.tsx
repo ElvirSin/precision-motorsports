@@ -22,56 +22,58 @@ export default function HomePage() {
       {/* Content Section */}
       <section className="content-section">
         <div className="content-container">
-          <div className="left-column">
-            <div className="car-image">
-              <Image
-                src="/maserati-mc20.jpg"
-                alt="Maserati MC20"
-                width={800}
-                height={400}
-                style={{ objectFit: 'contain' }}
-              />
-            </div>
-            <Link href="/about" className="learn-more-button">
-              LEARN MORE ABOUT US
-            </Link>
-          </div>
-          <div className="right-column">
-            <h2 className="section-title">PRECISION MOTORSPORTS</h2>
+          <h2 className="section-title">PRECISION MOTORSPORTS</h2>
 
-            <div className="content-block">
-              <div className="block-content">
-                <h3>INTRODUCTION</h3>
-                <p>
-                  Welcome to Precision Motorsports, your premier alternative to dealerships for
-                  European and exotic vehicles. We pride ourselves on delivering exceptional service
-                  with meticulous attention to detail, ensuring your vehicle receives the care it
-                  deserves.
-                </p>
+          <div className="content-grid">
+            <div className="left-column">
+              <div className="car-image">
+                <Image
+                  src="/maserati-mc20.jpg"
+                  alt="Maserati MC20"
+                  width={800}
+                  height={400}
+                  style={{ objectFit: 'contain' }}
+                />
               </div>
+              <Link href="/about" className="learn-more-button">
+                LEARN MORE ABOUT US
+              </Link>
             </div>
-
-            <div className="content-block">
-              <div className="block-content">
-                <h3>OUR MISSION</h3>
-                <p>
-                  At Precision Motorsports, our mission is to provide unparalleled automotive
-                  services that exceed expectations. We aim to create an exclusive haven for
-                  automotive enthusiasts, offering comprehensive solutions under one roof while
-                  fostering a community built on trust, excellence, and passion for fine
-                  automobiles.
-                </p>
+            <div className="right-column">
+              <div className="content-block">
+                <div className="block-content">
+                  <h3>INTRODUCTION</h3>
+                  <p>
+                    Welcome to Precision Motorsports, your premier alternative to dealerships for
+                    European and exotic vehicles. We pride ourselves on delivering exceptional
+                    service with meticulous attention to detail, ensuring your vehicle receives the
+                    care it deserves.
+                  </p>
+                </div>
               </div>
-            </div>
 
-            <div className="content-block">
-              <div className="block-content">
-                <h3>PREMIUM SERVICE & REPAIR</h3>
-                <p>
-                  We offer a comprehensive suite of services tailored for European & exotic
-                  vehicles. Our expert team is dedicated to providing exceptional quality and
-                  personalized solutions
-                </p>
+              <div className="content-block">
+                <div className="block-content">
+                  <h3>OUR MISSION</h3>
+                  <p>
+                    At Precision Motorsports, our mission is to provide unparalleled automotive
+                    services that exceed expectations. We aim to create an exclusive haven for
+                    automotive enthusiasts, offering comprehensive solutions under one roof while
+                    fostering a community built on trust, excellence, and passion for fine
+                    automobiles.
+                  </p>
+                </div>
+              </div>
+
+              <div className="content-block">
+                <div className="block-content">
+                  <h3>PREMIUM SERVICE & REPAIR</h3>
+                  <p>
+                    We offer a comprehensive suite of services tailored for European & exotic
+                    vehicles. Our expert team is dedicated to providing exceptional quality and
+                    personalized solutions
+                  </p>
+                </div>
               </div>
             </div>
           </div>
