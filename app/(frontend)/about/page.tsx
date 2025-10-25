@@ -1,13 +1,10 @@
 import React from 'react'
 import Image from 'next/image'
-import Navigation from '../components/Navigation'
 import '../styles.css'
 
 export default function AboutPage() {
   return (
     <div className="about-page">
-      <Navigation activePage="about" />
-
       {/* Hero Section */}
       <section className="about-hero">
         <div className="about-hero-content">

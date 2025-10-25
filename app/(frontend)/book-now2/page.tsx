@@ -1,6 +1,5 @@
 'use client'
 import { useState } from 'react'
-import Navigation from '../components/Navigation'
 import '../styles.css'
 
 export default function BookNow2Page() {
@@ -183,7 +182,6 @@ export default function BookNow2Page() {
 
   return (
     <div className="homepage">
-      <Navigation activePage="book-now2" />
 
       {/* Main Content */}
       <section className="book-now-section">

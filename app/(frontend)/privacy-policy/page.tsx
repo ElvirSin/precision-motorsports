@@ -1,11 +1,9 @@
 import React from 'react'
-import Navigation from '../components/Navigation'
 import '../styles.css'
 
 export default function PrivacyPolicyPage() {
   return (
     <div className="homepage">
-      <Navigation activePage="privacy-policy" />
 
       {/* Hero Section */}
       <section className="hero">

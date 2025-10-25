@@ -1,16 +1,29 @@
 'use client'
 import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import Footer from './components/Footer'
 import ContactSection from './components/ContactSection'
 import ReviewsSection from './components/ReviewsSection'
 import GoogleAnalytics from './components/GoogleAnalytics'
 import AnalyticsProvider from './components/AnalyticsProvider'
+import Navigation from './components/Navigation'
 import './styles.css'
 
 export default function RootLayout(props: { children: React.ReactNode }) {
   const { children } = props
   const [isExpanded, setIsExpanded] = useState(false)
+  const pathname = usePathname()
+
+  // Function to determine active page based on pathname
+  const getActivePage = () => {
+    if (pathname === '/') return 'home'
+    if (pathname === '/about') return 'about'
+    if (pathname === '/gallery') return 'gallery'
+    if (pathname === '/contact') return 'contact'
+    if (pathname === '/services' || pathname.startsWith('/manufacturers/')) return 'services'
+    return 'home' // default fallback
+  }
 
   // Close expanded buttons when user interacts with page (but not with floating buttons)
   useEffect(() => {
@@ -54,6 +67,7 @@ export default function RootLayout(props: { children: React.ReactNode }) {
       <body>
         <GoogleAnalytics />
         <AnalyticsProvider />
+        <Navigation activePage={getActivePage()} />
         <main>{children}</main>
         <ReviewsSection />
         <ContactSection />

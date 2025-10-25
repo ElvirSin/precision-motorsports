@@ -1,13 +1,10 @@
 import React from 'react'
 import Image from 'next/image'
-import Navigation from '../components/Navigation'
 import '../styles.css'
 
 export default function ServicesPage() {
   return (
     <div className="homepage">
-      <Navigation activePage="services" />
-
       {/* Hero Section */}
       <section className="hero">
         <div className="hero-background">

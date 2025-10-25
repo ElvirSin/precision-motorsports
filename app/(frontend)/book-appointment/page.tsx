@@ -1,7 +1,6 @@
 'use client'
 
 import React from 'react'
-import Navigation from '../components/Navigation'
 import '../styles.css'
 
 export default function BookAppointmentPage() {
@@ -11,7 +10,6 @@ export default function BookAppointmentPage() {
 
   return (
     <div className="homepage">
-      <Navigation activePage="book-appointment" />
 
       {/* Hero Section */}
       <section className="hero">

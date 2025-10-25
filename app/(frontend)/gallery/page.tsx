@@ -1,13 +1,10 @@
 import React from 'react'
 import Image from 'next/image'
-import Navigation from '../components/Navigation'
 import '../styles.css'
 
 export default function GalleryPage() {
   return (
     <div className="homepage">
-      <Navigation activePage="gallery" />
-
       {/* Hero Section */}
       <section className="hero">
         <div className="hero-background">

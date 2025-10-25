@@ -1,11 +1,9 @@
 import React from 'react'
-import Navigation from '../components/Navigation'
 import '../styles.css'
 
 export default function TermsAndConditionsPage() {
   return (
     <div className="homepage">
-      <Navigation activePage="terms-and-conditions" />
 
       {/* Hero Section */}
       <section className="hero">

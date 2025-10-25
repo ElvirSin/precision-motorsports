@@ -1,11 +1,8 @@
-import Navigation from '../components/Navigation'
 import '../styles.css'
 
 export default function BookNowPage() {
   return (
     <div className="homepage">
-      <Navigation activePage="book-now" />
-
       {/* Main Content */}
       <section className="book-now-section">
         <div className="book-now-container">

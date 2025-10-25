@@ -1,12 +1,9 @@
 import React from 'react'
-import Navigation from '../components/Navigation'
 import '../styles.css'
 
 export default function ThankYouPage() {
   return (
     <div className="homepage">
-      <Navigation activePage="thank-you" />
-
       {/* Main Content */}
       <section className="thank-you-section">
         <div className="thank-you-container">
