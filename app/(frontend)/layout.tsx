@@ -62,6 +62,10 @@ export default function RootLayout(props: { children: React.ReactNode }) {
     window.location.href = 'tel:+12483818200'
   }
 
+  // Check if current page should exclude certain sections
+  const shouldExcludeSections =
+    pathname === '/privacy-policy' || pathname === '/terms-and-conditions'
+
   return (
     <html lang="en">
       <body>
@@ -69,8 +73,8 @@ export default function RootLayout(props: { children: React.ReactNode }) {
         <AnalyticsProvider />
         <Navigation activePage={getActivePage()} />
         <main>{children}</main>
-        <ReviewsSection />
-        <ContactSection />
+        {!shouldExcludeSections && <ReviewsSection />}
+        {!shouldExcludeSections && <ContactSection />}
         <Footer />
         <div className="floating-inquire-container">
           {isExpanded ? (
