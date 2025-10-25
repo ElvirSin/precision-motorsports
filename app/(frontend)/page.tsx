@@ -28,7 +28,7 @@ export default function HomePage() {
             <div className="left-column">
               <div className="car-image">
                 <Image
-                  src="/maserati-mc20.jpg"
+                  src="/home-page/maserati.jpg"
                   alt="Maserati MC20"
                   width={800}
                   height={400}
