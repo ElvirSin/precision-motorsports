@@ -12,7 +12,11 @@ export default function HomePage() {
         <CyclingHero />
         <div className="hero-content">
           <h3 className="hero-subtitle">EUROPEAN AND EXOTIC AUTOMOTIVE SPECIALISTS</h3>
-          <h2 className="hero-title">PREMIUM SERVICE. BEYOND EXPECTATIONS.</h2>
+          <h2 className="hero-title">
+            PREMIUM SERVICE.
+            <br />
+            BEYOND EXPECTATIONS.
+          </h2>
           <Link href="/services" className="cta-button">
             BROWSE SERVICES
           </Link>
