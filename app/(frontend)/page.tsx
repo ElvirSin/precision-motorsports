@@ -1,6 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import CyclingHero from './components/CyclingHero'
 import './styles.css'
 
 export default function HomePage() {
@@ -8,15 +9,7 @@ export default function HomePage() {
     <div className="homepage">
       {/* Hero Section */}
       <section className="hero">
-        <div className="hero-background">
-          <Image
-            src="/hero-bg.jpg"
-            alt="BMW M Power Engine"
-            fill
-            style={{ objectFit: 'cover' }}
-            priority
-          />
-        </div>
+        <CyclingHero />
         <div className="hero-content">
           <h3 className="hero-subtitle">EUROPEAN AND EXOTIC AUTOMOTIVE SPECIALISTS</h3>
           <h2 className="hero-title">PREMIUM SERVICE. BEYOND EXPECTATIONS.</h2>
@@ -47,7 +40,6 @@ export default function HomePage() {
             <h2 className="section-title">PRECISION MOTORSPORTS</h2>
 
             <div className="content-block">
-              <div className="block-icon">📈</div>
               <div className="block-content">
                 <h3>INTRODUCTION</h3>
                 <p>
@@ -60,7 +52,6 @@ export default function HomePage() {
             </div>
 
             <div className="content-block">
-              <div className="block-icon">⚙️</div>
               <div className="block-content">
                 <h3>OUR MISSION</h3>
                 <p>
@@ -74,7 +65,6 @@ export default function HomePage() {
             </div>
 
             <div className="content-block">
-              <div className="block-icon">🕐</div>
               <div className="block-content">
                 <h3>PREMIUM SERVICE & REPAIR</h3>
                 <p>

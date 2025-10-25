@@ -1,6 +1,8 @@
 import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
+import { RiFacebookCircleLine } from 'react-icons/ri'
+import { FaInstagram } from 'react-icons/fa'
 
 export default function Footer() {
   return (
@@ -31,11 +33,23 @@ export default function Footer() {
               <div className="social-section">
                 <p className="follow-text">FOLLOW US</p>
                 <div className="social-icons">
-                  <a href="#" className="social-link" aria-label="Facebook">
-                    <div className="social-icon facebook-icon">f</div>
+                  <a
+                    href="https://www.facebook.com/precisionmotorsportsfb/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="social-link"
+                    aria-label="Facebook"
+                  >
+                    <RiFacebookCircleLine className="social-icon facebook-icon" />
                   </a>
-                  <a href="#" className="social-link" aria-label="Instagram">
-                    <div className="social-icon instagram-icon">📷</div>
+                  <a
+                    href="https://www.instagram.com/precision_motorsports/?hl=en"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="social-link"
+                    aria-label="Instagram"
+                  >
+                    <FaInstagram className="social-icon instagram-icon" />
                   </a>
                 </div>
               </div>
