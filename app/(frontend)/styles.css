@@ -2526,6 +2526,7 @@ a[href='/book-now'] * {
   gap: 20px;
   flex: 1;
   overflow: hidden;
+  padding-top: 10px;
 }
 
 .review-card {
