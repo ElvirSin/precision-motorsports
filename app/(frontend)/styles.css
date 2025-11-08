@@ -4909,7 +4909,9 @@ a[href='/book-now'] * {
 .services-carousel {
   position: relative;
   width: 100%;
+  min-height: 400px;
   height: 50vh;
+  max-height: 600px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -4933,14 +4935,14 @@ a[href='/book-now'] * {
 }
 
 .services-car-item.position-prev2 {
-  left: 0;
-  transform: scale(0.65) translateX(-50%);
+  left: 5%;
+  transform: scale(0.6) translateX(-50%);
   opacity: 0.2;
 }
 
 .services-car-item.position-prev1 {
-  left: 20%;
-  transform: scale(0.85) translateX(-50%);
+  left: 25%;
+  transform: scale(0.8) translateX(-50%);
   opacity: 0.4;
   z-index: 2;
 }
@@ -4948,20 +4950,21 @@ a[href='/book-now'] * {
 .services-car-item.active {
   left: 50%;
   opacity: 1;
-  transform: scale(1.2) translateX(-50%);
+  transform: scale(1.1) translateX(-50%);
   z-index: 3;
+  transform-origin: center center;
 }
 
 .services-car-item.position-next1 {
-  left: 80%;
-  transform: scale(0.85) translateX(-50%);
+  left: 75%;
+  transform: scale(0.8) translateX(-50%);
   opacity: 0.4;
   z-index: 2;
 }
 
 .services-car-item.position-next2 {
-  left: 100%;
-  transform: scale(0.65) translateX(-50%);
+  left: 95%;
+  transform: scale(0.6) translateX(-50%);
   opacity: 0.2;
 }
 
@@ -4979,6 +4982,23 @@ a[href='/book-now'] * {
   box-sizing: border-box;
 }
 
+.services-car-logo-background img,
+.services-car-logo-background [data-next-image] {
+  opacity: 0.3 !important;
+}
+
+.services-car-item.active .services-car-logo-background img,
+.services-car-item.active .services-car-logo-background [data-next-image] {
+  opacity: 0.4 !important;
+}
+
+.services-car-item.position-prev1 .services-car-logo-background img,
+.services-car-item.position-prev1 .services-car-logo-background [data-next-image],
+.services-car-item.position-next1 .services-car-logo-background img,
+.services-car-item.position-next1 .services-car-logo-background [data-next-image] {
+  opacity: 0.25 !important;
+}
+
 .services-car-image {
   position: relative;
   width: 100%;
@@ -4989,6 +5009,20 @@ a[href='/book-now'] * {
   justify-content: center;
   padding: 20px;
   box-sizing: border-box;
+}
+
+.services-car-item.active .services-car-image {
+  transform: scale(1);
+}
+
+.services-car-logo-background img,
+.services-car-logo-background [data-next-image] {
+  transform: scale(1);
+}
+
+.services-car-item.active .services-car-logo-background img,
+.services-car-item.active .services-car-logo-background [data-next-image] {
+  transform: scale(1.2);
 }
 
 .services-carousel-arrow {
@@ -5041,7 +5075,9 @@ a[href='/book-now'] * {
   }
 
   .services-carousel {
-    height: 50vh;
+    min-height: 350px;
+    height: 45vh;
+    max-height: 500px;
     padding: 0 60px;
   }
 }
@@ -5070,7 +5106,9 @@ a[href='/book-now'] * {
   }
 
   .services-carousel {
-    height: 50vh;
+    min-height: 300px;
+    height: 40vh;
+    max-height: 450px;
     padding: 0 50px;
   }
 
@@ -5089,11 +5127,15 @@ a[href='/book-now'] * {
   }
 
   .services-car-item.position-prev1 {
-    transform: scale(0.6) translateX(-50%);
+    transform: scale(0.7) translateX(-50%);
   }
 
   .services-car-item.position-next1 {
-    transform: scale(0.6) translateX(-50%);
+    transform: scale(0.7) translateX(-50%);
+  }
+
+  .services-car-item.active {
+    transform: scale(1) translateX(-50%);
   }
 }
 
@@ -5112,7 +5154,9 @@ a[href='/book-now'] * {
   }
 
   .services-carousel {
-    height: 50vh;
+    min-height: 250px;
+    height: 35vh;
+    max-height: 400px;
     padding: 0 40px;
   }
 
