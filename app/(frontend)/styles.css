@@ -4900,23 +4900,22 @@ a[href='/book-now'] * {
 
 .services-carousel-container {
   position: relative;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0 80px;
+  width: 90%;
+  margin: 0 auto;
+  padding: 0 0 40px;
   box-sizing: border-box;
 }
 
 .services-carousel {
   position: relative;
   width: 100%;
-  max-width: 1400px;
   height: 400px;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  padding: 0 70px;
+  box-sizing: border-box;
 }
 
 .services-car-item {
@@ -5020,11 +5019,11 @@ a[href='/book-now'] * {
 }
 
 .services-carousel-arrow-left {
-  left: 20px;
+  left: 0;
 }
 
 .services-carousel-arrow-right {
-  right: 20px;
+  right: 0;
 }
 
 /* Responsive Styles for Services Carousel */
@@ -5038,11 +5037,12 @@ a[href='/book-now'] * {
   }
 
   .services-carousel-container {
-    padding: 0 70px;
+    padding: 0 0 40px;
   }
 
   .services-carousel {
     height: 350px;
+    padding: 0 60px;
   }
 }
 
@@ -5066,11 +5066,12 @@ a[href='/book-now'] * {
   }
 
   .services-carousel-container {
-    padding: 0 60px;
+    padding: 0 0 40px;
   }
 
   .services-carousel {
     height: 300px;
+    padding: 0 50px;
   }
 
   .services-carousel-arrow {
@@ -5080,11 +5081,11 @@ a[href='/book-now'] * {
   }
 
   .services-carousel-arrow-left {
-    left: 10px;
+    left: 0;
   }
 
   .services-carousel-arrow-right {
-    right: 10px;
+    right: 0;
   }
 
   .services-car-item.position-prev1 {
@@ -5107,11 +5108,12 @@ a[href='/book-now'] * {
   }
 
   .services-carousel-container {
-    padding: 0 50px;
+    padding: 0 0 40px;
   }
 
   .services-carousel {
     height: 250px;
+    padding: 0 40px;
   }
 
   .services-carousel-arrow {
