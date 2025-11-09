@@ -11,53 +11,73 @@ const carData = [
     car: '/manufacturers/car-images/aston-martin.png',
     logo: '/manufacturers/astonmartin.webp',
     name: 'Aston Martin',
+    slug: 'aston-martin',
   },
-  { car: '/manufacturers/car-images/audi.png', logo: '/manufacturers/audi.webp', name: 'Audi' },
+  {
+    car: '/manufacturers/car-images/audi.png',
+    logo: '/manufacturers/audi.webp',
+    name: 'Audi',
+    slug: 'audi',
+  },
   {
     car: '/manufacturers/car-images/bentley.png',
     logo: '/manufacturers/bentley.webp',
     name: 'Bentley',
+    slug: 'bentley',
   },
-  { car: '/manufacturers/car-images/bmw.png', logo: '/manufacturers/bmw.webp', name: 'BMW' },
+  {
+    car: '/manufacturers/car-images/bmw.png',
+    logo: '/manufacturers/bmw.webp',
+    name: 'BMW',
+    slug: 'bmw',
+  },
   {
     car: '/manufacturers/car-images/ferrari.png',
     logo: '/manufacturers/ferrari.webp',
     name: 'Ferrari',
+    slug: 'ferrari',
   },
   {
     car: '/manufacturers/car-images/lamborghini.png',
     logo: '/manufacturers/lamborghini.webp',
     name: 'Lamborghini',
+    slug: 'lamborghini',
   },
   {
     car: '/manufacturers/car-images/maserati.png',
     logo: '/manufacturers/maserati.webp',
     name: 'Maserati',
+    slug: 'maserati',
   },
   {
     car: '/manufacturers/car-images/mclaren.png',
     logo: '/manufacturers/mclaren.webp',
     name: 'McLaren',
+    slug: 'mclaren',
   },
   {
     car: '/manufacturers/car-images/mercedes.png',
     logo: '/manufacturers/mercedes.webp',
     name: 'Mercedes-Benz',
+    slug: 'mercedes',
   },
   {
     car: '/manufacturers/car-images/porsche.png',
     logo: '/manufacturers/porsche.webp',
     name: 'Porsche',
+    slug: 'porsche',
   },
   {
     car: '/manufacturers/car-images/range-rover.png',
     logo: '/manufacturers/rangerover.webp',
     name: 'Range Rover',
+    slug: 'range-rover',
   },
   {
     car: '/manufacturers/car-images/rollsroye.png',
     logo: '/manufacturers/rollsroyce.webp',
     name: 'Rolls-Royce',
+    slug: 'rolls-royce',
   },
 ]
 
@@ -120,7 +140,10 @@ export default function ServicesPage() {
 
           <div className="carousel-wrapper">
             {/* Left (Previous) */}
-            <div className="carousel-item carousel-item-side">
+            <Link
+              href={`/manufacturers/${carData[previousIndex].slug}`}
+              className="carousel-item carousel-item-side"
+            >
               <div className="carousel-item-background">
                 <Image
                   src={carData[previousIndex].logo}
@@ -137,10 +160,13 @@ export default function ServicesPage() {
                   style={{ objectFit: 'contain' }}
                 />
               </div>
-            </div>
+            </Link>
 
             {/* Center (Current) */}
-            <div className="carousel-item carousel-item-center">
+            <Link
+              href={`/manufacturers/${carData[currentIndex].slug}`}
+              className="carousel-item carousel-item-center"
+            >
               <div className="carousel-item-background">
                 <Image
                   src={carData[currentIndex].logo}
@@ -157,10 +183,13 @@ export default function ServicesPage() {
                   style={{ objectFit: 'contain' }}
                 />
               </div>
-            </div>
+            </Link>
 
             {/* Right (Next) */}
-            <div className="carousel-item carousel-item-side">
+            <Link
+              href={`/manufacturers/${carData[nextIndex].slug}`}
+              className="carousel-item carousel-item-side"
+            >
               <div className="carousel-item-background">
                 <Image
                   src={carData[nextIndex].logo}
@@ -177,7 +206,7 @@ export default function ServicesPage() {
                   style={{ objectFit: 'contain' }}
                 />
               </div>
-            </div>
+            </Link>
           </div>
 
           <button
