@@ -1829,7 +1829,7 @@ body {
     #1a1a1a 75%,
     #0a0a0a 100%
   );
-  padding: 100px 0 10px !important;
+  padding: 40px 0 !important;
   min-height: 50vh !important;
   display: flex;
   align-items: center;
@@ -2064,7 +2064,7 @@ a[href='/book-now'] * {
 /* Responsive Manufacturer Pages */
 @media (max-width: 1024px) {
   .homepage .manufacturer-hero {
-    padding: 120px 0 10px !important;
+    padding: 40px 0 !important;
   }
 
   .manufacturer-hero-container {
@@ -2089,7 +2089,7 @@ a[href='/book-now'] * {
 
 @media (max-width: 768px) {
   .homepage .manufacturer-hero {
-    padding: 130px 0 10px !important;
+    padding: 40px 0 !important;
     min-height: 40vh !important;
   }
 
@@ -2158,7 +2158,7 @@ a[href='/book-now'] * {
 
 @media (max-width: 480px) {
   .homepage .manufacturer-hero {
-    padding: 120px 0 10px !important;
+    padding: 40px 0 !important;
     min-height: 35vh !important;
   }
 
