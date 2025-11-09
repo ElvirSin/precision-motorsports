@@ -1,12 +1,21 @@
 import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import {
+  FaTachometerAlt,
+  FaWrench,
+  FaCog,
+  FaPaintBrush,
+  FaStar,
+  FaVolumeUp,
+  FaCircle,
+  FaWind,
+} from 'react-icons/fa'
 import '../../styles.css'
 
 export default function LamborghiniPage() {
   return (
     <div className="homepage">
-
       {/* Hero Section */}
       <section className="manufacturer-hero">
         <div className="manufacturer-hero-container">
@@ -80,42 +89,58 @@ export default function LamborghiniPage() {
         <div className="service-options-container">
           <div className="service-options-grid">
             <button className="service-option">
-              <div className="service-icon">⚡</div>
+              <div className="service-icon">
+                <FaTachometerAlt />
+              </div>
               <h4>PERFORMANCE</h4>
               <p>VIEW SERVICES</p>
             </button>
             <button className="service-option">
-              <div className="service-icon">🔧</div>
+              <div className="service-icon">
+                <FaWrench />
+              </div>
               <h4>SERVICE</h4>
               <p>VIEW SERVICES</p>
             </button>
             <button className="service-option">
-              <div className="service-icon">⚙️</div>
+              <div className="service-icon">
+                <FaCog />
+              </div>
               <h4>REPAIR</h4>
               <p>VIEW SERVICES</p>
             </button>
             <button className="service-option">
-              <div className="service-icon">🎨</div>
+              <div className="service-icon">
+                <FaPaintBrush />
+              </div>
               <h4>RESTORATION</h4>
               <p>VIEW SERVICES</p>
             </button>
             <button className="service-option">
-              <div className="service-icon">✨</div>
+              <div className="service-icon">
+                <FaStar />
+              </div>
               <h4>COSMETICS</h4>
               <p>VIEW SERVICES</p>
             </button>
             <button className="service-option">
-              <div className="service-icon">🔊</div>
+              <div className="service-icon">
+                <FaVolumeUp />
+              </div>
               <h4>AUDIO</h4>
               <p>VIEW SERVICES</p>
             </button>
             <button className="service-option">
-              <div className="service-icon">⚫</div>
+              <div className="service-icon">
+                <FaCircle />
+              </div>
               <h4>WHEELS</h4>
               <p>VIEW SERVICES</p>
             </button>
             <button className="service-option">
-              <div className="service-icon">💨</div>
+              <div className="service-icon">
+                <FaWind />
+              </div>
               <h4>AERODYNAMICS</h4>
               <p>VIEW SERVICES</p>
             </button>

@@ -1998,7 +1998,7 @@ a[href='/book-now'] * {
 /* Service Options Grid */
 .service-options {
   background: #000;
-  padding: 40px 0 60px;
+  padding: 40px 0;
 }
 
 .service-options-container {
@@ -2126,7 +2126,7 @@ a[href='/book-now'] * {
   }
 
   .service-options {
-    padding: 40px 0 60px;
+    padding: 40px 0;
   }
 
   .service-options-container {
