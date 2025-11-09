@@ -4865,6 +4865,252 @@ a[href='/book-now'] * {
   }
 }
 
+/* Services Detail Section Styles */
+.services-detail-section {
+  background: #000;
+  padding: 80px 0;
+  width: 100%;
+}
+
+.services-detail-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+.services-detail-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+  width: 100%;
+}
+
+.service-detail-box {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(74, 158, 255, 0.2);
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
+  height: 100%;
+}
+
+.service-detail-box:hover {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(74, 158, 255, 0.4);
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(74, 158, 255, 0.2);
+}
+
+.service-detail-image {
+  position: relative;
+  width: 100%;
+  height: 250px;
+  overflow: hidden;
+}
+
+.service-detail-image::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.3) 100%);
+  z-index: 1;
+}
+
+.service-detail-title {
+  font-size: 28px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #fff;
+  margin: 30px 30px 15px 30px;
+  line-height: 1.2;
+}
+
+.service-detail-description {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #ccc;
+  margin: 0 30px 20px 30px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.service-detail-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 30px 20px 30px;
+  flex: 1;
+}
+
+.service-detail-list li {
+  font-size: 13px;
+  color: #aaa;
+  margin-bottom: 10px;
+  padding-left: 20px;
+  position: relative;
+  line-height: 1.5;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.service-detail-list li::before {
+  content: '•';
+  color: #4a9eff;
+  font-weight: bold;
+  font-size: 18px;
+  position: absolute;
+  left: 0;
+  top: -2px;
+}
+
+.service-detail-conclusion {
+  font-size: 14px;
+  line-height: 1.7;
+  color: #e0e0e0;
+  margin: 0 30px 30px 30px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(74, 158, 255, 0.2);
+}
+
+/* Responsive Styles for Services Detail Section */
+@media (max-width: 1024px) {
+  .services-detail-section {
+    padding: 60px 0;
+  }
+
+  .services-detail-container {
+    padding: 0 30px;
+  }
+
+  .services-detail-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+  }
+
+  .service-detail-image {
+    height: 220px;
+  }
+
+  .service-detail-title {
+    font-size: 24px;
+    margin: 25px 25px 12px 25px;
+  }
+
+  .service-detail-description {
+    font-size: 13px;
+    margin: 0 25px 18px 25px;
+  }
+
+  .service-detail-list {
+    margin: 0 25px 18px 25px;
+  }
+
+  .service-detail-list li {
+    font-size: 12px;
+    margin-bottom: 8px;
+  }
+
+  .service-detail-conclusion {
+    font-size: 13px;
+    margin: 0 25px 25px 25px;
+    padding-top: 18px;
+  }
+}
+
+@media (max-width: 768px) {
+  .services-detail-section {
+    padding: 50px 0;
+  }
+
+  .services-detail-container {
+    padding: 0 20px;
+  }
+
+  .services-detail-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .service-detail-image {
+    height: 200px;
+  }
+
+  .service-detail-title {
+    font-size: 22px;
+    letter-spacing: 1.5px;
+    margin: 25px 25px 12px 25px;
+  }
+
+  .service-detail-description {
+    font-size: 12px;
+    margin: 0 25px 18px 25px;
+  }
+
+  .service-detail-list {
+    margin: 0 25px 18px 25px;
+  }
+
+  .service-detail-list li {
+    font-size: 11px;
+    margin-bottom: 8px;
+  }
+
+  .service-detail-conclusion {
+    font-size: 12px;
+    margin: 0 25px 25px 25px;
+    padding-top: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .services-detail-section {
+    padding: 40px 0;
+  }
+
+  .services-detail-container {
+    padding: 0 15px;
+  }
+
+  .services-detail-grid {
+    gap: 25px;
+  }
+
+  .service-detail-image {
+    height: 180px;
+  }
+
+  .service-detail-title {
+    font-size: 20px;
+    letter-spacing: 1px;
+    margin: 20px 20px 10px 20px;
+  }
+
+  .service-detail-description {
+    font-size: 11px;
+    margin: 0 20px 15px 20px;
+  }
+
+  .service-detail-list {
+    margin: 0 20px 15px 20px;
+  }
+
+  .service-detail-list li {
+    font-size: 10px;
+    margin-bottom: 6px;
+  }
+
+  .service-detail-conclusion {
+    font-size: 11px;
+    margin: 0 20px 20px 20px;
+    padding-top: 15px;
+  }
+}
+
 /* Services Page Car Carousel Styles */
 .services-hero {
   display: flex;

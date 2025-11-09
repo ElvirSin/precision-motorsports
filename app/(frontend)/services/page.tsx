@@ -338,8 +338,133 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* Third Section - Empty placeholder for now */}
-      <section className="content-section">{/* Content will be added later */}</section>
+      {/* Third Section - Services Section */}
+      <section className="services-detail-section">
+        <div className="services-detail-container">
+          <div className="services-detail-grid">
+            {/* Maintenance Box */}
+            <div className="service-detail-box">
+              <div className="service-detail-image">
+                <Image
+                  src="/home-page/hero1.jpg"
+                  alt="Maintenance"
+                  fill
+                  style={{ objectFit: 'cover' }}
+                />
+              </div>
+              <h3 className="service-detail-title">MAINTENANCE</h3>
+              <p className="service-detail-description">
+                ROUTINE CARE FOR PEAK PERFORMANCE AND LONGEVITY.
+              </p>
+              <ul className="service-detail-list">
+                <li>OIL CHANGES</li>
+                <li>FLUID CHECKS AND REPLACEMENTS</li>
+                <li>BRAKE INSPECTION & REPLACEMENT</li>
+                <li>DRIVETRAIN</li>
+                <li>PREVENTIVE MAINTENANCE</li>
+                <li>MILEAGE SERVICE</li>
+                <li>SUSPENSION & STEERING ALIGNMENTS</li>
+                <li>BRAKE SYSTEM INSPECTION & MAINTENANCE</li>
+                <li>TIRE ROTATION & BALANCING</li>
+                <li>...AND MUCH MORE!</li>
+              </ul>
+              <p className="service-detail-conclusion">
+                Keep your vehicle running at its best with our comprehensive maintenance solutions
+                tailored to every need.
+              </p>
+            </div>
+
+            {/* Repair / Service Box */}
+            <div className="service-detail-box">
+              <div className="service-detail-image">
+                <Image
+                  src="/home-page/hero2.jpg"
+                  alt="Repair / Service"
+                  fill
+                  style={{ objectFit: 'cover' }}
+                />
+              </div>
+              <h3 className="service-detail-title">REPAIR / SERVICE</h3>
+              <p className="service-detail-description">
+                EXPERT DIAGNOSTICS AND QUALITY REPAIRS FOR EVERY VEHICLE NEED.
+              </p>
+              <ul className="service-detail-list">
+                <li>ENGINE REPAIR</li>
+                <li>DRIVETRAIN REPAIR</li>
+                <li>BRAKE SYSTEM REPAIR</li>
+                <li>SUSPENSION & STEERING ADJUSTMENTS</li>
+                <li>TIRE & WHEEL REPAIR</li>
+                <li>...AND MUCH MORE!</li>
+              </ul>
+              <p className="service-detail-conclusion">
+                From minor fixes to major overhauls, we've got every aspect of your vehicle covered.
+              </p>
+            </div>
+
+            {/* Performance Box */}
+            <div className="service-detail-box">
+              <div className="service-detail-image">
+                <Image
+                  src="/home-page/hero3.jpg"
+                  alt="Performance"
+                  fill
+                  style={{ objectFit: 'cover' }}
+                />
+              </div>
+              <h3 className="service-detail-title">PERFORMANCE</h3>
+              <p className="service-detail-description">
+                PERFORMANCE UPGRADE TAILORED FOR DRIVING ENTHUSIASTS.
+              </p>
+              <ul className="service-detail-list">
+                <li>ECU / TCU TUNING</li>
+                <li>EXHAUST SYSTEM INSTALLATION</li>
+                <li>TURBOCHARGER & SUPERCHARGER INSTALLS</li>
+                <li>CUSTOM BUILDS & PROJECTS</li>
+                <li>TRACK PREPARATION</li>
+                <li>DYNO TESTING</li>
+                <li>TURBOCHARGER & SUPERCHARGER SYSTEMS</li>
+                <li>EXHAUST SYSTEMS</li>
+                <li>TAILORED PERFORMANCE BUILDS</li>
+                <li>...AND MUCH MORE!</li>
+              </ul>
+              <p className="service-detail-conclusion">
+                Unleash your vehicle's potential with our comprehensive range of services designed
+                for driving enthusiasts.
+              </p>
+            </div>
+
+            {/* Concierge Box */}
+            <div className="service-detail-box">
+              <div className="service-detail-image">
+                <Image
+                  src="/home-page/hero4.jpg"
+                  alt="Concierge"
+                  fill
+                  style={{ objectFit: 'cover' }}
+                />
+              </div>
+              <h3 className="service-detail-title">CONCIERGE</h3>
+              <p className="service-detail-description">
+                Automotive concierge services provide a wide range of personalized, high-end, and
+                convenience-driven services designed to make vehicle ownership easier, more
+                enjoyable, and less time-consuming.
+              </p>
+              <ul className="service-detail-list">
+                <li>GLOVE SERVICE</li>
+                <li>VEHICLE MAINTENANCE / REPAIR COORDINATION</li>
+                <li>VEHICLE PICKUP & DELIVERY</li>
+                <li>DETAILING & CLEANING SERVICE</li>
+                <li>RACING SERVICES / TRACK SUPPORT</li>
+                <li>...AND MUCH MORE!</li>
+              </ul>
+              <p className="service-detail-conclusion">
+                Enjoy a seamless, stress-free ownership experience with our personalized services
+                tailored to meet your every need.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   )
 }
