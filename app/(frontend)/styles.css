@@ -4879,8 +4879,8 @@ a[href='/book-now'] * {
 .services-hero-content {
   position: relative;
   z-index: 10;
-  margin-top: 30px;
-  margin-bottom: 30px;
+  margin-top: 20px;
+  margin-bottom: 20px;
   padding: 0 20px;
   text-align: center;
 }
@@ -4912,7 +4912,7 @@ a[href='/book-now'] * {
   align-items: center;
   justify-content: center;
   gap: 20px;
-  padding: 0 20px 60px 20px;
+  padding: 0 60px 60px 60px;
 }
 
 .carousel-wrapper {
@@ -4922,6 +4922,7 @@ a[href='/book-now'] * {
   gap: 20px;
   flex: 1;
   max-width: 100%;
+  position: relative;
 }
 
 .carousel-item {
@@ -4929,7 +4930,7 @@ a[href='/book-now'] * {
   border-radius: 12px;
   overflow: hidden;
   background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: none;
   transition: all 0.4s ease;
 }
 
@@ -4989,17 +4990,28 @@ a[href='/book-now'] * {
   color: #4a9eff;
   transition: all 0.3s ease;
   flex-shrink: 0;
-  z-index: 10;
+  z-index: 20;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.carousel-nav-left {
+  left: 0;
+}
+
+.carousel-nav-right {
+  right: 0;
 }
 
 .carousel-nav-button:hover {
   background: rgba(74, 158, 255, 0.2);
   border-color: #4a9eff;
-  transform: scale(1.1);
+  transform: translateY(-50%) scale(1.1);
 }
 
 .carousel-nav-button:active {
-  transform: scale(0.95);
+  transform: translateY(-50%) scale(0.95);
 }
 
 .carousel-nav-button svg {
@@ -5026,7 +5038,7 @@ a[href='/book-now'] * {
   .services-carousel-container {
     max-width: 95%;
     gap: 15px;
-    padding: 0 20px 50px 20px;
+    padding: 0 50px 50px 50px;
   }
 
   .carousel-item-center {
@@ -5044,6 +5056,22 @@ a[href='/book-now'] * {
   .carousel-nav-button {
     width: 45px;
     height: 45px;
+  }
+}
+
+@media (max-width: 1000px) {
+  .services-carousel-container {
+    padding: 0 50px 50px 50px;
+  }
+
+  .carousel-nav-button {
+    width: 40px;
+    height: 40px;
+  }
+
+  .carousel-nav-button svg {
+    width: 20px;
+    height: 20px;
   }
 }
 
@@ -5072,7 +5100,7 @@ a[href='/book-now'] * {
   .services-carousel-container {
     max-width: 95%;
     gap: 10px;
-    padding: 0 10px 40px 10px;
+    padding: 0 45px 40px 45px;
     margin-top: 40px;
   }
 
@@ -5128,7 +5156,7 @@ a[href='/book-now'] * {
   .services-carousel-container {
     max-width: 98%;
     gap: 5px;
-    padding: 0 10px 30px 10px;
+    padding: 0 40px 30px 40px;
     margin-top: 30px;
   }
 
