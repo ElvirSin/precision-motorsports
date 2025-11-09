@@ -375,7 +375,7 @@ export default function ServicesPage() {
             <div className="service-detail-box">
               <div className="service-detail-image">
                 <Image
-                  src="/home-page/hero1.jpg"
+                  src="/services/maintenance.webp"
                   alt="Maintenance"
                   fill
                   style={{ objectFit: 'cover' }}
@@ -407,7 +407,7 @@ export default function ServicesPage() {
             <div className="service-detail-box">
               <div className="service-detail-image">
                 <Image
-                  src="/home-page/hero2.jpg"
+                  src="/services/repair.webp"
                   alt="Repair / Service"
                   fill
                   style={{ objectFit: 'cover' }}
@@ -434,7 +434,7 @@ export default function ServicesPage() {
             <div className="service-detail-box">
               <div className="service-detail-image">
                 <Image
-                  src="/home-page/hero3.jpg"
+                  src="/services/performance.webp"
                   alt="Performance"
                   fill
                   style={{ objectFit: 'cover' }}
@@ -466,7 +466,7 @@ export default function ServicesPage() {
             <div className="service-detail-box">
               <div className="service-detail-image">
                 <Image
-                  src="/home-page/hero4.jpg"
+                  src="/services/concierge.webp"
                   alt="Concierge"
                   fill
                   style={{ objectFit: 'cover' }}
