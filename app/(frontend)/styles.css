@@ -4868,7 +4868,7 @@ a[href='/book-now'] * {
 /* Services Detail Section Styles */
 .services-detail-section {
   background: #000;
-  padding: 80px 0;
+  padding: 40px 0;
   width: 100%;
 }
 
@@ -4978,7 +4978,7 @@ a[href='/book-now'] * {
 }
 
 /* Responsive Styles for Services Detail Section */
-@media (max-width: 1024px) {
+@media (max-width: 1150px) {
   .services-detail-section {
     padding: 60px 0;
   }
