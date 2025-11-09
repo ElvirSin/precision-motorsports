@@ -1,134 +1,91 @@
 'use client'
+
 import React, { useState } from 'react'
-import Image from 'next/image'
 import Link from 'next/link'
+import Image from 'next/image'
 import '../styles.css'
 
-interface CarData {
-  name: string
-  carImage: string
-  logoImage: string
-  url: string
-}
-
-const cars: CarData[] = [
+// Mapping car images to manufacturer logos
+const carData = [
   {
+    car: '/manufacturers/car-images/aston-martin.png',
+    logo: '/manufacturers/astonmartin.webp',
     name: 'Aston Martin',
-    carImage: '/manufacturers/car-images/aston-martin.png',
-    logoImage: '/manufacturers/astonmartin.webp',
-    url: '/manufacturers/aston-martin',
   },
+  { car: '/manufacturers/car-images/audi.png', logo: '/manufacturers/audi.webp', name: 'Audi' },
   {
-    name: 'Audi',
-    carImage: '/manufacturers/car-images/audi.png',
-    logoImage: '/manufacturers/audi.webp',
-    url: '/manufacturers/audi',
-  },
-  {
+    car: '/manufacturers/car-images/bentley.png',
+    logo: '/manufacturers/bentley.webp',
     name: 'Bentley',
-    carImage: '/manufacturers/car-images/bentley.png',
-    logoImage: '/manufacturers/bentley.webp',
-    url: '/manufacturers/bentley',
   },
+  { car: '/manufacturers/car-images/bmw.png', logo: '/manufacturers/bmw.webp', name: 'BMW' },
   {
-    name: 'BMW',
-    carImage: '/manufacturers/car-images/bmw.png',
-    logoImage: '/manufacturers/bmw.webp',
-    url: '/manufacturers/bmw',
-  },
-  {
+    car: '/manufacturers/car-images/ferrari.png',
+    logo: '/manufacturers/ferrari.webp',
     name: 'Ferrari',
-    carImage: '/manufacturers/car-images/ferrari.png',
-    logoImage: '/manufacturers/ferrari.webp',
-    url: '/manufacturers/ferrari',
   },
   {
+    car: '/manufacturers/car-images/lamborghini.png',
+    logo: '/manufacturers/lamborghini.webp',
     name: 'Lamborghini',
-    carImage: '/manufacturers/car-images/lamborghini.png',
-    logoImage: '/manufacturers/lamborghini.webp',
-    url: '/manufacturers/lamborghini',
   },
   {
+    car: '/manufacturers/car-images/maserati.png',
+    logo: '/manufacturers/maserati.webp',
     name: 'Maserati',
-    carImage: '/manufacturers/car-images/maserati.png',
-    logoImage: '/manufacturers/maserati.webp',
-    url: '/manufacturers/maserati',
   },
   {
+    car: '/manufacturers/car-images/mclaren.png',
+    logo: '/manufacturers/mclaren.webp',
     name: 'McLaren',
-    carImage: '/manufacturers/car-images/mclaren.png',
-    logoImage: '/manufacturers/mclaren.webp',
-    url: '/manufacturers/mclaren',
   },
   {
-    name: 'Mercedes',
-    carImage: '/manufacturers/car-images/mercedes.png',
-    logoImage: '/manufacturers/mercedes.webp',
-    url: '/manufacturers/mercedes',
+    car: '/manufacturers/car-images/mercedes.png',
+    logo: '/manufacturers/mercedes.webp',
+    name: 'Mercedes-Benz',
   },
   {
-    name: 'Mini',
-    carImage: '/manufacturers/car-images/mini.png',
-    logoImage: '/manufacturers/mini.webp',
-    url: '/manufacturers/mini',
-  },
-  {
+    car: '/manufacturers/car-images/porsche.png',
+    logo: '/manufacturers/porsche.webp',
     name: 'Porsche',
-    carImage: '/manufacturers/car-images/porsche.png',
-    logoImage: '/manufacturers/porsche.webp',
-    url: '/manufacturers/porsche',
   },
   {
+    car: '/manufacturers/car-images/range-rover.png',
+    logo: '/manufacturers/rangerover.webp',
     name: 'Range Rover',
-    carImage: '/manufacturers/car-images/range-rover.png',
-    logoImage: '/manufacturers/rangerover.webp',
-    url: '/manufacturers/range-rover',
   },
   {
+    car: '/manufacturers/car-images/rollsroye.png',
+    logo: '/manufacturers/rollsroyce.webp',
     name: 'Rolls-Royce',
-    carImage: '/manufacturers/car-images/rollsroye.png',
-    logoImage: '/manufacturers/rollsroyce.webp',
-    url: '/manufacturers/rolls-royce',
-  },
-  {
-    name: 'Volkswagen',
-    carImage: '/manufacturers/car-images/vw.webp',
-    logoImage: '/manufacturers/vw.webp',
-    url: '/manufacturers/volkswagen',
   },
 ]
 
 export default function ServicesPage() {
   const [currentIndex, setCurrentIndex] = useState(0)
 
-  const nextSlide = () => {
-    setCurrentIndex((prev) => (prev + 1) % cars.length)
+  const getPreviousIndex = (index: number) => {
+    return index === 0 ? carData.length - 1 : index - 1
   }
 
-  const prevSlide = () => {
-    setCurrentIndex((prev) => (prev - 1 + cars.length) % cars.length)
+  const getNextIndex = (index: number) => {
+    return index === carData.length - 1 ? 0 : index + 1
   }
 
-  // Get visible cars (show 3-5 cars at once, with center one active)
-  const getVisibleCars = () => {
-    const visible = []
-    // Show 5 cars: 2 before, current, 2 after
-    for (let i = -2; i <= 2; i++) {
-      const index = (currentIndex + i + cars.length) % cars.length
-      let positionClass = ''
-      if (i === -2) positionClass = 'position-prev2'
-      else if (i === -1) positionClass = 'position-prev1'
-      else if (i === 0) positionClass = 'position-center'
-      else if (i === 1) positionClass = 'position-next1'
-      else if (i === 2) positionClass = 'position-next2'
-      visible.push({ ...cars[index], position: i, positionClass })
-    }
-    return visible
+  const goToPrevious = () => {
+    setCurrentIndex(getPreviousIndex(currentIndex))
   }
+
+  const goToNext = () => {
+    setCurrentIndex(getNextIndex(currentIndex))
+  }
+
+  const previousIndex = getPreviousIndex(currentIndex)
+  const nextIndex = getNextIndex(currentIndex)
 
   return (
     <div className="homepage">
-      {/* First Section - Hero Section with Car Carousel */}
+      {/* First Section - Hero Section */}
       <section className="hero services-hero" style={{ backgroundColor: '#000' }}>
         <div className="hero-content services-hero-content">
           <h3 className="hero-subtitle">TAILORED SERVICES FOR EUROPEAN & EXOTIC VEHICLES</h3>
@@ -137,51 +94,112 @@ export default function ServicesPage() {
           </h2>
         </div>
 
+        {/* Carousel */}
         <div className="services-carousel-container">
           <button
-            className="services-carousel-arrow services-carousel-arrow-left"
-            onClick={prevSlide}
-            aria-label="Previous car"
+            className="carousel-nav-button carousel-nav-left"
+            onClick={goToPrevious}
+            aria-label="Previous"
           >
-            ‹
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M15 18L9 12L15 6"
+                stroke="currentColor"
+                strokeWidth="3"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
           </button>
 
-          <div className="services-carousel">
-            {getVisibleCars().map((car, idx) => (
-              <Link
-                key={`${car.name}-${idx}`}
-                href={car.url}
-                className={`services-car-item ${car.positionClass} ${
-                  car.position === 0 ? 'active' : ''
-                }`}
-              >
-                <div className="services-car-logo-background">
-                  <Image
-                    src={car.logoImage}
-                    alt={`${car.name} logo`}
-                    fill
-                    style={{ objectFit: 'contain', opacity: 0.15 }}
-                  />
-                </div>
-                <div className="services-car-image">
-                  <Image
-                    src={car.carImage}
-                    alt={car.name}
-                    fill
-                    style={{ objectFit: 'contain' }}
-                    priority={car.position === 0}
-                  />
-                </div>
-              </Link>
-            ))}
+          <div className="carousel-wrapper">
+            {/* Left (Previous) */}
+            <div className="carousel-item carousel-item-side">
+              <div className="carousel-item-background">
+                <Image
+                  src={carData[previousIndex].logo}
+                  alt={carData[previousIndex].name}
+                  fill
+                  style={{ objectFit: 'contain', opacity: 0.1 }}
+                />
+              </div>
+              <div className="carousel-item-car">
+                <Image
+                  src={carData[previousIndex].car}
+                  alt={carData[previousIndex].name}
+                  fill
+                  style={{ objectFit: 'contain' }}
+                />
+              </div>
+            </div>
+
+            {/* Center (Current) */}
+            <div className="carousel-item carousel-item-center">
+              <div className="carousel-item-background">
+                <Image
+                  src={carData[currentIndex].logo}
+                  alt={carData[currentIndex].name}
+                  fill
+                  style={{ objectFit: 'contain', opacity: 0.15 }}
+                />
+              </div>
+              <div className="carousel-item-car">
+                <Image
+                  src={carData[currentIndex].car}
+                  alt={carData[currentIndex].name}
+                  fill
+                  style={{ objectFit: 'contain' }}
+                />
+              </div>
+            </div>
+
+            {/* Right (Next) */}
+            <div className="carousel-item carousel-item-side">
+              <div className="carousel-item-background">
+                <Image
+                  src={carData[nextIndex].logo}
+                  alt={carData[nextIndex].name}
+                  fill
+                  style={{ objectFit: 'contain', opacity: 0.1 }}
+                />
+              </div>
+              <div className="carousel-item-car">
+                <Image
+                  src={carData[nextIndex].car}
+                  alt={carData[nextIndex].name}
+                  fill
+                  style={{ objectFit: 'contain' }}
+                />
+              </div>
+            </div>
           </div>
 
           <button
-            className="services-carousel-arrow services-carousel-arrow-right"
-            onClick={nextSlide}
-            aria-label="Next car"
+            className="carousel-nav-button carousel-nav-right"
+            onClick={goToNext}
+            aria-label="Next"
           >
-            ›
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M9 18L15 12L9 6"
+                stroke="currentColor"
+                strokeWidth="3"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
           </button>
         </div>
       </section>
