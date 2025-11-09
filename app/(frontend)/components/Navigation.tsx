@@ -20,10 +20,6 @@ export default function Navigation({ activePage }: NavigationProps) {
     setIsMobileMenuOpen(false)
   }
 
-  const toggleServicesDropdown = () => {
-    setIsServicesDropdownOpen(!isServicesDropdownOpen)
-  }
-
   const closeServicesDropdown = () => {
     setIsServicesDropdownOpen(false)
   }
@@ -74,12 +70,13 @@ export default function Navigation({ activePage }: NavigationProps) {
             onMouseEnter={() => setIsServicesDropdownOpen(true)}
             onMouseLeave={() => setIsServicesDropdownOpen(false)}
           >
-            <button
+            <Link
+              href="/services"
               className={`nav-link nav-button ${activePage === 'services' ? 'active' : ''}`}
-              onClick={toggleServicesDropdown}
+              onClick={closeServicesDropdown}
             >
               SERVICES
-            </button>
+            </Link>
             <div className={`dropdown-menu ${isServicesDropdownOpen ? 'active' : ''}`}>
               <Link
                 href="/services"
