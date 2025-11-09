@@ -4870,7 +4870,10 @@ a[href='/book-now'] * {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 0;
+  padding: 0 0 120px 0;
+  overflow: visible;
+  position: relative;
+  min-height: auto;
 }
 
 .services-hero-content {
@@ -4878,6 +4881,8 @@ a[href='/book-now'] * {
   z-index: 10;
   margin-top: 30px;
   margin-bottom: 30px;
+  padding: 0 20px;
+  text-align: center;
 }
 
 .services-hero-content .hero-subtitle {
@@ -4901,13 +4906,13 @@ a[href='/book-now'] * {
 /* Services Page Carousel Styles */
 .services-carousel-container {
   max-width: 90%;
-  margin: 60px auto 40px;
+  margin: 60px auto 0;
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 20px;
-  padding: 0 20px;
+  padding: 0 20px 60px 20px;
 }
 
 .carousel-wrapper {
@@ -5004,9 +5009,24 @@ a[href='/book-now'] * {
 
 /* Responsive styles for carousel */
 @media (max-width: 1024px) {
+  .services-hero {
+    padding: 0 0 100px 0;
+  }
+
+  .services-hero-content .hero-subtitle {
+    font-size: 14px;
+    letter-spacing: 1.5px;
+  }
+
+  .services-hero-content .hero-title {
+    font-size: 24px;
+    letter-spacing: 0.8px;
+  }
+
   .services-carousel-container {
     max-width: 95%;
     gap: 15px;
+    padding: 0 20px 50px 20px;
   }
 
   .carousel-item-center {
@@ -5028,10 +5048,32 @@ a[href='/book-now'] * {
 }
 
 @media (max-width: 768px) {
+  .services-hero {
+    padding: 0 0 80px 0;
+  }
+
+  .services-hero-content {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 0 15px;
+  }
+
+  .services-hero-content .hero-subtitle {
+    font-size: 11px;
+    letter-spacing: 1px;
+  }
+
+  .services-hero-content .hero-title {
+    font-size: 16px;
+    letter-spacing: 0.5px;
+    line-height: 1.2;
+  }
+
   .services-carousel-container {
     max-width: 95%;
     gap: 10px;
-    padding: 0 10px;
+    padding: 0 10px 40px 10px;
+    margin-top: 40px;
   }
 
   .carousel-wrapper {
@@ -5062,9 +5104,32 @@ a[href='/book-now'] * {
 }
 
 @media (max-width: 480px) {
+  .services-hero {
+    padding: 0 0 60px 0;
+  }
+
+  .services-hero-content {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    padding: 0 10px;
+  }
+
+  .services-hero-content .hero-subtitle {
+    font-size: 9px;
+    letter-spacing: 0.8px;
+  }
+
+  .services-hero-content .hero-title {
+    font-size: 13px;
+    letter-spacing: 0.4px;
+    line-height: 1.2;
+  }
+
   .services-carousel-container {
     max-width: 98%;
     gap: 5px;
+    padding: 0 10px 30px 10px;
+    margin-top: 30px;
   }
 
   .carousel-wrapper {
