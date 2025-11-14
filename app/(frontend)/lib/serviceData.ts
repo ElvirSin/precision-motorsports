@@ -12,9 +12,9 @@ export const serviceDataMap: Record<string, ServiceData> = {
     examples: [
       'ECU Tuning',
       'Engine Builds',
-      'Turbo And Supercharger Installations',
+      'TURBOCHARGERS',
       'Dyno Testing',
-      'Performance Exhaust Systems',
+      'EXHAUST SYSTEMS',
       'Cold Air Intakes',
       'Suspension Tuning',
       'Fuel System Upgrades',
