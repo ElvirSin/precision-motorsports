@@ -169,13 +169,13 @@ export default function ContactPage() {
                         disabled={isSubmitting}
                       >
                         <option value="">Select Service</option>
-                        <option value="Maintenance & Repair">Maintenance & Repair</option>
-                        <option value="Performance Upgrades">Performance Upgrades</option>
-                        <option value="Detailing & Restoration">Detailing & Restoration</option>
-                        <option value="Inspection & Certification">
-                          Inspection & Certification
-                        </option>
                         <option value="General Inquiry">General Inquiry</option>
+                        <option value="Performance Upgrades">Performance Upgrades</option>
+                        <option value="Service & Repair">Service & Repair</option>
+                        <option value="Detailing & Restoration">Detailing & Restoration</option>
+                        <option value="Audio">Audio</option>
+                        <option value="Wheels">Wheels</option>
+                        <option value="Aerodynamics">Aerodynamics</option>
                       </select>
                     </div>
                   </div>
