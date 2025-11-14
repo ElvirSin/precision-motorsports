@@ -1,6 +1,5 @@
 'use client'
 
-import Image from 'next/image'
 import { useState, FormEvent } from 'react'
 import '../styles.css'
 
@@ -75,23 +74,6 @@ export default function ContactPage() {
 
   return (
     <div className="homepage">
-      {/* Hero Section */}
-      <section className="hero">
-        <div className="hero-background">
-          <Image
-            src="/home-page/hero1.jpg"
-            alt="BMW M Power Engine"
-            fill
-            style={{ objectFit: 'cover' }}
-            priority
-          />
-        </div>
-        <div className="hero-content">
-          <h3 className="hero-subtitle">GET IN TOUCH WITH US</h3>
-          <h2 className="hero-title">READY TO SERVE YOUR AUTOMOTIVE NEEDS</h2>
-        </div>
-      </section>
-
       {/* Contact Section */}
       <section className="contact-page-section">
         <div className="contact-page-container">
