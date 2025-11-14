@@ -68,7 +68,8 @@ export default function RootLayout(props: { children: React.ReactNode }) {
     pathname === '/terms-and-conditions' ||
     pathname.startsWith('/manufacturers/') ||
     pathname === '/gallery' ||
-    pathname === '/contact'
+    pathname === '/contact' ||
+    pathname === '/book-now'
 
   return (
     <html lang="en">
