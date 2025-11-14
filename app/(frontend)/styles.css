@@ -3650,6 +3650,7 @@ a[href='/book-now'] * {
   display: flex;
   flex-direction: column;
   gap: 30px;
+  align-items: flex-start;
 }
 
 .footer-heading {
@@ -3665,12 +3666,14 @@ a[href='/book-now'] * {
   display: flex;
   flex-direction: column;
   gap: 15px;
+  align-items: flex-start;
 }
 
 .contact-item {
   font-size: 14px;
   margin: 0;
   color: #fff;
+  text-align: left;
 }
 
 .contact-link {
@@ -3903,6 +3906,7 @@ a[href='/book-now'] * {
 
   .contact-item {
     font-size: 13px;
+    text-align: left;
   }
 
   .contact-link {
@@ -3970,6 +3974,7 @@ a[href='/book-now'] * {
 
   .contact-item {
     font-size: 12px;
+    text-align: left;
   }
 
   .contact-link {
