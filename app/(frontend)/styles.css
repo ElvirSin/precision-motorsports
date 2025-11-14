@@ -5840,7 +5840,7 @@ a[href='/book-now'] * {
   max-height: 70vh;
   overflow-y: auto;
   position: relative;
-  padding: 40px;
+  padding: 30px;
   animation: slideUp 0.3s ease;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
   /* Hide scrollbar for all browsers */
@@ -5926,11 +5926,11 @@ a[href='/book-now'] * {
   text-transform: uppercase;
   letter-spacing: 2px;
   color: #fff;
-  margin-bottom: 10px;
+  margin-bottom: 0;
 }
 
 .service-modal-title {
-  font-size: 36px;
+  font-size: 30px;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 2px;
@@ -6070,7 +6070,7 @@ a[href='/book-now'] * {
   }
 
   .service-modal-title {
-    font-size: 32px;
+    font-size: 26px;
   }
 
   .service-modal-description {
@@ -6092,7 +6092,7 @@ a[href='/book-now'] * {
   }
 
   .service-modal-content {
-    padding: 20px;
+    padding: 30px;
     max-height: 70vh;
   }
 
@@ -6115,7 +6115,7 @@ a[href='/book-now'] * {
   }
 
   .service-modal-title {
-    font-size: 24px;
+    font-size: 20px;
   }
 
   .service-modal-description {
