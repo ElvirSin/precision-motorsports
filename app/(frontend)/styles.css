@@ -2716,7 +2716,7 @@ a[href='/book-now'] * {
 
 /* Stats Section */
 .about-stats-section {
-  padding: 80px 0;
+  padding: 40px 0;
   background: linear-gradient(180deg, #0a0a0a 0%, #000 100%);
   border-top: 1px solid rgba(74, 158, 255, 0.1);
   border-bottom: 1px solid rgba(74, 158, 255, 0.1);
@@ -2789,7 +2789,7 @@ a[href='/book-now'] * {
 
 /* Content Sections */
 .about-section-new {
-  padding: 120px 0;
+  padding: 40px 0;
   position: relative;
 }
 
@@ -2973,7 +2973,7 @@ a[href='/book-now'] * {
 
 /* CTA Section */
 .about-cta-section {
-  padding: 120px 0;
+  padding: 40px 0;
   background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
   text-align: center;
   position: relative;
@@ -3034,7 +3034,7 @@ a[href='/book-now'] * {
 /* Tablet Styles (768px - 1024px) */
 @media (max-width: 1024px) {
   .about-hero-new {
-    min-height: 85vh;
+    min-height: 100vh;
     padding-top: 100px;
   }
 
@@ -3074,7 +3074,7 @@ a[href='/book-now'] * {
   }
 
   .about-stats-section {
-    padding: 60px 0;
+    padding: 40px 0;
   }
 
   .about-stats-container {
@@ -3096,7 +3096,7 @@ a[href='/book-now'] * {
   }
 
   .about-section-new {
-    padding: 90px 0;
+    padding: 40px 0;
   }
 
   .about-container-new {
@@ -3162,7 +3162,7 @@ a[href='/book-now'] * {
   }
 
   .about-cta-section {
-    padding: 90px 0;
+    padding: 40px 0;
   }
 
   .about-cta-title {
@@ -3178,7 +3178,7 @@ a[href='/book-now'] * {
 /* Mobile Styles (max-width: 768px) */
 @media (max-width: 768px) {
   .about-hero-new {
-    min-height: 75vh;
+    min-height: 100vh;
     padding-top: 90px;
   }
 
@@ -3223,7 +3223,7 @@ a[href='/book-now'] * {
   }
 
   .about-stats-section {
-    padding: 50px 0;
+    padding: 40px 0;
   }
 
   .about-stats-container {
@@ -3247,7 +3247,7 @@ a[href='/book-now'] * {
   }
 
   .about-section-new {
-    padding: 70px 0;
+    padding: 40px 0;
   }
 
   .about-container-new {
@@ -3325,7 +3325,7 @@ a[href='/book-now'] * {
   }
 
   .about-cta-section {
-    padding: 70px 0;
+    padding: 40px 0;
   }
 
   .about-cta-content {
@@ -3347,7 +3347,7 @@ a[href='/book-now'] * {
 /* Small Mobile Styles (max-width: 480px) */
 @media (max-width: 480px) {
   .about-hero-new {
-    min-height: 70vh;
+    min-height: 100vh;
     padding-top: 80px;
   }
 
@@ -3401,7 +3401,7 @@ a[href='/book-now'] * {
   }
 
   .about-section-new {
-    padding: 50px 0;
+    padding: 40px 0;
   }
 
   .about-container-new {
@@ -3456,7 +3456,7 @@ a[href='/book-now'] * {
   }
 
   .about-cta-section {
-    padding: 60px 0;
+    padding: 40px 0;
   }
 
   .about-cta-content {
@@ -3478,7 +3478,7 @@ a[href='/book-now'] * {
 /* Extra Small Mobile (max-width: 360px) */
 @media (max-width: 360px) {
   .about-hero-new {
-    min-height: 65vh;
+    min-height: 100vh;
     padding-top: 70px;
   }
 
