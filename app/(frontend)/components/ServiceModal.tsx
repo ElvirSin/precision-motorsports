@@ -72,7 +72,7 @@ export default function ServiceModal({
         <div className="service-modal-divider"></div>
 
         <div className="service-modal-bottom">
-          <h3 className="service-modal-options-title">OUR SERVICING OPTIONS</h3>
+          <h3 className="service-modal-options-title">INQUIRE FOR SERVICES</h3>
           <div className="service-modal-examples-grid">
             {serviceExamples.map((example, index) => (
               <div key={index} className="service-modal-example-card">
