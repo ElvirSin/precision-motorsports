@@ -64,7 +64,11 @@ export default function RootLayout(props: { children: React.ReactNode }) {
 
   // Check if current page should exclude certain sections
   const shouldExcludeSections =
-    pathname === '/privacy-policy' || pathname === '/terms-and-conditions'
+    pathname === '/privacy-policy' ||
+    pathname === '/terms-and-conditions' ||
+    pathname.startsWith('/manufacturers/') ||
+    pathname === '/gallery' ||
+    pathname === '/contact'
 
   return (
     <html lang="en">
