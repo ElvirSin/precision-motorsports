@@ -1,7 +1,78 @@
+'use client'
+
 import Image from 'next/image'
+import { useState, FormEvent } from 'react'
 import '../styles.css'
 
 export default function ContactPage() {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    service: '',
+    message: '',
+  })
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitStatus, setSubmitStatus] = useState<{
+    type: 'success' | 'error' | null
+    message: string
+  }>({ type: null, message: '' })
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
+  ) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    })
+  }
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    setIsSubmitting(true)
+    setSubmitStatus({ type: null, message: '' })
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      })
+
+      const data = await response.json()
+
+      if (response.ok) {
+        setSubmitStatus({
+          type: 'success',
+          message:
+            'Thank you! Your message has been sent successfully. We will get back to you soon.',
+        })
+        // Reset form
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          service: '',
+          message: '',
+        })
+      } else {
+        setSubmitStatus({
+          type: 'error',
+          message: data.error || 'Failed to send message. Please try again later.',
+        })
+      }
+    } catch (error) {
+      setSubmitStatus({
+        type: 'error',
+        message: 'An error occurred. Please try again later.',
+      })
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
   return (
     <div className="homepage">
       {/* Hero Section */}
@@ -40,7 +111,18 @@ export default function ContactPage() {
                 <p className="contact-form-subtitle">
                   Fill out the form below and we'll get back to you as soon as possible.
                 </p>
-                <form className="contact-form-element">
+                {submitStatus.type && (
+                  <div
+                    className={`form-message ${
+                      submitStatus.type === 'success'
+                        ? 'form-message-success'
+                        : 'form-message-error'
+                    }`}
+                  >
+                    {submitStatus.message}
+                  </div>
+                )}
+                <form className="contact-form-element" onSubmit={handleSubmit}>
                   <div className="form-row">
                     <div className="form-group">
                       <label htmlFor="name" className="form-label">
@@ -52,7 +134,10 @@ export default function ContactPage() {
                         name="name"
                         placeholder="Your Name"
                         className="form-input"
+                        value={formData.name}
+                        onChange={handleChange}
                         required
+                        disabled={isSubmitting}
                       />
                     </div>
                     <div className="form-group">
@@ -65,7 +150,10 @@ export default function ContactPage() {
                         name="email"
                         placeholder="your.email@example.com"
                         className="form-input"
+                        value={formData.email}
+                        onChange={handleChange}
                         required
+                        disabled={isSubmitting}
                       />
                     </div>
                   </div>
@@ -80,6 +168,9 @@ export default function ContactPage() {
                         name="phone"
                         placeholder="(555) 123-4567"
                         className="form-input"
+                        value={formData.phone}
+                        onChange={handleChange}
+                        disabled={isSubmitting}
                       />
                     </div>
                     <div className="form-group">
@@ -90,14 +181,19 @@ export default function ContactPage() {
                         id="service"
                         name="service"
                         className="form-input form-select"
+                        value={formData.service}
+                        onChange={handleChange}
                         required
+                        disabled={isSubmitting}
                       >
                         <option value="">Select Service</option>
-                        <option value="maintenance">Maintenance & Repair</option>
-                        <option value="performance">Performance Upgrades</option>
-                        <option value="detailing">Detailing & Restoration</option>
-                        <option value="inspection">Inspection & Certification</option>
-                        <option value="general">General Inquiry</option>
+                        <option value="Maintenance & Repair">Maintenance & Repair</option>
+                        <option value="Performance Upgrades">Performance Upgrades</option>
+                        <option value="Detailing & Restoration">Detailing & Restoration</option>
+                        <option value="Inspection & Certification">
+                          Inspection & Certification
+                        </option>
+                        <option value="General Inquiry">General Inquiry</option>
                       </select>
                     </div>
                   </div>
@@ -111,23 +207,28 @@ export default function ContactPage() {
                       placeholder="Tell us about your needs..."
                       className="form-input form-textarea"
                       rows={6}
+                      value={formData.message}
+                      onChange={handleChange}
                       required
+                      disabled={isSubmitting}
                     ></textarea>
                   </div>
-                  <button type="submit" className="contact-submit-button">
-                    <span>SEND MESSAGE</span>
-                    <svg
-                      width="20"
-                      height="20"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M2.01 21L23 12L2.01 3L2 10L17 12L2 14L2.01 21Z"
-                        fill="currentColor"
-                      />
-                    </svg>
+                  <button type="submit" className="contact-submit-button" disabled={isSubmitting}>
+                    <span>{isSubmitting ? 'SENDING...' : 'SEND MESSAGE'}</span>
+                    {!isSubmitting && (
+                      <svg
+                        width="20"
+                        height="20"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M2.01 21L23 12L2.01 3L2 10L17 12L2 14L2.01 21Z"
+                          fill="currentColor"
+                        />
+                      </svg>
+                    )}
                   </button>
                 </form>
               </div>
