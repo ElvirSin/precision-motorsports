@@ -5833,9 +5833,9 @@ a[href='/book-now'] * {
 
 .service-modal-content {
   background: #000;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 12px;
-  max-width: 1200px;
+  max-width: 70%;
   width: 100%;
   max-height: 90vh;
   overflow-y: auto;
@@ -5843,6 +5843,13 @@ a[href='/book-now'] * {
   padding: 40px;
   animation: slideUp 0.3s ease;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  /* Hide scrollbar for all browsers */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+.service-modal-content::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
 }
 
 @keyframes slideUp {
@@ -5858,24 +5865,45 @@ a[href='/book-now'] * {
 
 .service-modal-close {
   position: absolute;
-  top: 20px;
-  left: 20px;
+  top: 0;
+  left: 0;
   background: none;
   border: none;
   color: #fff;
-  font-size: 14px;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 1px;
+  font-size: 36px;
   cursor: pointer;
-  padding: 8px 0;
-  transition: color 0.3s ease;
+  padding: 20px;
+  transition: all 0.3s ease;
   z-index: 10;
-  font-family: 'Poppins', sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
 }
 
 .service-modal-close:hover {
   color: #4a9eff;
+  transform: scale(1.1);
+}
+
+/* Larger screens - increase close icon size */
+@media (min-width: 1025px) {
+  .service-modal-close {
+    font-size: 48px;
+    width: 56px;
+    height: 56px;
+    padding: 24px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .service-modal-close {
+    font-size: 54px;
+    width: 64px;
+    height: 64px;
+    padding: 28px;
+  }
 }
 
 .service-modal-top {
@@ -5971,8 +5999,8 @@ a[href='/book-now'] * {
 
 .service-modal-divider {
   height: 1px;
-  background: rgba(255, 255, 255, 0.1);
-  margin: 40px 0;
+  background: rgba(255, 255, 255, 0.3);
+  margin: 20px 0;
 }
 
 .service-modal-bottom {
@@ -5997,7 +6025,7 @@ a[href='/book-now'] * {
 
 .service-modal-example-card {
   background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 8px;
   padding: 24px;
   text-align: center;
@@ -6017,6 +6045,14 @@ a[href='/book-now'] * {
 }
 
 /* Responsive Modal Styles */
+@media (max-width: 1100px) {
+  .service-modal-content {
+    max-width: 90%;
+    padding: 30px;
+    max-height: 95vh;
+  }
+}
+
 @media (max-width: 1024px) {
   .service-modal-content {
     padding: 30px;
@@ -6052,8 +6088,12 @@ a[href='/book-now'] * {
   }
 
   .service-modal-close {
-    top: 15px;
-    left: 15px;
+    top: 0;
+    left: 0;
+    padding: 15px;
+    font-size: 30px;
+    width: 44px;
+    height: 44px;
   }
 
   .service-modal-title {

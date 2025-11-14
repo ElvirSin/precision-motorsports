@@ -3,6 +3,7 @@
 import React, { useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { FaTimes } from 'react-icons/fa'
 
 interface ServiceModalProps {
   isOpen: boolean
@@ -41,8 +42,8 @@ export default function ServiceModal({
   return (
     <div className="service-modal-overlay" onClick={onClose}>
       <div className="service-modal-content" onClick={(e) => e.stopPropagation()}>
-        <button className="service-modal-close" onClick={onClose}>
-          Close
+        <button className="service-modal-close" onClick={onClose} aria-label="Close">
+          <FaTimes />
         </button>
 
         <div className="service-modal-top">
