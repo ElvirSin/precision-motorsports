@@ -42,9 +42,11 @@ export default function ServiceModal({
   return (
     <div className="service-modal-overlay" onClick={onClose}>
       <div className="service-modal-content" onClick={(e) => e.stopPropagation()}>
-        <button className="service-modal-close" onClick={onClose} aria-label="Close">
-          <FaTimes />
-        </button>
+        <div className="service-modal-close-wrapper">
+          <button className="service-modal-close" onClick={onClose} aria-label="Close">
+            <FaTimes />
+          </button>
+        </div>
 
         <div className="service-modal-top">
           <div className="service-modal-intro">
