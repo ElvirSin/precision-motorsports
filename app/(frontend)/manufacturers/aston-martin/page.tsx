@@ -1,4 +1,6 @@
-import React from 'react'
+'use client'
+
+import React, { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import {
@@ -11,9 +13,24 @@ import {
   FaCircle,
   FaWind,
 } from 'react-icons/fa'
+import ServiceModal from '../../components/ServiceModal'
+import { serviceDataMap } from '../../lib/serviceData'
 import '../../styles.css'
 
 export default function AstonMartinPage() {
+  const [openService, setOpenService] = useState<string | null>(null)
+
+  const handleServiceClick = (serviceType: string) => {
+    setOpenService(serviceType)
+  }
+
+  const handleCloseModal = () => {
+    setOpenService(null)
+  }
+
+  const carImage = '/manufacturers/car-images/aston-martin.png'
+  const carAlt = 'Aston Martin'
+
   return (
     <div className="homepage">
       {/* Hero Section */}
@@ -88,56 +105,56 @@ export default function AstonMartinPage() {
       <section className="service-options">
         <div className="service-options-container">
           <div className="service-options-grid">
-            <button className="service-option">
+            <button className="service-option" onClick={() => handleServiceClick('PERFORMANCE')}>
               <div className="service-icon">
                 <FaTachometerAlt />
               </div>
               <h4>PERFORMANCE</h4>
               <p>VIEW SERVICES</p>
             </button>
-            <button className="service-option">
+            <button className="service-option" onClick={() => handleServiceClick('SERVICE')}>
               <div className="service-icon">
                 <FaWrench />
               </div>
               <h4>SERVICE</h4>
               <p>VIEW SERVICES</p>
             </button>
-            <button className="service-option">
+            <button className="service-option" onClick={() => handleServiceClick('REPAIR')}>
               <div className="service-icon">
                 <FaCog />
               </div>
               <h4>REPAIR</h4>
               <p>VIEW SERVICES</p>
             </button>
-            <button className="service-option">
+            <button className="service-option" onClick={() => handleServiceClick('RESTORATION')}>
               <div className="service-icon">
                 <FaPaintBrush />
               </div>
               <h4>RESTORATION</h4>
               <p>VIEW SERVICES</p>
             </button>
-            <button className="service-option">
+            <button className="service-option" onClick={() => handleServiceClick('COSMETICS')}>
               <div className="service-icon">
                 <FaStar />
               </div>
               <h4>COSMETICS</h4>
               <p>VIEW SERVICES</p>
             </button>
-            <button className="service-option">
+            <button className="service-option" onClick={() => handleServiceClick('AUDIO')}>
               <div className="service-icon">
                 <FaVolumeUp />
               </div>
               <h4>AUDIO</h4>
               <p>VIEW SERVICES</p>
             </button>
-            <button className="service-option">
+            <button className="service-option" onClick={() => handleServiceClick('WHEELS')}>
               <div className="service-icon">
                 <FaCircle />
               </div>
               <h4>WHEELS</h4>
               <p>VIEW SERVICES</p>
             </button>
-            <button className="service-option">
+            <button className="service-option" onClick={() => handleServiceClick('AERODYNAMICS')}>
               <div className="service-icon">
                 <FaWind />
               </div>
@@ -147,6 +164,19 @@ export default function AstonMartinPage() {
           </div>
         </div>
       </section>
+
+      {openService && serviceDataMap[openService] && (
+        <ServiceModal
+          isOpen={true}
+          onClose={handleCloseModal}
+          serviceType={openService}
+          serviceTitle={serviceDataMap[openService].title}
+          serviceDescription={serviceDataMap[openService].description}
+          carImage={carImage}
+          carAlt={carAlt}
+          serviceExamples={serviceDataMap[openService].examples}
+        />
+      )}
     </div>
   )
 }
