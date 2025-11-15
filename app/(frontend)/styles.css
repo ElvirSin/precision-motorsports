@@ -247,7 +247,7 @@ body {
 /* Hero Section */
 .hero {
   position: relative;
-  height: 70vh;
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -353,6 +353,72 @@ body {
 
 .button-icon {
   font-size: 16px;
+}
+
+.hero-scroll-indicator {
+  position: fixed;
+  bottom: 120px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 4;
+  pointer-events: none;
+}
+
+.hero-scroll-arrow {
+  width: 24px;
+  height: 40px;
+  border: 2px solid rgba(74, 158, 255, 0.5);
+  border-radius: 12px;
+  position: relative;
+  animation: heroScrollBounce 2s infinite;
+}
+
+.hero-scroll-arrow::before {
+  content: '';
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 8px;
+  background: #4a9eff;
+  border-radius: 2px;
+  animation: scrollMove 2s infinite;
+}
+
+@keyframes heroScrollBounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(10px);
+  }
+}
+
+@keyframes scrollBounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(10px);
+  }
+}
+
+@keyframes scrollMove {
+  0% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+  50% {
+    opacity: 0.5;
+    transform: translateX(-50%) translateY(12px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(20px);
+  }
 }
 
 /* Content Section */
@@ -970,7 +1036,11 @@ body {
   }
 
   .hero {
-    height: 40vh;
+    min-height: 100vh;
+  }
+
+  .hero-scroll-indicator {
+    bottom: 120px;
   }
 
   .hero-title {
@@ -1265,7 +1335,11 @@ body {
   }
 
   .hero {
-    height: 35vh;
+    min-height: 100vh;
+  }
+
+  .hero-scroll-indicator {
+    bottom: 120px;
   }
 
   .hero-title {

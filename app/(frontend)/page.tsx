@@ -21,6 +21,9 @@ export default function HomePage() {
             BROWSE SERVICES
           </Link>
         </div>
+        <div className="hero-scroll-indicator">
+          <div className="hero-scroll-arrow"></div>
+        </div>
       </section>
 
       {/* Content Section */}
