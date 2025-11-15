@@ -2661,7 +2661,7 @@ a[href='/book-now'] * {
 
 .about-hero-scroll-indicator {
   position: absolute;
-  bottom: 80px;
+  bottom: 120px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 2;
@@ -3070,7 +3070,7 @@ a[href='/book-now'] * {
   }
 
   .about-hero-scroll-indicator {
-    bottom: 80px;
+    bottom: 120px;
   }
 
   .about-stats-section {
@@ -3214,7 +3214,7 @@ a[href='/book-now'] * {
   }
 
   .about-hero-scroll-indicator {
-    bottom: 80px;
+    bottom: 120px;
   }
 
   .about-scroll-arrow {
@@ -3375,7 +3375,7 @@ a[href='/book-now'] * {
   }
 
   .about-hero-scroll-indicator {
-    bottom: 80px;
+    bottom: 120px;
   }
 
   .about-stats-section {
