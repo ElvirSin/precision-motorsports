@@ -247,7 +247,7 @@ body {
 /* Hero Section */
 .hero {
   position: relative;
-  min-height: 100vh;
+  height: calc(100vh - 90px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -356,19 +356,18 @@ body {
 }
 
 .hero-scroll-indicator {
-  position: fixed;
-  bottom: 120px;
+  position: absolute;
+  bottom: 150px;
   left: 50%;
   transform: translateX(-50%);
-  z-index: 4;
-  pointer-events: none;
+  z-index: 2;
 }
 
 .hero-scroll-arrow {
-  width: 24px;
-  height: 40px;
-  border: 2px solid rgba(74, 158, 255, 0.5);
-  border-radius: 12px;
+  width: 28px;
+  height: 48px;
+  border: 3px solid rgba(74, 158, 255, 0.6);
+  border-radius: 14px;
   position: relative;
   animation: heroScrollBounce 2s infinite;
 }
@@ -376,13 +375,13 @@ body {
 .hero-scroll-arrow::before {
   content: '';
   position: absolute;
-  top: 8px;
+  top: 10px;
   left: 50%;
   transform: translateX(-50%);
-  width: 4px;
-  height: 8px;
+  width: 5px;
+  height: 10px;
   background: #4a9eff;
-  border-radius: 2px;
+  border-radius: 2.5px;
   animation: scrollMove 2s infinite;
 }
 
@@ -1036,11 +1035,11 @@ body {
   }
 
   .hero {
-    min-height: 100vh;
+    height: calc(100vh - 90px);
   }
 
   .hero-scroll-indicator {
-    bottom: 120px;
+    bottom: 150px;
   }
 
   .hero-title {
@@ -1335,11 +1334,11 @@ body {
   }
 
   .hero {
-    min-height: 100vh;
+    height: calc(100vh - 90px);
   }
 
   .hero-scroll-indicator {
-    bottom: 120px;
+    bottom: 150px;
   }
 
   .hero-title {
@@ -2741,17 +2740,17 @@ a[href='/book-now'] * {
 
 .about-hero-scroll-indicator {
   position: absolute;
-  bottom: 120px;
+  bottom: 150px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 2;
 }
 
 .about-scroll-arrow {
-  width: 24px;
-  height: 40px;
-  border: 2px solid rgba(74, 158, 255, 0.5);
-  border-radius: 12px;
+  width: 28px;
+  height: 48px;
+  border: 3px solid rgba(74, 158, 255, 0.6);
+  border-radius: 14px;
   position: relative;
   animation: scrollBounce 2s infinite;
 }
@@ -2759,13 +2758,13 @@ a[href='/book-now'] * {
 .about-scroll-arrow::before {
   content: '';
   position: absolute;
-  top: 8px;
+  top: 10px;
   left: 50%;
   transform: translateX(-50%);
-  width: 4px;
-  height: 8px;
+  width: 5px;
+  height: 10px;
   background: #4a9eff;
-  border-radius: 2px;
+  border-radius: 2.5px;
   animation: scrollMove 2s infinite;
 }
 
@@ -3150,7 +3149,7 @@ a[href='/book-now'] * {
   }
 
   .about-hero-scroll-indicator {
-    bottom: 120px;
+    bottom: 150px;
   }
 
   .about-stats-section {
@@ -3294,7 +3293,7 @@ a[href='/book-now'] * {
   }
 
   .about-hero-scroll-indicator {
-    bottom: 120px;
+    bottom: 150px;
   }
 
   .about-scroll-arrow {
@@ -3455,7 +3454,7 @@ a[href='/book-now'] * {
   }
 
   .about-hero-scroll-indicator {
-    bottom: 120px;
+    bottom: 150px;
   }
 
   .about-stats-section {
