@@ -123,26 +123,17 @@ export default function GalleryPage() {
   }, [selectedCollection, goToPrevious, goToNext, closeModal])
 
   return (
-    <div className="homepage">
-      {/* Hero Section */}
-      <section className="hero">
-        <div className="hero-background">
-          <Image
-            src="/home-page/hero1.jpg"
-            alt="Gallery Background"
-            fill
-            style={{ objectFit: 'cover' }}
-            priority
-          />
-        </div>
-        <div className="hero-content">
-          <h3 className="hero-subtitle">OUR WORK & ACHIEVEMENTS</h3>
-          <h2 className="hero-title">VISUAL EXCELLENCE IN EVERY PROJECT</h2>
+    <div className="gallery-page">
+      {/* Gallery Header */}
+      <section className="gallery-header">
+        <div className="gallery-header-content">
+          <h3 className="gallery-header-subtitle">OUR WORK & ACHIEVEMENTS</h3>
+          <h2 className="gallery-header-title">VISUAL EXCELLENCE IN EVERY PROJECT</h2>
         </div>
       </section>
 
       {/* Gallery Section */}
-      <section className="content-section">
+      <section className="gallery-content-section">
         {loading ? (
           <div className="gallery-loading">
             <div className="gallery-loading-spinner"></div>
