@@ -7549,8 +7549,7 @@ a[href='/book-now'] * {
   border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 16px;
   max-width: 600px;
-  min-height: 70vh;
-  max-height: 95vh;
+  max-height: 90vh;
   width: 100%;
   position: relative;
   padding: 0;
@@ -7609,17 +7608,21 @@ a[href='/book-now'] * {
   align-items: center;
   justify-content: center;
   padding: 12px;
-  flex: 1;
+  flex: 0 1 auto;
   min-height: 0;
   overflow: hidden;
-  height: 100%;
+  position: relative;
 }
 
-.promotion-popup-image-wrapper img {
-  width: 100%;
-  height: 100%;
+.promotion-popup-image-wrapper img,
+.promotion-popup-image {
+  max-height: calc(90vh - 120px);
+  width: auto;
+  max-width: 100%;
+  height: auto;
   object-fit: contain;
   border-radius: 8px;
+  display: block;
 }
 
 .promotion-popup-footer {
@@ -7695,7 +7698,12 @@ a[href='/book-now'] * {
 @media (min-width: 768px) {
   .promotion-popup-content {
     max-width: 550px;
-    min-height: 75vh;
+    max-height: 85vh;
+  }
+
+  .promotion-popup-image-wrapper img,
+  .promotion-popup-image {
+    max-height: calc(85vh - 140px);
   }
 
   .promotion-popup-header {
@@ -7734,6 +7742,11 @@ a[href='/book-now'] * {
 @media (min-width: 1024px) {
   .promotion-popup-content {
     max-width: 650px;
-    min-height: 80vh;
+    max-height: 88vh;
+  }
+
+  .promotion-popup-image-wrapper img,
+  .promotion-popup-image {
+    max-height: calc(88vh - 150px);
   }
 }

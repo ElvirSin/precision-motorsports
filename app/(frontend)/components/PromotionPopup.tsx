@@ -67,12 +67,12 @@ export default function PromotionPopup({ imageUrl }: PromotionPopupProps) {
             alt="Current Promotion"
             width={500}
             height={700}
+            className="promotion-popup-image"
             style={{
               objectFit: 'contain',
-              width: '100%',
-              height: '100%',
             }}
             priority
+            unoptimized
           />
         </div>
         <div className="promotion-popup-footer">
