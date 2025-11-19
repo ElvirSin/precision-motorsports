@@ -69,10 +69,8 @@ export default function PromotionPopup({ imageUrl }: PromotionPopupProps) {
             height={700}
             style={{
               objectFit: 'contain',
-              maxWidth: '100%',
-              maxHeight: '100%',
-              width: 'auto',
-              height: 'auto',
+              width: '100%',
+              height: '100%',
             }}
             priority
           />
