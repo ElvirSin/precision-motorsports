@@ -7526,3 +7526,212 @@ a[href='/book-now'] * {
     margin-bottom: 15px;
   }
 }
+
+/* Promotion Popup Styles */
+.promotion-popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(8px);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: fadeIn 0.3s ease;
+}
+
+.promotion-popup-content {
+  background: #000;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 16px;
+  max-width: 450px;
+  max-height: 90vh;
+  width: 100%;
+  position: relative;
+  padding: 0;
+  animation: slideUp 0.3s ease;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.promotion-popup-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  flex-shrink: 0;
+}
+
+.promotion-popup-title {
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #fff;
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+}
+
+.promotion-popup-close {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+}
+
+.promotion-popup-close:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: scale(1.05);
+}
+
+.promotion-popup-image-wrapper {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.promotion-popup-image-wrapper img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.promotion-popup-footer {
+  padding: 20px 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.promotion-popup-inquire-button {
+  background: linear-gradient(135deg, #4a9eff 0%, #00d4ff 100%);
+  border: none;
+  border-radius: 10px;
+  padding: 16px 32px;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  font-family: 'Poppins', sans-serif;
+  width: 100%;
+  justify-content: center;
+  box-shadow: 0 4px 20px rgba(74, 158, 255, 0.4), 0 0 30px rgba(0, 212, 255, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.promotion-popup-inquire-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s ease;
+}
+
+.promotion-popup-inquire-button:hover::before {
+  left: 100%;
+}
+
+.promotion-popup-inquire-button:hover {
+  background: linear-gradient(135deg, #5aa8ff 0%, #1ae4ff 100%);
+  color: #fff;
+  box-shadow: 0 6px 30px rgba(74, 158, 255, 0.6), 0 0 40px rgba(0, 212, 255, 0.4);
+  transform: translateY(-2px);
+}
+
+.promotion-popup-inquire-button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 15px rgba(74, 158, 255, 0.5), 0 0 25px rgba(0, 212, 255, 0.3);
+}
+
+.promotion-popup-inquire-button .button-arrow {
+  font-size: 18px;
+  font-weight: bold;
+  transition: transform 0.3s ease;
+}
+
+.promotion-popup-inquire-button:hover .button-arrow {
+  transform: translateX(5px);
+}
+
+/* Responsive Promotion Popup Styles */
+@media (min-width: 768px) {
+  .promotion-popup-content {
+    max-width: 400px;
+  }
+
+  .promotion-popup-header {
+    padding: 24px 28px;
+  }
+
+  .promotion-popup-title {
+    font-size: 15px;
+  }
+
+  .promotion-popup-close {
+    width: 36px;
+    height: 36px;
+    font-size: 16px;
+  }
+
+  .promotion-popup-image-wrapper {
+    padding: 24px;
+  }
+
+  .promotion-popup-footer {
+    padding: 24px 28px;
+  }
+
+  .promotion-popup-inquire-button {
+    padding: 18px 36px;
+    font-size: 15px;
+    letter-spacing: 2.5px;
+  }
+
+  .promotion-popup-inquire-button .button-arrow {
+    font-size: 20px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .promotion-popup-content {
+    max-width: 450px;
+  }
+}

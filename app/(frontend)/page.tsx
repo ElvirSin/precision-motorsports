@@ -2,11 +2,13 @@ import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import CyclingHero from './components/CyclingHero'
+import PromotionWrapper from './components/PromotionWrapper'
 import './styles.css'
 
 export default function HomePage() {
   return (
     <div className="homepage">
+      <PromotionWrapper />
       {/* Hero Section */}
       <section className="hero">
         <CyclingHero />
