@@ -43,25 +43,8 @@ export default function CyclingHero({ className = '' }: CyclingHeroProps) {
     }
   }, [currentVideoIndex])
 
-  // Pause video on hover
-  const handleMouseEnter = () => {
-    if (videoRef.current) {
-      videoRef.current.pause()
-    }
-  }
-
-  const handleMouseLeave = () => {
-    if (videoRef.current) {
-      videoRef.current.play()
-    }
-  }
-
   return (
-    <div
-      className={`hero-background ${className}`}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-    >
+    <div className={`hero-background ${className}`}>
       {/* Video */}
       <video
         ref={videoRef}
