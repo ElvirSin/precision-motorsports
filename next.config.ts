@@ -12,12 +12,8 @@ const nextConfig: NextConfig = {
   },
   // Enable compression
   compress: true,
-  // Optimize production builds
-  swcMinify: true,
   // Enable static page generation where possible
   output: 'standalone',
-  // Optimize fonts
-  optimizeFonts: true,
   // Enable React strict mode for better performance
   reactStrictMode: true,
   // Power optimizations
