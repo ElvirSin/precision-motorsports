@@ -1,9 +1,25 @@
 import { NextResponse } from 'next/server'
-import { readdir, readFile } from 'fs/promises'
+import { readdir } from 'fs/promises'
 import { join } from 'path'
+
+// Cache gallery data for 1 hour
+let cachedGalleryData: { collections: any[]; timestamp: number } | null = null
+const CACHE_DURATION = 60 * 60 * 1000 // 1 hour in milliseconds
 
 export async function GET() {
   try {
+    // Check cache first
+    if (cachedGalleryData && Date.now() - cachedGalleryData.timestamp < CACHE_DURATION) {
+      return NextResponse.json(
+        { collections: cachedGalleryData.collections },
+        {
+          headers: {
+            'Cache-Control': 'public, s-maxage=3600, stale-while-revalidate=86400',
+          },
+        },
+      )
+    }
+
     const galleryPath = join(process.cwd(), 'public', 'gallery')
     const collections = await readdir(galleryPath, { withFileTypes: true })
 
@@ -28,7 +44,20 @@ export async function GET() {
         }),
     )
 
-    return NextResponse.json({ collections: galleryCollections })
+    // Update cache
+    cachedGalleryData = {
+      collections: galleryCollections,
+      timestamp: Date.now(),
+    }
+
+    return NextResponse.json(
+      { collections: galleryCollections },
+      {
+        headers: {
+          'Cache-Control': 'public, s-maxage=3600, stale-while-revalidate=86400',
+        },
+      },
+    )
   } catch (error) {
     console.error('Error reading gallery:', error)
     return NextResponse.json({ error: 'Failed to load gallery' }, { status: 500 })

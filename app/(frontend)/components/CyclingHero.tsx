@@ -69,6 +69,7 @@ export default function CyclingHero({ className = '' }: CyclingHeroProps) {
         autoPlay
         muted
         playsInline
+        preload="metadata"
         onEnded={handleVideoEnd}
         style={{
           width: '100%',

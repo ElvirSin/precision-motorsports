@@ -2,13 +2,26 @@
 import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import Footer from './components/Footer'
-import ContactSection from './components/ContactSection'
-import ReviewsSection from './components/ReviewsSection'
-import GoogleAnalytics from './components/GoogleAnalytics'
-import AnalyticsProvider from './components/AnalyticsProvider'
+import dynamic from 'next/dynamic'
 import Navigation from './components/Navigation'
 import './styles.css'
+
+// Dynamically import heavy components to reduce initial bundle size
+const Footer = dynamic(() => import('./components/Footer'), {
+  ssr: true,
+})
+const ContactSection = dynamic(() => import('./components/ContactSection'), {
+  ssr: true,
+})
+const ReviewsSection = dynamic(() => import('./components/ReviewsSection'), {
+  ssr: true,
+})
+const GoogleAnalytics = dynamic(() => import('./components/GoogleAnalytics'), {
+  ssr: false,
+})
+const AnalyticsProvider = dynamic(() => import('./components/AnalyticsProvider'), {
+  ssr: false,
+})
 
 export default function RootLayout(props: { children: React.ReactNode }) {
   const { children } = props
