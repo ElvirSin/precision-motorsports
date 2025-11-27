@@ -2777,7 +2777,9 @@ body {
     padding: 20px;
   }
 
-  /* Reset centering for medium screens */
+  /* Reset centering for medium screens - all items should use auto placement */
+  .manufacturer-item:nth-last-child(4),
+  .manufacturer-item:nth-last-child(3),
   .manufacturer-item:nth-last-child(2),
   .manufacturer-item:nth-last-child(1) {
     grid-column: auto;
@@ -2804,7 +2806,9 @@ body {
     padding: 15px;
   }
 
-  /* Reset centering for small screens */
+  /* Reset centering for small screens - all items should use auto placement */
+  .manufacturer-item:nth-last-child(4),
+  .manufacturer-item:nth-last-child(3),
   .manufacturer-item:nth-last-child(2),
   .manufacturer-item:nth-last-child(1) {
     grid-column: auto;
