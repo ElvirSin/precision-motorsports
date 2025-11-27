@@ -2709,18 +2709,22 @@ body {
   height: 0;
 }
 
-/* Center the last two items in the last row */
-.manufacturer-item:nth-last-child(-n + 2) {
-  grid-column: span 1;
+/* Center the last row items when not full */
+/* For 4 items in last row (16 total items) - center them in columns 2, 3, 4, 5 */
+.manufacturer-item:nth-last-child(4) {
+  grid-column: 2;
 }
 
-/* For the last row with 2 items, center them */
-.manufacturer-item:nth-last-child(2) {
+.manufacturer-item:nth-last-child(3) {
   grid-column: 3;
 }
 
-.manufacturer-item:nth-last-child(1) {
+.manufacturer-item:nth-last-child(2) {
   grid-column: 4;
+}
+
+.manufacturer-item:nth-last-child(1) {
+  grid-column: 5;
 }
 
 .manufacturer-item {

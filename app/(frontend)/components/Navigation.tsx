@@ -34,6 +34,7 @@ export default function Navigation({ activePage }: NavigationProps) {
     { name: 'Bentley', slug: 'bentley', icon: '/manufacturers/bentley.webp' },
     { name: 'BMW', slug: 'bmw', icon: '/manufacturers/bmw.webp' },
     { name: 'Ferrari', slug: 'ferrari', icon: '/manufacturers/ferrari.webp' },
+    { name: 'Jaguar', slug: 'jaguar', icon: '/manufacturers/jaguar.png' },
     { name: 'Lamborghini', slug: 'lamborghini', icon: '/manufacturers/lamborghini.webp' },
     { name: 'Maserati', slug: 'maserati', icon: '/manufacturers/maserati.webp' },
     { name: 'McLaren', slug: 'mclaren', icon: '/manufacturers/mclaren.webp' },
@@ -43,6 +44,7 @@ export default function Navigation({ activePage }: NavigationProps) {
     { name: 'Range Rover', slug: 'range-rover', icon: '/manufacturers/rangerover.webp' },
     { name: 'Rolls-Royce', slug: 'rolls-royce', icon: '/manufacturers/rollsroyce.webp' },
     { name: 'Volkswagen', slug: 'volkswagen', icon: '/manufacturers/vw.webp' },
+    { name: 'Other', slug: 'other', icon: '/logo.jpg' },
   ]
 
   return (

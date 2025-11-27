@@ -240,7 +240,36 @@ export default function HomePage() {
                 width={120}
                 height={80}
                 style={{ objectFit: 'contain' }}
+                loading="lazy"
               />
+            </Link>
+            <Link href="/manufacturers/jaguar" className="manufacturer-item">
+              <Image
+                src="/manufacturers/jaguar.png"
+                alt="Jaguar"
+                width={120}
+                height={80}
+                style={{ objectFit: 'contain' }}
+                loading="lazy"
+              />
+            </Link>
+            <Link href="/manufacturers/other" className="manufacturer-item">
+              <div
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  width: '100%',
+                  height: '100%',
+                  color: '#fff',
+                  fontSize: '18px',
+                  fontWeight: '600',
+                  letterSpacing: '2px',
+                }}
+              >
+                OTHER
+              </div>
             </Link>
           </div>
         </div>
