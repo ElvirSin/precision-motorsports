@@ -7449,7 +7449,9 @@ a[href='/book-now'] * {
 }
 
 .service-modal-expanded-box {
-  margin-top: 12px;
+  margin-top: 0;
+  width: 90%;
+  align-self: center;
   padding: 20px;
   background: rgba(74, 158, 255, 0.1);
   border: 1px solid rgba(74, 158, 255, 0.4);
@@ -7606,7 +7608,9 @@ a[href='/book-now'] * {
 
   .service-modal-expanded-box {
     padding: 15px;
-    margin-top: 10px;
+    margin-top: 0;
+    width: 90%;
+    align-self: center;
   }
 
   .service-modal-expanded-inquire-button {
