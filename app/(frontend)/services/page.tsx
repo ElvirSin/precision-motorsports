@@ -144,14 +144,6 @@ export default function ServicesPage() {
               href={`/manufacturers/${carData[previousIndex].slug}`}
               className="carousel-item carousel-item-side"
             >
-              <div className="carousel-item-background">
-                <Image
-                  src={carData[previousIndex].logo}
-                  alt={carData[previousIndex].name}
-                  fill
-                  style={{ objectFit: 'contain', opacity: 0.1 }}
-                />
-              </div>
               <div className="carousel-item-car">
                 <Image
                   src={carData[previousIndex].car}
@@ -167,14 +159,6 @@ export default function ServicesPage() {
               href={`/manufacturers/${carData[currentIndex].slug}`}
               className="carousel-item carousel-item-center"
             >
-              <div className="carousel-item-background">
-                <Image
-                  src={carData[currentIndex].logo}
-                  alt={carData[currentIndex].name}
-                  fill
-                  style={{ objectFit: 'contain', opacity: 0.15 }}
-                />
-              </div>
               <div className="carousel-item-car">
                 <Image
                   src={carData[currentIndex].car}
@@ -190,14 +174,6 @@ export default function ServicesPage() {
               href={`/manufacturers/${carData[nextIndex].slug}`}
               className="carousel-item carousel-item-side"
             >
-              <div className="carousel-item-background">
-                <Image
-                  src={carData[nextIndex].logo}
-                  alt={carData[nextIndex].name}
-                  fill
-                  style={{ objectFit: 'contain', opacity: 0.1 }}
-                />
-              </div>
               <div className="carousel-item-car">
                 <Image
                   src={carData[nextIndex].car}
