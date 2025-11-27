@@ -101,6 +101,7 @@ export default function ServicesPage() {
   }
 
   const previousIndex = getPreviousIndex(currentIndex)
+
   const nextIndex = getNextIndex(currentIndex)
 
   return (
