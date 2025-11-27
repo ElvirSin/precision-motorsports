@@ -1,10 +1,10 @@
 'use client'
 
-import { useState, FormEvent, useEffect } from 'react'
+import { useState, FormEvent, useEffect, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import '../styles.css'
 
-export default function ContactPage() {
+function ContactForm() {
   const searchParams = useSearchParams()
   const [formData, setFormData] = useState({
     name: '',
@@ -95,6 +95,134 @@ export default function ContactPage() {
   }
 
   return (
+    <div className="contact-form-wrapper">
+      <div className="contact-form-card">
+        <h2 className="contact-form-title">SEND US A MESSAGE</h2>
+        <p className="contact-form-subtitle">
+          Fill out the form below and we'll get back to you as soon as possible.
+        </p>
+        {submitStatus.type && (
+          <div
+            className={`form-message ${
+              submitStatus.type === 'success' ? 'form-message-success' : 'form-message-error'
+            }`}
+          >
+            {submitStatus.message}
+          </div>
+        )}
+        <form className="contact-form-element" onSubmit={handleSubmit}>
+          <div className="form-row">
+            <div className="form-group">
+              <label htmlFor="name" className="form-label">
+                Name
+              </label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                placeholder="Your Name"
+                className="form-input"
+                value={formData.name}
+                onChange={handleChange}
+                required
+                disabled={isSubmitting}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="email" className="form-label">
+                Email
+              </label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="your.email@example.com"
+                className="form-input"
+                value={formData.email}
+                onChange={handleChange}
+                required
+                disabled={isSubmitting}
+              />
+            </div>
+          </div>
+          <div className="form-row">
+            <div className="form-group">
+              <label htmlFor="phone" className="form-label">
+                Phone
+              </label>
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                placeholder="(555) 123-4567"
+                className="form-input"
+                value={formData.phone}
+                onChange={handleChange}
+                disabled={isSubmitting}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="service" className="form-label">
+                Service
+              </label>
+              <select
+                id="service"
+                name="service"
+                className="form-input form-select"
+                value={formData.service}
+                onChange={handleChange}
+                required
+                disabled={isSubmitting}
+              >
+                <option value="">Select Service</option>
+                <option value="General Inquiry">General Inquiry</option>
+                <option value="Performance Upgrades">Performance Upgrades</option>
+                <option value="Service & Repair">Service & Repair</option>
+                <option value="Detailing & Restoration">Detailing & Restoration</option>
+                <option value="Audio">Audio</option>
+                <option value="Wheels">Wheels</option>
+                <option value="Aerodynamics">Aerodynamics</option>
+              </select>
+            </div>
+          </div>
+          <div className="form-group">
+            <label htmlFor="message" className="form-label">
+              Message
+            </label>
+            <textarea
+              id="message"
+              name="message"
+              placeholder="Tell us about your needs..."
+              className="form-input form-textarea"
+              rows={6}
+              value={formData.message}
+              onChange={handleChange}
+              required
+              disabled={isSubmitting}
+            ></textarea>
+          </div>
+          <button type="submit" className="contact-submit-button" disabled={isSubmitting}>
+            <span>{isSubmitting ? 'SENDING...' : 'SEND MESSAGE'}</span>
+            {!isSubmitting && (
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M2.01 21L23 12L2.01 3L2 10L17 12L2 14L2.01 21Z" fill="currentColor" />
+              </svg>
+            )}
+          </button>
+        </form>
+      </div>
+    </div>
+  )
+}
+
+export default function ContactPage() {
+  return (
     <div className="homepage">
       {/* Contact Section */}
       <section className="contact-page-section">
@@ -109,134 +237,9 @@ export default function ContactPage() {
 
           <div className="contact-page-content">
             {/* Contact Form - First */}
-            <div className="contact-form-wrapper">
-              <div className="contact-form-card">
-                <h2 className="contact-form-title">SEND US A MESSAGE</h2>
-                <p className="contact-form-subtitle">
-                  Fill out the form below and we'll get back to you as soon as possible.
-                </p>
-                {submitStatus.type && (
-                  <div
-                    className={`form-message ${
-                      submitStatus.type === 'success'
-                        ? 'form-message-success'
-                        : 'form-message-error'
-                    }`}
-                  >
-                    {submitStatus.message}
-                  </div>
-                )}
-                <form className="contact-form-element" onSubmit={handleSubmit}>
-                  <div className="form-row">
-                    <div className="form-group">
-                      <label htmlFor="name" className="form-label">
-                        Name
-                      </label>
-                      <input
-                        type="text"
-                        id="name"
-                        name="name"
-                        placeholder="Your Name"
-                        className="form-input"
-                        value={formData.name}
-                        onChange={handleChange}
-                        required
-                        disabled={isSubmitting}
-                      />
-                    </div>
-                    <div className="form-group">
-                      <label htmlFor="email" className="form-label">
-                        Email
-                      </label>
-                      <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        placeholder="your.email@example.com"
-                        className="form-input"
-                        value={formData.email}
-                        onChange={handleChange}
-                        required
-                        disabled={isSubmitting}
-                      />
-                    </div>
-                  </div>
-                  <div className="form-row">
-                    <div className="form-group">
-                      <label htmlFor="phone" className="form-label">
-                        Phone
-                      </label>
-                      <input
-                        type="tel"
-                        id="phone"
-                        name="phone"
-                        placeholder="(555) 123-4567"
-                        className="form-input"
-                        value={formData.phone}
-                        onChange={handleChange}
-                        disabled={isSubmitting}
-                      />
-                    </div>
-                    <div className="form-group">
-                      <label htmlFor="service" className="form-label">
-                        Service
-                      </label>
-                      <select
-                        id="service"
-                        name="service"
-                        className="form-input form-select"
-                        value={formData.service}
-                        onChange={handleChange}
-                        required
-                        disabled={isSubmitting}
-                      >
-                        <option value="">Select Service</option>
-                        <option value="General Inquiry">General Inquiry</option>
-                        <option value="Performance Upgrades">Performance Upgrades</option>
-                        <option value="Service & Repair">Service & Repair</option>
-                        <option value="Detailing & Restoration">Detailing & Restoration</option>
-                        <option value="Audio">Audio</option>
-                        <option value="Wheels">Wheels</option>
-                        <option value="Aerodynamics">Aerodynamics</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="message" className="form-label">
-                      Message
-                    </label>
-                    <textarea
-                      id="message"
-                      name="message"
-                      placeholder="Tell us about your needs..."
-                      className="form-input form-textarea"
-                      rows={6}
-                      value={formData.message}
-                      onChange={handleChange}
-                      required
-                      disabled={isSubmitting}
-                    ></textarea>
-                  </div>
-                  <button type="submit" className="contact-submit-button" disabled={isSubmitting}>
-                    <span>{isSubmitting ? 'SENDING...' : 'SEND MESSAGE'}</span>
-                    {!isSubmitting && (
-                      <svg
-                        width="20"
-                        height="20"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M2.01 21L23 12L2.01 3L2 10L17 12L2 14L2.01 21Z"
-                          fill="currentColor"
-                        />
-                      </svg>
-                    )}
-                  </button>
-                </form>
-              </div>
-            </div>
+            <Suspense fallback={<div className="contact-form-wrapper">Loading form...</div>}>
+              <ContactForm />
+            </Suspense>
 
             {/* Combined Contact Info Box - Below Form */}
             <div className="contact-info-combined">
