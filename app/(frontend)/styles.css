@@ -7432,37 +7432,52 @@ a[href='/book-now'] * {
   color: #fff;
   transition: all 0.3s ease;
   cursor: pointer;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: auto;
 }
 
-.service-modal-example-card:hover {
+.service-modal-example-text {
+  width: 100%;
+}
+
+.service-modal-example-card:hover:not(.is-expanded) {
   background: rgba(74, 158, 255, 0.15);
   border-color: rgba(74, 158, 255, 0.8);
   transform: translateY(-4px) scale(1.02);
   box-shadow: 0 8px 20px rgba(74, 158, 255, 0.3);
 }
 
-.service-modal-example-card:active {
+.service-modal-example-card:active:not(.is-expanded) {
   background: rgba(74, 158, 255, 0.25);
   border-color: #4a9eff;
   transform: translateY(-2px) scale(1.01);
   box-shadow: 0 4px 12px rgba(74, 158, 255, 0.4);
 }
 
-.service-modal-expanded-box {
-  margin-top: 0;
-  width: 90%;
-  align-self: center;
-  padding: 20px;
-  background: rgba(74, 158, 255, 0.1);
-  border: 1px solid rgba(74, 158, 255, 0.4);
-  border-radius: 8px;
-  animation: expandBox 0.3s ease-out;
+/* When card is expanded */
+.service-modal-example-card.is-expanded {
+  background: rgba(74, 158, 255, 0.15);
+  border-color: rgba(74, 158, 255, 0.8);
+  padding-bottom: 24px;
+  box-shadow: 0 8px 20px rgba(74, 158, 255, 0.3);
+}
+
+.service-modal-expanded-button-container {
+  margin-top: 20px;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+  animation: expandButton 0.3s ease-out;
+  padding-top: 16px;
+  border-top: 1px solid rgba(74, 158, 255, 0.3);
 }
 
-@keyframes expandBox {
+@keyframes expandButton {
   from {
     opacity: 0;
     transform: translateY(-10px);
@@ -7606,11 +7621,13 @@ a[href='/book-now'] * {
     font-size: 12px;
   }
 
-  .service-modal-expanded-box {
-    padding: 15px;
-    margin-top: 0;
-    width: 90%;
-    align-self: center;
+  .service-modal-example-card.is-expanded {
+    padding-bottom: 20px;
+  }
+
+  .service-modal-expanded-button-container {
+    margin-top: 16px;
+    padding-top: 12px;
   }
 
   .service-modal-expanded-inquire-button {

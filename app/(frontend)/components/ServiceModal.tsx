@@ -91,19 +91,24 @@ export default function ServiceModal({
           <div className="service-modal-examples-grid">
             {serviceExamples.map((example, index) => (
               <div key={index} className="service-modal-example-wrapper">
-                <div className="service-modal-example-card" onClick={() => handleCardClick(index)}>
-                  {example}
+                <div
+                  className={`service-modal-example-card ${
+                    expandedCard === index ? 'is-expanded' : ''
+                  }`}
+                  onClick={() => handleCardClick(index)}
+                >
+                  <div className="service-modal-example-text">{example}</div>
+                  {expandedCard === index && (
+                    <div className="service-modal-expanded-button-container">
+                      <Link href="/book-now" onClick={(e) => e.stopPropagation()}>
+                        <button className="service-modal-expanded-inquire-button">
+                          INQUIRE NOW
+                          <span className="button-arrow">→</span>
+                        </button>
+                      </Link>
+                    </div>
+                  )}
                 </div>
-                {expandedCard === index && (
-                  <div className="service-modal-expanded-box">
-                    <Link href="/book-now">
-                      <button className="service-modal-expanded-inquire-button">
-                        INQUIRE NOW
-                        <span className="button-arrow">→</span>
-                      </button>
-                    </Link>
-                  </div>
-                )}
               </div>
             ))}
           </div>
