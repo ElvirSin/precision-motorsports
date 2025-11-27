@@ -1,9 +1,11 @@
 'use client'
 
-import { useState, FormEvent } from 'react'
+import { useState, FormEvent, useEffect } from 'react'
+import { useSearchParams } from 'next/navigation'
 import '../styles.css'
 
 export default function ContactPage() {
+  const searchParams = useSearchParams()
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -11,6 +13,26 @@ export default function ContactPage() {
     service: '',
     message: '',
   })
+
+  useEffect(() => {
+    // Pre-fill form from query parameters
+    const serviceParam = searchParams.get('service')
+    const detailParam = searchParams.get('detail')
+
+    if (serviceParam) {
+      setFormData((prev) => ({
+        ...prev,
+        service: decodeURIComponent(serviceParam),
+      }))
+    }
+
+    if (detailParam) {
+      setFormData((prev) => ({
+        ...prev,
+        message: decodeURIComponent(detailParam),
+      }))
+    }
+  }, [searchParams])
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState<{
     type: 'success' | 'error' | null

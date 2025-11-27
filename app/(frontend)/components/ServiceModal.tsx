@@ -5,6 +5,21 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { FaTimes } from 'react-icons/fa'
 
+// Map service type to contact form dropdown value
+const getServiceDropdownValue = (serviceType: string): string => {
+  const mapping: Record<string, string> = {
+    PERFORMANCE: 'Performance Upgrades',
+    SERVICE: 'Service & Repair',
+    REPAIR: 'Service & Repair',
+    RESTORATION: 'Detailing & Restoration',
+    COSMETICS: 'Detailing & Restoration',
+    AUDIO: 'Audio',
+    WHEELS: 'Wheels',
+    AERODYNAMICS: 'Aerodynamics',
+  }
+  return mapping[serviceType] || 'General Inquiry'
+}
+
 interface ServiceModalProps {
   isOpen: boolean
   onClose: () => void
@@ -66,9 +81,9 @@ export default function ServiceModal({
             <div className="service-modal-category">{serviceType}</div>
             <h2 className="service-modal-title">{serviceTitle}</h2>
             <p className="service-modal-description">{serviceDescription}</p>
-            <Link href="/book-now">
+            <Link href="/contact">
               <button className="service-modal-inquire-button">
-                INQUIRE NOW
+                CONTACT US
                 <span className="button-arrow">→</span>
               </button>
             </Link>
@@ -100,9 +115,14 @@ export default function ServiceModal({
                   <div className="service-modal-example-text">{example}</div>
                   {expandedCard === index && (
                     <div className="service-modal-expanded-button-container">
-                      <Link href="/book-now" onClick={(e) => e.stopPropagation()}>
+                      <Link
+                        href={`/contact?service=${encodeURIComponent(
+                          getServiceDropdownValue(serviceType),
+                        )}&detail=${encodeURIComponent(example)}`}
+                        onClick={(e) => e.stopPropagation()}
+                      >
                         <button className="service-modal-expanded-inquire-button">
-                          INQUIRE NOW
+                          CONTACT US
                           <span className="button-arrow">→</span>
                         </button>
                       </Link>

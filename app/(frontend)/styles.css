@@ -7372,6 +7372,10 @@ a[href='/book-now'] * {
   transform: translateX(5px);
 }
 
+.service-modal-intro a {
+  text-decoration: none;
+}
+
 .service-modal-image {
   width: 100%;
   height: 300px;
@@ -7504,6 +7508,11 @@ a[href='/book-now'] * {
   align-items: center;
   gap: 10px;
   font-family: 'Poppins', sans-serif;
+  text-decoration: none;
+}
+
+.service-modal-expanded-button-container a {
+  text-decoration: none;
 }
 
 .service-modal-expanded-inquire-button:hover {
