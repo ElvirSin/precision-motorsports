@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { FaTimes } from 'react-icons/fa'
@@ -26,6 +26,8 @@ export default function ServiceModal({
   carAlt,
   serviceExamples,
 }: ServiceModalProps) {
+  const [expandedCard, setExpandedCard] = useState<number | null>(null)
+
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden'
@@ -36,6 +38,17 @@ export default function ServiceModal({
       document.body.style.overflow = 'unset'
     }
   }, [isOpen])
+
+  useEffect(() => {
+    // Reset expanded card when modal closes
+    if (!isOpen) {
+      setExpandedCard(null)
+    }
+  }, [isOpen])
+
+  const handleCardClick = (index: number) => {
+    setExpandedCard(expandedCard === index ? null : index)
+  }
 
   if (!isOpen) return null
 
@@ -77,8 +90,20 @@ export default function ServiceModal({
           <h3 className="service-modal-options-title">INQUIRE FOR SERVICES</h3>
           <div className="service-modal-examples-grid">
             {serviceExamples.map((example, index) => (
-              <div key={index} className="service-modal-example-card">
-                {example}
+              <div key={index} className="service-modal-example-wrapper">
+                <div className="service-modal-example-card" onClick={() => handleCardClick(index)}>
+                  {example}
+                </div>
+                {expandedCard === index && (
+                  <div className="service-modal-expanded-box">
+                    <Link href="/book-now">
+                      <button className="service-modal-expanded-inquire-button">
+                        INQUIRE NOW
+                        <span className="button-arrow">→</span>
+                      </button>
+                    </Link>
+                  </div>
+                )}
               </div>
             ))}
           </div>

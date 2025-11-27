@@ -7414,6 +7414,11 @@ a[href='/book-now'] * {
   gap: 20px;
 }
 
+.service-modal-example-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
 .service-modal-example-card {
   background: rgba(255, 255, 255, 0.02);
   border: 1px solid rgba(255, 255, 255, 0.3);
@@ -7441,6 +7446,68 @@ a[href='/book-now'] * {
   border-color: #4a9eff;
   transform: translateY(-2px) scale(1.01);
   box-shadow: 0 4px 12px rgba(74, 158, 255, 0.4);
+}
+
+.service-modal-expanded-box {
+  margin-top: 12px;
+  padding: 20px;
+  background: rgba(74, 158, 255, 0.1);
+  border: 1px solid rgba(74, 158, 255, 0.4);
+  border-radius: 8px;
+  animation: expandBox 0.3s ease-out;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@keyframes expandBox {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.service-modal-expanded-inquire-button {
+  background: #4a9eff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  color: #fff;
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.service-modal-expanded-inquire-button:hover {
+  background: #5aaeff;
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(74, 158, 255, 0.4);
+}
+
+.service-modal-expanded-inquire-button:active {
+  background: #3a8eef;
+  transform: scale(1.02);
+  box-shadow: 0 4px 12px rgba(74, 158, 255, 0.5);
+}
+
+.service-modal-expanded-inquire-button .button-arrow {
+  font-size: 16px;
+  transition: transform 0.3s ease;
+}
+
+.service-modal-expanded-inquire-button:hover .button-arrow {
+  transform: translateX(5px);
 }
 
 /* Responsive Modal Styles */
@@ -7534,6 +7601,16 @@ a[href='/book-now'] * {
 
   .service-modal-example-card {
     padding: 20px;
+    font-size: 12px;
+  }
+
+  .service-modal-expanded-box {
+    padding: 15px;
+    margin-top: 10px;
+  }
+
+  .service-modal-expanded-inquire-button {
+    padding: 10px 20px;
     font-size: 12px;
   }
 
