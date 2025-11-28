@@ -24,7 +24,7 @@ export async function POST(request: NextRequest) {
 
     // Send email using Resend
     const { data, error } = await resend.emails.send({
-      from: 'Precision Motorsports <onboarding@resend.dev>', // You can change this after verifying your domain
+      from: 'Precision Motorsports <support@precision-motorsports.com>', // You can change this after verifying your domain
       to: process.env.CONTACT_EMAIL || 'support@precision-motorsports.com',
       replyTo: email,
       subject: `New Contact Form Submission - ${service}`,
