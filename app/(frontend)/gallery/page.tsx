@@ -25,6 +25,7 @@ export default function GalleryPage() {
   const [selectedCollection, setSelectedCollection] = useState<GalleryCollection | null>(null)
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
   const [loadedImages, setLoadedImages] = useState<Set<number>>(new Set())
+  const [imagesReadyToLoad, setImagesReadyToLoad] = useState<Set<number>>(new Set())
 
   // Fetch gallery collections
   useEffect(() => {
@@ -51,9 +52,43 @@ export default function GalleryPage() {
         initialImages.add(i)
       }
       setLoadedImages(initialImages)
+      setImagesReadyToLoad(new Set())
       setCurrentImageIndex(0)
     }
   }, [selectedCollection])
+
+  // Automatically load remaining images sequentially after initial 5 are loaded
+  useEffect(() => {
+    if (!selectedCollection) return
+
+    const initialCount = Math.min(5, selectedCollection.images.length)
+
+    // Check if all initial images (first 5) are ready
+    let allInitialReady = true
+    for (let i = 0; i < initialCount; i++) {
+      if (!imagesReadyToLoad.has(i)) {
+        allInitialReady = false
+        break
+      }
+    }
+
+    // If initial images are ready, start loading the rest sequentially
+    if (allInitialReady) {
+      // Find the next unloaded image index
+      for (let i = initialCount; i < selectedCollection.images.length; i++) {
+        if (!loadedImages.has(i)) {
+          // Load the next image
+          setLoadedImages((prev) => new Set([...prev, i]))
+          break // Only load one at a time
+        }
+      }
+    }
+  }, [selectedCollection, loadedImages, imagesReadyToLoad])
+
+  // Handle image load completion
+  const handleImageLoad = useCallback((index: number) => {
+    setImagesReadyToLoad((prev) => new Set([...prev, index]))
+  }, [])
 
   // Lazy load images as user navigates
   const loadImageIfNeeded = useCallback(
@@ -74,6 +109,7 @@ export default function GalleryPage() {
   const closeModal = useCallback(() => {
     setSelectedCollection(null)
     setLoadedImages(new Set())
+    setImagesReadyToLoad(new Set())
     document.body.style.overflow = 'unset'
   }, [])
 
@@ -209,6 +245,8 @@ export default function GalleryPage() {
                     style={{ objectFit: 'contain' }}
                     sizes="90vw"
                     priority={currentImageIndex < 5}
+                    onLoad={() => handleImageLoad(currentImageIndex)}
+                    onLoadingComplete={() => handleImageLoad(currentImageIndex)}
                   />
                 ) : (
                   <div className="gallery-modal-image-loading">
@@ -227,7 +265,7 @@ export default function GalleryPage() {
             </div>
 
             <div className="gallery-modal-thumbnails">
-              {selectedCollection.images.slice(0, 10).map((image, index) => (
+              {selectedCollection.images.map((image, index) => (
                 <div
                   key={index}
                   className={`gallery-modal-thumbnail ${
@@ -245,12 +283,34 @@ export default function GalleryPage() {
                       fill
                       style={{ objectFit: 'cover' }}
                       sizes="80px"
+                      onLoad={() => handleImageLoad(index)}
+                      onLoadingComplete={() => handleImageLoad(index)}
                     />
                   ) : (
                     <div className="gallery-thumbnail-placeholder"></div>
                   )}
                 </div>
               ))}
+            </div>
+
+            {/* Hidden images for preloading */}
+            <div style={{ display: 'none' }}>
+              {selectedCollection.images.map((image, index) => {
+                if (loadedImages.has(index) && index !== currentImageIndex) {
+                  return (
+                    <Image
+                      key={index}
+                      src={image}
+                      alt={`Preload ${index + 1}`}
+                      width={1}
+                      height={1}
+                      onLoad={() => handleImageLoad(index)}
+                      onLoadingComplete={() => handleImageLoad(index)}
+                    />
+                  )
+                }
+                return null
+              })}
             </div>
           </div>
         </div>
