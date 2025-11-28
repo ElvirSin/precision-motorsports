@@ -57,33 +57,7 @@ export default function GalleryPage() {
     }
   }, [selectedCollection])
 
-  // Automatically load remaining images sequentially after initial 5 are loaded
-  useEffect(() => {
-    if (!selectedCollection) return
-
-    const initialCount = Math.min(5, selectedCollection.images.length)
-
-    // Check if all initial images (first 5) are ready
-    let allInitialReady = true
-    for (let i = 0; i < initialCount; i++) {
-      if (!imagesReadyToLoad.has(i)) {
-        allInitialReady = false
-        break
-      }
-    }
-
-    // If initial images are ready, start loading the rest sequentially
-    if (allInitialReady) {
-      // Find the next unloaded image index
-      for (let i = initialCount; i < selectedCollection.images.length; i++) {
-        if (!loadedImages.has(i)) {
-          // Load the next image
-          setLoadedImages((prev) => new Set([...prev, i]))
-          break // Only load one at a time
-        }
-      }
-    }
-  }, [selectedCollection, loadedImages, imagesReadyToLoad])
+  // Removed: Sequential loading of all images - now using preload system instead
 
   // Handle image load completion
   const handleImageLoad = useCallback((index: number) => {
@@ -101,6 +75,31 @@ export default function GalleryPage() {
     [selectedCollection, loadedImages],
   )
 
+  // Automatically preload images around the current image (for thumbnails)
+  // This ensures the main image can reuse the cached version from thumbnails
+  useEffect(() => {
+    if (!selectedCollection) return
+
+    const totalImages = selectedCollection.images.length
+    const preloadCount = 3 // Preload 3 images ahead and behind
+
+    // Ensure current image is loaded (for thumbnail)
+    loadImageIfNeeded(currentImageIndex)
+
+    // Preload next images
+    for (let i = 1; i <= preloadCount; i++) {
+      const nextIndex = (currentImageIndex + i) % totalImages
+      loadImageIfNeeded(nextIndex)
+    }
+
+    // Preload previous images
+    for (let i = 1; i <= preloadCount; i++) {
+      const prevIndex =
+        currentImageIndex - i < 0 ? totalImages + (currentImageIndex - i) : currentImageIndex - i
+      loadImageIfNeeded(prevIndex)
+    }
+  }, [selectedCollection, currentImageIndex, loadImageIfNeeded])
+
   const openCollection = useCallback((collection: GalleryCollection) => {
     setSelectedCollection(collection)
     document.body.style.overflow = 'hidden'
@@ -116,30 +115,16 @@ export default function GalleryPage() {
   const goToPrevious = useCallback(() => {
     if (!selectedCollection) return
     setCurrentImageIndex((prevIndex) => {
-      const newIndex = prevIndex === 0 ? selectedCollection.images.length - 1 : prevIndex - 1
-      loadImageIfNeeded(newIndex)
-      // Preload adjacent images
-      const prevIdx = newIndex === 0 ? selectedCollection.images.length - 1 : newIndex - 1
-      const nextIdx = (newIndex + 1) % selectedCollection.images.length
-      loadImageIfNeeded(prevIdx)
-      loadImageIfNeeded(nextIdx)
-      return newIndex
+      return prevIndex === 0 ? selectedCollection.images.length - 1 : prevIndex - 1
     })
-  }, [selectedCollection, loadImageIfNeeded])
+  }, [selectedCollection])
 
   const goToNext = useCallback(() => {
     if (!selectedCollection) return
     setCurrentImageIndex((prevIndex) => {
-      const newIndex = (prevIndex + 1) % selectedCollection.images.length
-      loadImageIfNeeded(newIndex)
-      // Preload adjacent images
-      const prevIdx = newIndex === 0 ? selectedCollection.images.length - 1 : newIndex - 1
-      const nextIdx = (newIndex + 1) % selectedCollection.images.length
-      loadImageIfNeeded(prevIdx)
-      loadImageIfNeeded(nextIdx)
-      return newIndex
+      return (prevIndex + 1) % selectedCollection.images.length
     })
-  }, [selectedCollection, loadImageIfNeeded])
+  }, [selectedCollection])
 
   useEffect(() => {
     if (!selectedCollection) return
@@ -235,24 +220,19 @@ export default function GalleryPage() {
               </button>
 
               <div className="gallery-modal-image-wrapper">
-                {loadedImages.has(currentImageIndex) ? (
-                  <Image
-                    src={selectedCollection.images[currentImageIndex]}
-                    alt={`${formatFolderName(selectedCollection.folderName)} - Image ${
-                      currentImageIndex + 1
-                    }`}
-                    fill
-                    style={{ objectFit: 'contain' }}
-                    sizes="90vw"
-                    priority={currentImageIndex < 5}
-                    onLoad={() => handleImageLoad(currentImageIndex)}
-                    onLoadingComplete={() => handleImageLoad(currentImageIndex)}
-                  />
-                ) : (
-                  <div className="gallery-modal-image-loading">
-                    <div className="gallery-loading-spinner"></div>
-                  </div>
-                )}
+                <Image
+                  key={`main-${currentImageIndex}`}
+                  src={selectedCollection.images[currentImageIndex]}
+                  alt={`${formatFolderName(selectedCollection.folderName)} - Image ${
+                    currentImageIndex + 1
+                  }`}
+                  fill
+                  style={{ objectFit: 'contain' }}
+                  sizes="90vw"
+                  priority={currentImageIndex < 5}
+                  onLoad={() => handleImageLoad(currentImageIndex)}
+                  onLoadingComplete={() => handleImageLoad(currentImageIndex)}
+                />
               </div>
 
               <button
@@ -273,7 +253,6 @@ export default function GalleryPage() {
                   }`}
                   onClick={() => {
                     setCurrentImageIndex(index)
-                    loadImageIfNeeded(index)
                   }}
                 >
                   {loadedImages.has(index) ? (
@@ -291,26 +270,6 @@ export default function GalleryPage() {
                   )}
                 </div>
               ))}
-            </div>
-
-            {/* Hidden images for preloading */}
-            <div style={{ display: 'none' }}>
-              {selectedCollection.images.map((image, index) => {
-                if (loadedImages.has(index) && index !== currentImageIndex) {
-                  return (
-                    <Image
-                      key={index}
-                      src={image}
-                      alt={`Preload ${index + 1}`}
-                      width={1}
-                      height={1}
-                      onLoad={() => handleImageLoad(index)}
-                      onLoadingComplete={() => handleImageLoad(index)}
-                    />
-                  )
-                }
-                return null
-              })}
             </div>
           </div>
         </div>
