@@ -6,12 +6,27 @@ import { join } from 'path'
 let cachedCarsData: { brands: any[]; timestamp: number } | null = null
 const CACHE_DURATION = 60 * 60 * 1000 // 1 hour in milliseconds
 
+// Helper function to sort brands alphabetically
+function sortBrands(brands: any[]): any[] {
+  return brands.sort((a, b) => a.brandName.toLowerCase().localeCompare(b.brandName.toLowerCase()))
+}
+
+// Helper function to sort models alphabetically
+function sortModels(models: any[]): any[] {
+  return models.sort((a, b) => a.modelName.toLowerCase().localeCompare(b.modelName.toLowerCase()))
+}
+
 export async function GET() {
   try {
     // Check cache first
     if (cachedCarsData && Date.now() - cachedCarsData.timestamp < CACHE_DURATION) {
+      // Ensure cached data is sorted
+      const sortedBrands = sortBrands([...cachedCarsData.brands]).map((brand) => ({
+        ...brand,
+        models: sortModels([...brand.models]),
+      }))
       return NextResponse.json(
-        { brands: cachedCarsData.brands },
+        { brands: sortedBrands },
         {
           headers: {
             'Cache-Control': 'public, s-maxage=3600, stale-while-revalidate=86400',
@@ -87,6 +102,9 @@ export async function GET() {
             // Filter out models with no images
             const validModels = models.filter((model) => model.imageCount > 0)
 
+            // Sort models alphabetically by modelName
+            sortModels(validModels)
+
             // Determine brand thumbnail: use brand thumbnail if exists, otherwise use first model's thumbnail
             let finalBrandThumbnail = brandThumbnail
             if (!finalBrandThumbnail && validModels.length > 0 && validModels[0].thumbnail) {
@@ -103,6 +121,9 @@ export async function GET() {
 
       // Filter out brands with no valid models
       brands = brands.filter((brand) => brand.models.length > 0)
+
+      // Sort brands alphabetically by brandName
+      brands = sortBrands(brands)
     } catch (error) {
       // If cars directory doesn't exist, return empty array
       console.log('Cars gallery directory not found or empty')

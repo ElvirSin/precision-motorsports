@@ -80,7 +80,18 @@ export default function GalleryPage() {
         try {
           const response = await fetch('/api/gallery/cars')
           const data = await response.json()
-          setCarsData(data.brands || [])
+          // Sort brands and models alphabetically on client side as well
+          const sortedBrands = (data.brands || [])
+            .map((brand: CarBrand) => ({
+              ...brand,
+              models: [...brand.models].sort((a, b) =>
+                a.modelName.toLowerCase().localeCompare(b.modelName.toLowerCase()),
+              ),
+            }))
+            .sort((a: CarBrand, b: CarBrand) =>
+              a.brandName.toLowerCase().localeCompare(b.brandName.toLowerCase()),
+            )
+          setCarsData(sortedBrands)
         } catch (error) {
           console.error('Error fetching cars gallery:', error)
         } finally {
