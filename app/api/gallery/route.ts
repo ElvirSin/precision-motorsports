@@ -20,7 +20,7 @@ export async function GET() {
       )
     }
 
-    const galleryPath = join(process.cwd(), 'public', 'gallery')
+    const galleryPath = join(process.cwd(), 'public', 'gallery', 'events')
     const collections = await readdir(galleryPath, { withFileTypes: true })
 
     const galleryCollections = await Promise.all(
@@ -37,8 +37,8 @@ export async function GET() {
 
           return {
             folderName: dirent.name,
-            thumbnail: `/gallery/${dirent.name}/thumbnail.webp`,
-            images: images.map((img) => `/gallery/${dirent.name}/${img}`),
+            thumbnail: `/gallery/events/${dirent.name}/thumbnail.webp`,
+            images: images.map((img) => `/gallery/events/${dirent.name}/${img}`),
             imageCount: images.length,
           }
         }),

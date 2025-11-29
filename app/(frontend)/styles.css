@@ -1698,6 +1698,85 @@ body {
   margin: 0;
 }
 
+.gallery-tabs-section {
+  background: rgba(0, 0, 0, 0.8);
+  border-bottom: 1px solid rgba(74, 158, 255, 0.2);
+  padding: 0;
+}
+
+.gallery-tabs {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.gallery-tab {
+  flex: 1;
+  max-width: 200px;
+  padding: 20px 30px;
+  background: transparent;
+  border: none;
+  border-bottom: 3px solid transparent;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.gallery-tab:hover {
+  color: rgba(255, 255, 255, 0.9);
+  background: rgba(74, 158, 255, 0.05);
+}
+
+.gallery-tab.active {
+  color: #4a9eff;
+  border-bottom-color: #4a9eff;
+}
+
+.gallery-tab.active::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, #4a9eff 50%, transparent 100%);
+}
+
+.gallery-breadcrumb {
+  grid-column: 1 / -1;
+  margin-bottom: 20px;
+  padding: 0 20px;
+}
+
+.gallery-breadcrumb-link {
+  background: rgba(74, 158, 255, 0.1);
+  border: 1px solid rgba(74, 158, 255, 0.3);
+  color: #4a9eff;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.gallery-breadcrumb-link:hover {
+  background: rgba(74, 158, 255, 0.2);
+  border-color: rgba(74, 158, 255, 0.5);
+  transform: translateX(-4px);
+}
+
 .gallery-content-section {
   padding: 40px 0 60px;
   background: #000;
@@ -2071,6 +2150,15 @@ body {
     font-size: 28px;
   }
 
+  .gallery-tabs {
+    padding: 0 15px;
+  }
+
+  .gallery-tab {
+    padding: 18px 25px;
+    font-size: 15px;
+  }
+
   .gallery-content-section {
     padding: 30px 0 50px;
   }
@@ -2128,6 +2216,26 @@ body {
   .gallery-header-title {
     font-size: 24px;
     letter-spacing: 1px;
+  }
+
+  .gallery-tabs {
+    padding: 0 10px;
+  }
+
+  .gallery-tab {
+    padding: 15px 20px;
+    font-size: 14px;
+    letter-spacing: 1px;
+    max-width: none;
+  }
+
+  .gallery-breadcrumb {
+    padding: 0 15px;
+  }
+
+  .gallery-breadcrumb-link {
+    padding: 10px 20px;
+    font-size: 13px;
   }
 
   .gallery-content-section {
