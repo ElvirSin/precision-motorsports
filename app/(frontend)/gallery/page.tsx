@@ -20,6 +20,7 @@ interface CarModel {
 
 interface CarBrand {
   brandName: string
+  thumbnail: string | null
   models: CarModel[]
 }
 
@@ -214,7 +215,7 @@ export default function GalleryPage() {
   const currentBrand = carsData.find((brand) => brand.brandName === selectedBrand)
   const currentImages = selectedCollection?.images || selectedModel?.images
   const currentTitle = selectedCollection
-    ? formatFolderName(selectedCollection.folderName)
+    ? selectedCollection.folderName
     : selectedModel && selectedBrand
     ? `${formatName(selectedBrand)} ${formatName(selectedModel.modelName)}`
     : ''
@@ -277,7 +278,7 @@ export default function GalleryPage() {
                     <div className="gallery-thumbnail-wrapper">
                       <Image
                         src={collection.thumbnail}
-                        alt={formatFolderName(collection.folderName)}
+                        alt={collection.folderName}
                         fill
                         style={{ objectFit: 'cover' }}
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -291,7 +292,7 @@ export default function GalleryPage() {
                       </div>
                     </div>
                     <div className="gallery-item-title">
-                      <p>{formatFolderName(collection.folderName)}</p>
+                      <p>{collection.folderName}</p>
                     </div>
                   </div>
                 ))}
@@ -320,9 +321,9 @@ export default function GalleryPage() {
                       onClick={() => setSelectedBrand(brand.brandName)}
                     >
                       <div className="gallery-thumbnail-wrapper">
-                        {brand.models.length > 0 && brand.models[0].thumbnail ? (
+                        {brand.thumbnail ? (
                           <Image
-                            src={brand.models[0].thumbnail}
+                            src={brand.thumbnail}
                             alt={formatName(brand.brandName)}
                             fill
                             style={{ objectFit: 'cover' }}

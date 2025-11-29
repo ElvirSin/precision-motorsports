@@ -32,6 +32,15 @@ export async function GET() {
           .filter((dirent) => dirent.isDirectory())
           .map(async (brandDirent) => {
             const brandPath = join(carsPath, brandDirent.name)
+            const brandFiles = await readdir(brandPath)
+
+            // Check if brand folder has a thumbnail.webp
+            const brandThumbnail = brandFiles.some(
+              (file) => file.toLowerCase() === 'thumbnail.webp',
+            )
+              ? `/gallery/cars/${brandDirent.name}/thumbnail.webp`
+              : null
+
             const modelDirs = await readdir(brandPath, { withFileTypes: true })
 
             const models = await Promise.all(
@@ -41,22 +50,28 @@ export async function GET() {
                   const modelPath = join(brandPath, modelDirent.name)
                   const files = await readdir(modelPath)
 
-                  // Filter for image files (webp, jpg, jpeg, png)
+                  // Check if model folder has a thumbnail.webp
+                  const hasThumbnail = files.some((file) => file.toLowerCase() === 'thumbnail.webp')
+
+                  // Filter for image files (webp, jpg, jpeg, png), excluding thumbnail.webp
                   const images = files
                     .filter(
                       (file) =>
-                        file.toLowerCase().endsWith('.webp') ||
-                        file.toLowerCase().endsWith('.jpg') ||
-                        file.toLowerCase().endsWith('.jpeg') ||
-                        file.toLowerCase().endsWith('.png'),
+                        (file.toLowerCase().endsWith('.webp') ||
+                          file.toLowerCase().endsWith('.jpg') ||
+                          file.toLowerCase().endsWith('.jpeg') ||
+                          file.toLowerCase().endsWith('.png')) &&
+                        file.toLowerCase() !== 'thumbnail.webp',
                     )
                     .sort()
 
-                  // Use first image as thumbnail, or null if no images
-                  const thumbnail =
-                    images.length > 0
-                      ? `/gallery/cars/${brandDirent.name}/${modelDirent.name}/${images[0]}`
-                      : null
+                  // Use thumbnail.webp if it exists, otherwise use first image
+                  let thumbnail: string | null = null
+                  if (hasThumbnail) {
+                    thumbnail = `/gallery/cars/${brandDirent.name}/${modelDirent.name}/thumbnail.webp`
+                  } else if (images.length > 0) {
+                    thumbnail = `/gallery/cars/${brandDirent.name}/${modelDirent.name}/${images[0]}`
+                  }
 
                   return {
                     modelName: modelDirent.name,
@@ -72,8 +87,15 @@ export async function GET() {
             // Filter out models with no images
             const validModels = models.filter((model) => model.imageCount > 0)
 
+            // Determine brand thumbnail: use brand thumbnail if exists, otherwise use first model's thumbnail
+            let finalBrandThumbnail = brandThumbnail
+            if (!finalBrandThumbnail && validModels.length > 0 && validModels[0].thumbnail) {
+              finalBrandThumbnail = validModels[0].thumbnail
+            }
+
             return {
               brandName: brandDirent.name,
+              thumbnail: finalBrandThumbnail,
               models: validModels,
             }
           }),
