@@ -50,10 +50,11 @@ export async function GET() {
             const brandFiles = await readdir(brandPath)
 
             // Check if brand folder has a thumbnail.webp
+            // Use /cars/ path for Vercel compatibility
             const brandThumbnail = brandFiles.some(
               (file) => file.toLowerCase() === 'thumbnail.webp',
             )
-              ? `/gallery/cars/${brandDirent.name}/thumbnail.webp`
+              ? `/cars/${brandDirent.name}/thumbnail.webp`
               : null
 
             const modelDirs = await readdir(brandPath, { withFileTypes: true })
@@ -81,18 +82,19 @@ export async function GET() {
                     .sort()
 
                   // Use thumbnail.webp if it exists, otherwise use first image
+                  // Use /cars/ path for Vercel compatibility
                   let thumbnail: string | null = null
                   if (hasThumbnail) {
-                    thumbnail = `/gallery/cars/${brandDirent.name}/${modelDirent.name}/thumbnail.webp`
+                    thumbnail = `/cars/${brandDirent.name}/${modelDirent.name}/thumbnail.webp`
                   } else if (images.length > 0) {
-                    thumbnail = `/gallery/cars/${brandDirent.name}/${modelDirent.name}/${images[0]}`
+                    thumbnail = `/cars/${brandDirent.name}/${modelDirent.name}/${images[0]}`
                   }
 
                   return {
                     modelName: modelDirent.name,
                     thumbnail,
                     images: images.map(
-                      (img) => `/gallery/cars/${brandDirent.name}/${modelDirent.name}/${img}`,
+                      (img) => `/cars/${brandDirent.name}/${modelDirent.name}/${img}`,
                     ),
                     imageCount: images.length,
                   }

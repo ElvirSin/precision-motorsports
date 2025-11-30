@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useRef, useMemo } from 'react'
 import Image from 'next/image'
 import '../styles.css'
 
@@ -24,17 +24,12 @@ interface CarBrand {
   models: CarModel[]
 }
 
-// Convert camelCase to Title Case with spaces
-function formatFolderName(folderName: string): string {
-  return folderName
-    .replace(/([A-Z])/g, ' $1')
-    .replace(/^./, (str) => str.toUpperCase())
-    .trim()
-}
+const BATCH_SIZE = 5
+const BATCH_DELAY = 50
+const INITIAL_LOAD_DELAY = 100
+const PRELOAD_RADIUS = 5 // Preload 5 images ahead and behind current
 
-// Format brand/model names for display
 function formatName(name: string): string {
-  // Convert to title case
   return name
     .split(/[-_\s]/)
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
@@ -54,7 +49,13 @@ export default function GalleryPage() {
   const [selectedModel, setSelectedModel] = useState<CarModel | null>(null)
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
   const [loadedImages, setLoadedImages] = useState<Set<number>>(new Set())
-  const [imagesReadyToLoad, setImagesReadyToLoad] = useState<Set<number>>(new Set())
+  const loadingRef = useRef<{
+    timeoutId: NodeJS.Timeout | null
+    images: string[] | null
+  }>({
+    timeoutId: null,
+    images: null,
+  })
 
   // Fetch gallery collections
   useEffect(() => {
@@ -74,100 +75,185 @@ export default function GalleryPage() {
 
   // Fetch cars gallery data
   useEffect(() => {
+    if (activeTab !== 'cars' || carsData.length > 0) return
+
+    let cancelled = false
+
     async function fetchCarsData() {
-      if (activeTab === 'cars' && carsData.length === 0) {
-        setCarsLoading(true)
-        try {
-          const response = await fetch('/api/gallery/cars')
-          const data = await response.json()
-          // Sort brands and models alphabetically on client side as well
-          const sortedBrands = (data.brands || [])
-            .map((brand: CarBrand) => ({
-              ...brand,
-              models: [...brand.models].sort((a, b) =>
-                a.modelName.toLowerCase().localeCompare(b.modelName.toLowerCase()),
-              ),
-            }))
-            .sort((a: CarBrand, b: CarBrand) =>
-              a.brandName.toLowerCase().localeCompare(b.brandName.toLowerCase()),
-            )
-          setCarsData(sortedBrands)
-        } catch (error) {
-          console.error('Error fetching cars gallery:', error)
-        } finally {
-          setCarsLoading(false)
-        }
+      setCarsLoading(true)
+      try {
+        const response = await fetch('/api/gallery/cars')
+        const data = await response.json()
+        if (cancelled) return
+
+        const sortedBrands = (data.brands || [])
+          .map((brand: CarBrand) => ({
+            ...brand,
+            models: [...brand.models].sort((a, b) =>
+              a.modelName.toLowerCase().localeCompare(b.modelName.toLowerCase()),
+            ),
+          }))
+          .sort((a: CarBrand, b: CarBrand) =>
+            a.brandName.toLowerCase().localeCompare(b.brandName.toLowerCase()),
+          )
+        setCarsData(sortedBrands)
+      } catch (error) {
+        console.error('Error fetching cars gallery:', error)
+      } finally {
+        if (!cancelled) setCarsLoading(false)
       }
     }
+
     fetchCarsData()
+
+    return () => {
+      cancelled = true
+    }
   }, [activeTab, carsData.length])
 
-  // Load initial 5 images when a collection or model is opened
+  // Initialize: Load first image immediately when modal opens, then start batch loading
   useEffect(() => {
-    if (selectedCollection) {
-      const initialImages = new Set<number>()
-      const count = Math.min(5, selectedCollection.images.length)
-      for (let i = 0; i < count; i++) {
-        initialImages.add(i)
+    const currentImages = selectedCollection?.images || selectedModel?.images
+    const isModalOpen = !!(selectedCollection || selectedModel)
+
+    if (!isModalOpen) {
+      if (loadingRef.current.timeoutId) {
+        clearTimeout(loadingRef.current.timeoutId)
+        loadingRef.current.timeoutId = null
       }
-      setLoadedImages(initialImages)
-      setImagesReadyToLoad(new Set())
-      setCurrentImageIndex(0)
-    } else if (selectedModel) {
-      const initialImages = new Set<number>()
-      const count = Math.min(5, selectedModel.images.length)
-      for (let i = 0; i < count; i++) {
-        initialImages.add(i)
+      loadingRef.current.images = null
+      return
+    }
+
+    if (!currentImages?.length) return
+
+    // Stop any existing loading process
+    if (loadingRef.current.timeoutId) {
+      clearTimeout(loadingRef.current.timeoutId)
+      loadingRef.current.timeoutId = null
+    }
+
+    // Reset state and immediately mark first image for loading
+    setLoadedImages(new Set([0]))
+    setCurrentImageIndex(0)
+    loadingRef.current.images = currentImages
+
+    const totalImages = currentImages.length
+
+    // Function to load next batch of images
+    const loadNextBatch = () => {
+      if (!isModalOpen || !loadingRef.current.images) return
+
+      setLoadedImages((prevLoaded) => {
+        // Find the next unloaded image index
+        let nextIndexToLoad = -1
+        for (let i = 0; i < totalImages; i++) {
+          if (!prevLoaded.has(i)) {
+            nextIndexToLoad = i
+            break
+          }
+        }
+
+        // If all images are loaded, stop
+        if (nextIndexToLoad === -1) return prevLoaded
+
+        // Mark images in batch for loading (avoid duplicates)
+        const batchIndices: number[] = []
+        for (let i = 0; i < BATCH_SIZE && nextIndexToLoad + i < totalImages; i++) {
+          const index = nextIndexToLoad + i
+          if (!prevLoaded.has(index)) {
+            batchIndices.push(index)
+          }
+        }
+
+        if (batchIndices.length > 0) {
+          // Preload images into browser cache using native Image objects
+          batchIndices.forEach((index) => {
+            const img = new window.Image()
+            img.src = currentImages[index]
+          })
+
+          // Create updated set with new loaded images
+          const updated = new Set(prevLoaded)
+          batchIndices.forEach((idx) => updated.add(idx))
+
+          // Schedule next batch
+          loadingRef.current.timeoutId = setTimeout(loadNextBatch, BATCH_DELAY)
+
+          return updated
+        }
+
+        return prevLoaded
+      })
+    }
+
+    // Start loading batches after a short delay
+    loadingRef.current.timeoutId = setTimeout(loadNextBatch, INITIAL_LOAD_DELAY)
+
+    return () => {
+      if (loadingRef.current.timeoutId) {
+        clearTimeout(loadingRef.current.timeoutId)
+        loadingRef.current.timeoutId = null
       }
-      setLoadedImages(initialImages)
-      setImagesReadyToLoad(new Set())
-      setCurrentImageIndex(0)
     }
   }, [selectedCollection, selectedModel])
 
-  // Removed: Sequential loading of all images - now using preload system instead
-
-  // Handle image load completion
-  const handleImageLoad = useCallback((index: number) => {
-    setImagesReadyToLoad((prev) => new Set([...prev, index]))
-  }, [])
-
-  // Lazy load images as user navigates
-  const loadImageIfNeeded = useCallback(
-    (index: number) => {
-      if (!selectedCollection && !selectedModel) return
-      if (!loadedImages.has(index)) {
-        setLoadedImages((prev) => new Set([...prev, index]))
-      }
-    },
-    [selectedCollection, selectedModel, loadedImages],
+  // Memoize computed values
+  const currentBrand = useMemo(
+    () => carsData.find((brand) => brand.brandName === selectedBrand),
+    [carsData, selectedBrand],
   )
 
-  // Automatically preload images around the current image (for thumbnails)
-  // This ensures the main image can reuse the cached version from thumbnails
+  const currentImages = useMemo(
+    () => selectedCollection?.images || selectedModel?.images,
+    [selectedCollection, selectedModel],
+  )
+
+  const currentTitle = useMemo(() => {
+    if (selectedCollection) return selectedCollection.folderName
+    if (selectedModel && selectedBrand) {
+      return `${formatName(selectedBrand)} ${formatName(selectedModel.modelName)}`
+    }
+    return ''
+  }, [selectedCollection, selectedModel, selectedBrand])
+
+  // Aggressively preload images around current index for instant navigation
   useEffect(() => {
-    const currentImages = selectedCollection?.images || selectedModel?.images
-    if (!currentImages) return
+    if (!currentImages?.length) return
+    if (!selectedCollection && !selectedModel) return
 
     const totalImages = currentImages.length
-    const preloadCount = 3 // Preload 3 images ahead and behind
+    const indicesToPreload: number[] = []
 
-    // Ensure current image is loaded (for thumbnail)
-    loadImageIfNeeded(currentImageIndex)
+    // Use functional update to check current state without dependency
+    setLoadedImages((prevLoaded) => {
+      // Preload images around current index (circular)
+      for (let i = -PRELOAD_RADIUS; i <= PRELOAD_RADIUS; i++) {
+        let index = currentImageIndex + i
+        if (index < 0) index = totalImages + index
+        if (index >= totalImages) index = index - totalImages
 
-    // Preload next images
-    for (let i = 1; i <= preloadCount; i++) {
-      const nextIndex = (currentImageIndex + i) % totalImages
-      loadImageIfNeeded(nextIndex)
-    }
+        if (index >= 0 && index < totalImages && !prevLoaded.has(index)) {
+          indicesToPreload.push(index)
+        }
+      }
 
-    // Preload previous images
-    for (let i = 1; i <= preloadCount; i++) {
-      const prevIndex =
-        currentImageIndex - i < 0 ? totalImages + (currentImageIndex - i) : currentImageIndex - i
-      loadImageIfNeeded(prevIndex)
-    }
-  }, [selectedCollection, selectedModel, currentImageIndex, loadImageIfNeeded])
+      if (indicesToPreload.length > 0) {
+        // Immediately preload these images
+        indicesToPreload.forEach((index) => {
+          const img = new window.Image()
+          img.src = currentImages[index]
+        })
+
+        // Create updated set with new loaded images
+        const updated = new Set(prevLoaded)
+        indicesToPreload.forEach((idx) => updated.add(idx))
+        return updated
+      }
+
+      return prevLoaded
+    })
+  }, [currentImageIndex, currentImages, selectedCollection, selectedModel])
 
   const openCollection = useCallback((collection: GalleryCollection) => {
     setSelectedCollection(collection)
@@ -185,25 +271,20 @@ export default function GalleryPage() {
     setSelectedCollection(null)
     setSelectedModel(null)
     setLoadedImages(new Set())
-    setImagesReadyToLoad(new Set())
     document.body.style.overflow = 'unset'
   }, [])
 
   const goToPrevious = useCallback(() => {
-    const currentImages = selectedCollection?.images || selectedModel?.images
-    if (!currentImages) return
-    setCurrentImageIndex((prevIndex) => {
-      return prevIndex === 0 ? currentImages.length - 1 : prevIndex - 1
-    })
-  }, [selectedCollection, selectedModel])
+    if (!currentImages?.length) return
+    setCurrentImageIndex((prevIndex) =>
+      prevIndex === 0 ? currentImages.length - 1 : prevIndex - 1,
+    )
+  }, [currentImages])
 
   const goToNext = useCallback(() => {
-    const currentImages = selectedCollection?.images || selectedModel?.images
-    if (!currentImages) return
-    setCurrentImageIndex((prevIndex) => {
-      return (prevIndex + 1) % currentImages.length
-    })
-  }, [selectedCollection, selectedModel])
+    if (!currentImages?.length) return
+    setCurrentImageIndex((prevIndex) => (prevIndex + 1) % currentImages.length)
+  }, [currentImages])
 
   useEffect(() => {
     if (!selectedCollection && !selectedModel) return
@@ -221,15 +302,6 @@ export default function GalleryPage() {
     window.addEventListener('keydown', handleKeyDown)
     return () => window.removeEventListener('keydown', handleKeyDown)
   }, [selectedCollection, selectedModel, goToPrevious, goToNext, closeModal])
-
-  // Get current brand's models
-  const currentBrand = carsData.find((brand) => brand.brandName === selectedBrand)
-  const currentImages = selectedCollection?.images || selectedModel?.images
-  const currentTitle = selectedCollection
-    ? selectedCollection.folderName
-    : selectedModel && selectedBrand
-    ? `${formatName(selectedBrand)} ${formatName(selectedModel.modelName)}`
-    : ''
 
   return (
     <div className="gallery-page">
@@ -431,15 +503,14 @@ export default function GalleryPage() {
 
               <div className="gallery-modal-image-wrapper">
                 <Image
-                  key={`main-${currentImageIndex}`}
+                  key={currentImageIndex}
                   src={currentImages[currentImageIndex]}
                   alt={`${currentTitle} - Image ${currentImageIndex + 1}`}
                   fill
                   style={{ objectFit: 'contain' }}
                   sizes="90vw"
-                  priority={currentImageIndex < 5}
-                  onLoad={() => handleImageLoad(currentImageIndex)}
-                  onLoadingComplete={() => handleImageLoad(currentImageIndex)}
+                  priority={currentImageIndex === 0}
+                  unoptimized={true}
                 />
               </div>
 
@@ -459,9 +530,7 @@ export default function GalleryPage() {
                   className={`gallery-modal-thumbnail ${
                     index === currentImageIndex ? 'active' : ''
                   }`}
-                  onClick={() => {
-                    setCurrentImageIndex(index)
-                  }}
+                  onClick={() => setCurrentImageIndex(index)}
                 >
                   {loadedImages.has(index) ? (
                     <Image
@@ -470,11 +539,10 @@ export default function GalleryPage() {
                       fill
                       style={{ objectFit: 'cover' }}
                       sizes="80px"
-                      onLoad={() => handleImageLoad(index)}
-                      onLoadingComplete={() => handleImageLoad(index)}
+                      unoptimized={true}
                     />
                   ) : (
-                    <div className="gallery-thumbnail-placeholder"></div>
+                    <div className="gallery-thumbnail-placeholder" />
                   )}
                 </div>
               ))}

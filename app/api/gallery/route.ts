@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server'
-import { readdir } from 'fs/promises'
-import { join } from 'path'
+import { list } from '@vercel/blob'
 
 // Cache gallery data for 1 hour
 let cachedGalleryData: { collections: any[]; timestamp: number } | null = null
@@ -20,29 +19,65 @@ export async function GET() {
       )
     }
 
-    const galleryPath = join(process.cwd(), 'public', 'gallery', 'events')
-    const collections = await readdir(galleryPath, { withFileTypes: true })
+    const token = process.env.GALLERY_READ_WRITE_TOKEN
+    if (!token) {
+      console.error('GALLERY_READ_WRITE_TOKEN is not set')
+      return NextResponse.json({ error: 'Gallery token not configured' }, { status: 500 })
+    }
 
-    const galleryCollections = await Promise.all(
-      collections
-        .filter((dirent) => dirent.isDirectory())
-        .map(async (dirent) => {
-          const collectionPath = join(galleryPath, dirent.name)
-          const files = await readdir(collectionPath)
+    // List all blobs in the events folder
+    const { blobs } = await list({
+      token,
+      prefix: 'events/',
+    })
 
-          // Filter out non-webp files and get all images except thumbnail
-          const images = files
-            .filter((file) => file.endsWith('.webp') && file !== 'thumbnail.webp')
-            .sort()
+    // Group blobs by collection folder name
+    const collectionsMap = new Map<string, { images: string[]; thumbnail: string | null }>()
 
-          return {
-            folderName: dirent.name,
-            thumbnail: `/gallery/events/${dirent.name}/thumbnail.webp`,
-            images: images.map((img) => `/gallery/events/${dirent.name}/${img}`),
-            imageCount: images.length,
-          }
-        }),
-    )
+    for (const blob of blobs) {
+      // Extract collection name from path: events/{collectionName}/{fileName}
+      const pathParts = blob.pathname.split('/')
+      if (pathParts.length >= 3 && pathParts[0] === 'events') {
+        const collectionName = pathParts[1]
+        const fileName = pathParts.slice(2).join('/')
+
+        if (!collectionsMap.has(collectionName)) {
+          collectionsMap.set(collectionName, { images: [], thumbnail: null })
+        }
+
+        const collection = collectionsMap.get(collectionName)!
+
+        // Check if it's a thumbnail
+        if (fileName.toLowerCase() === 'thumbnail.webp') {
+          collection.thumbnail = blob.url
+        } else if (
+          fileName.toLowerCase().endsWith('.webp') ||
+          fileName.toLowerCase().endsWith('.jpg') ||
+          fileName.toLowerCase().endsWith('.jpeg') ||
+          fileName.toLowerCase().endsWith('.png')
+        ) {
+          collection.images.push(blob.url)
+        }
+      }
+    }
+
+    // Convert map to array and format response
+    const galleryCollections = Array.from(collectionsMap.entries())
+      .map(([folderName, data]) => {
+        // Sort images
+        data.images.sort()
+
+        // If no thumbnail found, use first image as thumbnail
+        const thumbnail = data.thumbnail || (data.images.length > 0 ? data.images[0] : null)
+
+        return {
+          folderName,
+          thumbnail,
+          images: data.images,
+          imageCount: data.images.length,
+        }
+      })
+      .filter((collection) => collection.imageCount > 0) // Only include collections with images
 
     // Update cache
     cachedGalleryData = {
@@ -59,7 +94,7 @@ export async function GET() {
       },
     )
   } catch (error) {
-    console.error('Error reading gallery:', error)
+    console.error('Error reading gallery from blob storage:', error)
     return NextResponse.json({ error: 'Failed to load gallery' }, { status: 500 })
   }
 }
