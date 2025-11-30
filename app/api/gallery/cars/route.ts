@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server'
-import { readdir } from 'fs/promises'
-import { join } from 'path'
+import { list } from '@vercel/blob'
 
 // Cache cars gallery data for 1 hour
 let cachedCarsData: { brands: any[]; timestamp: number } | null = null
@@ -35,110 +34,133 @@ export async function GET() {
       )
     }
 
-    const carsPath = join(process.cwd(), 'public', 'gallery', 'cars')
+    const token = process.env.GALLERY_READ_WRITE_TOKEN
+    if (!token) {
+      console.error('GALLERY_READ_WRITE_TOKEN is not set')
+      return NextResponse.json({ error: 'Gallery token not configured' }, { status: 500 })
+    }
 
-    // Check if cars directory exists
-    let brands: any[] = []
-    try {
-      const brandDirs = await readdir(carsPath, { withFileTypes: true })
+    // List all blobs in the cars folder
+    const { blobs } = await list({
+      token,
+      prefix: 'cars/',
+    })
 
-      brands = await Promise.all(
-        brandDirs
-          .filter((dirent) => dirent.isDirectory())
-          .map(async (brandDirent) => {
-            const brandPath = join(carsPath, brandDirent.name)
-            const brandFiles = await readdir(brandPath)
+    // Group blobs by brand and model: cars/{brandName}/{modelName}/{fileName}
+    const brandsMap = new Map<
+      string,
+      {
+        thumbnail: string | null
+        models: Map<
+          string,
+          {
+            thumbnail: string | null
+            images: string[]
+          }
+        >
+      }
+    >()
 
-            // Check if brand folder has a thumbnail.webp
-            // Use /cars/ path for Vercel compatibility
-            const brandThumbnail = brandFiles.some(
-              (file) => file.toLowerCase() === 'thumbnail.webp',
-            )
-              ? `/cars/${brandDirent.name}/thumbnail.webp`
-              : null
+    for (const blob of blobs) {
+      // Extract brand, model, and filename from path
+      // Structure: cars/{brandName}/thumbnail.webp OR cars/{brandName}/{modelName}/{fileName}
+      const pathParts = blob.pathname.split('/')
+      if (pathParts.length < 3 || pathParts[0] !== 'cars') continue
 
-            const modelDirs = await readdir(brandPath, { withFileTypes: true })
+      const brandName = pathParts[1]
 
-            const models = await Promise.all(
-              modelDirs
-                .filter((dirent) => dirent.isDirectory())
-                .map(async (modelDirent) => {
-                  const modelPath = join(brandPath, modelDirent.name)
-                  const files = await readdir(modelPath)
+      if (!brandsMap.has(brandName)) {
+        brandsMap.set(brandName, {
+          thumbnail: null,
+          models: new Map(),
+        })
+      }
 
-                  // Check if model folder has a thumbnail.webp
-                  const hasThumbnail = files.some((file) => file.toLowerCase() === 'thumbnail.webp')
+      const brand = brandsMap.get(brandName)!
 
-                  // Filter for image files (webp, jpg, jpeg, png), excluding thumbnail.webp
-                  const images = files
-                    .filter(
-                      (file) =>
-                        (file.toLowerCase().endsWith('.webp') ||
-                          file.toLowerCase().endsWith('.jpg') ||
-                          file.toLowerCase().endsWith('.jpeg') ||
-                          file.toLowerCase().endsWith('.png')) &&
-                        file.toLowerCase() !== 'thumbnail.webp',
-                    )
-                    .sort()
+      // Check if it's a brand thumbnail: cars/{brandName}/thumbnail.webp
+      if (pathParts.length === 3 && pathParts[2].toLowerCase() === 'thumbnail.webp') {
+        brand.thumbnail = blob.url
+        continue
+      }
 
-                  // Use thumbnail.webp if it exists, otherwise use first image
-                  // Use /cars/ path for Vercel compatibility
-                  let thumbnail: string | null = null
-                  if (hasThumbnail) {
-                    thumbnail = `/cars/${brandDirent.name}/${modelDirent.name}/thumbnail.webp`
-                  } else if (images.length > 0) {
-                    thumbnail = `/cars/${brandDirent.name}/${modelDirent.name}/${images[0]}`
-                  }
+      // Handle model images: cars/{brandName}/{modelName}/{fileName}
+      if (pathParts.length >= 4) {
+        const modelName = pathParts[2]
+        const fileName = pathParts.slice(3).join('/')
 
-                  return {
-                    modelName: modelDirent.name,
-                    thumbnail,
-                    images: images.map(
-                      (img) => `/cars/${brandDirent.name}/${modelDirent.name}/${img}`,
-                    ),
-                    imageCount: images.length,
-                  }
-                }),
-            )
+        if (!brand.models.has(modelName)) {
+          brand.models.set(modelName, {
+            thumbnail: null,
+            images: [],
+          })
+        }
 
-            // Filter out models with no images
-            const validModels = models.filter((model) => model.imageCount > 0)
+        const model = brand.models.get(modelName)!
 
-            // Sort models alphabetically by modelName
-            sortModels(validModels)
+        // Check if it's a model thumbnail
+        if (fileName.toLowerCase() === 'thumbnail.webp') {
+          model.thumbnail = blob.url
+        } else if (
+          fileName.toLowerCase().endsWith('.webp') ||
+          fileName.toLowerCase().endsWith('.jpg') ||
+          fileName.toLowerCase().endsWith('.jpeg') ||
+          fileName.toLowerCase().endsWith('.png')
+        ) {
+          model.images.push(blob.url)
+        }
+      }
+    }
 
-            // Determine brand thumbnail: use brand thumbnail if exists, otherwise use first model's thumbnail
-            let finalBrandThumbnail = brandThumbnail
-            if (!finalBrandThumbnail && validModels.length > 0 && validModels[0].thumbnail) {
-              finalBrandThumbnail = validModels[0].thumbnail
-            }
+    // Convert map to array and format response
+    const brands = Array.from(brandsMap.entries())
+      .map(([brandName, brandData]) => {
+        const models = Array.from(brandData.models.entries())
+          .map(([modelName, modelData]) => {
+            // Sort images
+            modelData.images.sort()
+
+            // Use thumbnail if exists, otherwise use first image
+            const thumbnail =
+              modelData.thumbnail || (modelData.images.length > 0 ? modelData.images[0] : null)
 
             return {
-              brandName: brandDirent.name,
-              thumbnail: finalBrandThumbnail,
-              models: validModels,
+              modelName,
+              thumbnail,
+              images: modelData.images,
+              imageCount: modelData.images.length,
             }
-          }),
-      )
+          })
+          .filter((model) => model.imageCount > 0) // Only include models with images
 
-      // Filter out brands with no valid models
-      brands = brands.filter((brand) => brand.models.length > 0)
+        // Sort models alphabetically
+        sortModels(models)
 
-      // Sort brands alphabetically by brandName
-      brands = sortBrands(brands)
-    } catch (error) {
-      // If cars directory doesn't exist, return empty array
-      console.log('Cars gallery directory not found or empty')
-    }
+        // Determine brand thumbnail: use brand thumbnail if exists, otherwise use first model's thumbnail
+        let finalBrandThumbnail = brandData.thumbnail
+        if (!finalBrandThumbnail && models.length > 0 && models[0].thumbnail) {
+          finalBrandThumbnail = models[0].thumbnail
+        }
+
+        return {
+          brandName,
+          thumbnail: finalBrandThumbnail,
+          models,
+        }
+      })
+      .filter((brand) => brand.models.length > 0) // Only include brands with valid models
+
+    // Sort brands alphabetically
+    const sortedBrands = sortBrands(brands)
 
     // Update cache
     cachedCarsData = {
-      brands,
+      brands: sortedBrands,
       timestamp: Date.now(),
     }
 
     return NextResponse.json(
-      { brands },
+      { brands: sortedBrands },
       {
         headers: {
           'Cache-Control': 'public, s-maxage=3600, stale-while-revalidate=86400',
@@ -146,7 +168,7 @@ export async function GET() {
       },
     )
   } catch (error) {
-    console.error('Error reading cars gallery:', error)
+    console.error('Error reading cars gallery from blob storage:', error)
     return NextResponse.json({ error: 'Failed to load cars gallery' }, { status: 500 })
   }
 }
