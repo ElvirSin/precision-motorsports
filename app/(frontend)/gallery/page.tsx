@@ -411,6 +411,7 @@ export default function GalleryPage() {
                             fill
                             style={{ objectFit: 'cover' }}
                             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                            unoptimized={true}
                           />
                         ) : (
                           <div className="gallery-thumbnail-placeholder"></div>
@@ -456,6 +457,7 @@ export default function GalleryPage() {
                           fill
                           style={{ objectFit: 'cover' }}
                           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                          unoptimized={true}
                         />
                       ) : (
                         <div className="gallery-thumbnail-placeholder"></div>
