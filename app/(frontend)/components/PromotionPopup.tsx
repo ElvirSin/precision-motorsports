@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { FaTimes } from 'react-icons/fa'
@@ -12,6 +12,7 @@ interface PromotionPopupProps {
 export default function PromotionPopup({ imageUrl }: PromotionPopupProps) {
   const [isOpen, setIsOpen] = useState(false)
   const [imageLoaded, setImageLoaded] = useState(false)
+  const imageRef = useRef<HTMLImageElement>(null)
 
   useEffect(() => {
     // Check if user has seen the promotion in the last 4 hours
@@ -21,8 +22,17 @@ export default function PromotionPopup({ imageUrl }: PromotionPopupProps) {
       const fourHoursInMs = 4 * 60 * 60 * 1000 // 4 hours in milliseconds
 
       if (!lastSeen || now - parseInt(lastSeen) > fourHoursInMs) {
-        // Preload the image first
+        // Preload the image immediately with high priority for LCP optimization
+        const link = document.createElement('link')
+        link.rel = 'preload'
+        link.as = 'image'
+        link.href = imageUrl
+        link.fetchPriority = 'high'
+        document.head.appendChild(link)
+
+        // Also preload with img element for immediate loading
         const img = document.createElement('img')
+        img.fetchPriority = 'high'
         img.onload = () => {
           setImageLoaded(true)
           setIsOpen(true)
@@ -35,9 +45,8 @@ export default function PromotionPopup({ imageUrl }: PromotionPopupProps) {
       }
     }
 
-    // Small delay to ensure page is loaded
-    const timer = setTimeout(checkPromotionStatus, 500)
-    return () => clearTimeout(timer)
+    // Check immediately for faster LCP - removed delay
+    checkPromotionStatus()
   }, [imageUrl])
 
   const handleClose = () => {
@@ -57,6 +66,16 @@ export default function PromotionPopup({ imageUrl }: PromotionPopupProps) {
     }
   }, [isOpen])
 
+  // Ensure fetchpriority="high" is set on the actual img element for LCP optimization
+  useEffect(() => {
+    if (isOpen && imageRef.current) {
+      const imgElement = imageRef.current.querySelector('img')
+      if (imgElement) {
+        imgElement.setAttribute('fetchpriority', 'high')
+      }
+    }
+  }, [isOpen])
+
   if (!isOpen) return null
 
   return (
@@ -72,7 +91,7 @@ export default function PromotionPopup({ imageUrl }: PromotionPopupProps) {
             <FaTimes />
           </button>
         </div>
-        <div className="promotion-popup-image-wrapper">
+        <div className="promotion-popup-image-wrapper" ref={imageRef}>
           <Image
             src={imageUrl}
             alt="Current Promotion"
