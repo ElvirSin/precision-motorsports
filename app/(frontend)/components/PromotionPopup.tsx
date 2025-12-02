@@ -11,6 +11,7 @@ interface PromotionPopupProps {
 
 export default function PromotionPopup({ imageUrl }: PromotionPopupProps) {
   const [isOpen, setIsOpen] = useState(false)
+  const [imageLoaded, setImageLoaded] = useState(false)
 
   useEffect(() => {
     // Check if user has seen the promotion in the last 4 hours
@@ -20,14 +21,24 @@ export default function PromotionPopup({ imageUrl }: PromotionPopupProps) {
       const fourHoursInMs = 4 * 60 * 60 * 1000 // 4 hours in milliseconds
 
       if (!lastSeen || now - parseInt(lastSeen) > fourHoursInMs) {
-        setIsOpen(true)
+        // Preload the image first
+        const img = document.createElement('img')
+        img.onload = () => {
+          setImageLoaded(true)
+          setIsOpen(true)
+        }
+        img.onerror = () => {
+          // If image fails to load, don't show popup
+          console.error('Failed to load promotion image')
+        }
+        img.src = imageUrl
       }
     }
 
     // Small delay to ensure page is loaded
     const timer = setTimeout(checkPromotionStatus, 500)
     return () => clearTimeout(timer)
-  }, [])
+  }, [imageUrl])
 
   const handleClose = () => {
     setIsOpen(false)
