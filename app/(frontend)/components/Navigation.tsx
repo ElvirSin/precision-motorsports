@@ -155,6 +155,19 @@ export default function Navigation({ activePage }: NavigationProps) {
           <Link href="/gallery" className={`nav-link ${activePage === 'gallery' ? 'active' : ''}`}>
             GALLERY
           </Link>
+          <span
+            className="nav-link"
+            style={{
+              cursor: 'default',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            <span>STORE</span>
+            <span style={{ fontSize: '0.5em', color: 'red', lineHeight: '1' }}>(coming soon)</span>
+          </span>
           <Link href="/contact" className={`nav-link ${activePage === 'contact' ? 'active' : ''}`}>
             CONTACT US
           </Link>
@@ -236,6 +249,19 @@ export default function Navigation({ activePage }: NavigationProps) {
         >
           GALLERY
         </Link>
+        <span
+          className="nav-link"
+          style={{
+            cursor: 'default',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'flex-start',
+            justifyContent: 'center',
+          }}
+        >
+          <span>STORE</span>
+          <span style={{ fontSize: '0.5em', color: 'red', lineHeight: '1' }}>(coming soon)</span>
+        </span>
         <Link
           href="/contact"
           className={`nav-link ${activePage === 'contact' ? 'active' : ''}`}

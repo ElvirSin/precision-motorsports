@@ -48,7 +48,7 @@ body {
   display: flex;
   align-items: center;
   position: absolute;
-  left: 20px;
+  left: 5px;
 }
 
 .logo img {
@@ -868,7 +868,7 @@ body {
 }
 
 /* Hide dropdown on mobile */
-@media (max-width: 1000px) {
+@media (max-width: 1050px) {
   .nav-dropdown {
     position: static;
   }
@@ -997,8 +997,8 @@ body {
   }
 }
 
-/* Navbar Mobile Styles - Switch to mobile at 1000px */
-@media (max-width: 1000px) {
+/* Navbar Mobile Styles - Switch to mobile at 1050px */
+@media (max-width: 1050px) {
   .header-content {
     justify-content: flex-start;
   }
