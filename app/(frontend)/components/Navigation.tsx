@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -27,6 +27,44 @@ export default function Navigation({ activePage }: NavigationProps) {
   const toggleMobileServices = () => {
     setIsMobileServicesOpen(!isMobileServicesOpen)
   }
+
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      // Save current scroll position
+      const scrollY = window.scrollY
+      // Lock body scroll
+      document.body.style.position = 'fixed'
+      document.body.style.top = `-${scrollY}px`
+      document.body.style.width = '100%'
+      document.body.style.overflow = 'hidden'
+    } else {
+      // Restore body scroll
+      const scrollY = document.body.style.top
+      document.body.style.position = ''
+      document.body.style.top = ''
+      document.body.style.width = ''
+      document.body.style.overflow = ''
+      // Restore scroll position (extract number from "-123px" format)
+      if (scrollY) {
+        const savedScrollY = Math.abs(parseInt(scrollY.replace('px', ''), 10))
+        window.scrollTo(0, savedScrollY)
+      }
+    }
+
+    // Cleanup function to ensure scroll is restored if component unmounts
+    return () => {
+      const scrollY = document.body.style.top
+      document.body.style.position = ''
+      document.body.style.top = ''
+      document.body.style.width = ''
+      document.body.style.overflow = ''
+      if (scrollY) {
+        const savedScrollY = Math.abs(parseInt(scrollY.replace('px', ''), 10))
+        window.scrollTo(0, savedScrollY)
+      }
+    }
+  }, [isMobileMenuOpen])
 
   const manufacturers = [
     { name: 'Aston Martin', slug: 'aston-martin', icon: '/manufacturers/astonmartin.webp' },
