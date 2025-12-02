@@ -3,8 +3,18 @@ import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import dynamic from 'next/dynamic'
+import { Poppins } from 'next/font/google'
 import Navigation from './components/Navigation'
 import './styles.css'
+
+// Optimize Google Fonts - self-hosted and non-render-blocking
+const poppins = Poppins({
+  weight: ['300', '400', '500', '600', '700', '800', '900'],
+  subsets: ['latin'],
+  display: 'swap',
+  preload: true,
+  variable: '--font-poppins',
+})
 
 // Dynamically import heavy components to reduce initial bundle size
 const Footer = dynamic(() => import('./components/Footer'), {
@@ -85,8 +95,8 @@ export default function RootLayout(props: { children: React.ReactNode }) {
     pathname === '/book-now'
 
   return (
-    <html lang="en">
-      <body>
+    <html lang="en" className={poppins.variable}>
+      <body className={poppins.className}>
         <GoogleAnalytics />
         <AnalyticsProvider />
         <Navigation activePage={getActivePage()} />
