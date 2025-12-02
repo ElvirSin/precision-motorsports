@@ -4,12 +4,6 @@ import Script from 'next/script'
 import { GA_TRACKING_ID } from '../../../lib/analytics'
 
 export default function GoogleAnalytics() {
-  // Debug: Log the GA_TRACKING_ID to console in production
-  if (typeof window !== 'undefined') {
-    console.log('GA_TRACKING_ID in production:', GA_TRACKING_ID)
-    console.log('Environment variable available:', !!process.env.NEXT_PUBLIC_GA_ID)
-  }
-
   return (
     <>
       <Script
@@ -28,7 +22,6 @@ export default function GoogleAnalytics() {
               page_path: window.location.pathname,
               send_page_view: false
             });
-            console.log('Google Analytics initialized for:', window.location.pathname);
           `,
         }}
       />
