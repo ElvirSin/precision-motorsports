@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server'
-import { readdir } from 'fs/promises'
-import { join } from 'path'
+import { list } from '@vercel/blob'
 
 // Cache promotion data for 5 minutes
 let cachedPromotionData: { hasPromotion: boolean; imageUrl?: string; timestamp: number } | null =
@@ -24,25 +23,34 @@ export async function GET() {
       )
     }
 
-    const promotionPath = join(process.cwd(), 'public', 'current-promotion')
-    const files = await readdir(promotionPath)
+    const token = process.env.GALLERY_READ_WRITE_TOKEN
+    if (!token) {
+      console.error('GALLERY_READ_WRITE_TOKEN is not set')
+      return NextResponse.json({ error: 'Gallery token not configured' }, { status: 500 })
+    }
+
+    // List all blobs in the current-promotions folder
+    const { blobs } = await list({
+      token,
+      prefix: 'current-promotions/',
+    })
 
     // Filter for image files (common formats)
-    const imageFiles = files.filter(
-      (file) =>
-        file.endsWith('.png') ||
-        file.endsWith('.jpg') ||
-        file.endsWith('.jpeg') ||
-        file.endsWith('.webp') ||
-        file.endsWith('.gif'),
+    const imageBlobs = blobs.filter(
+      (blob) =>
+        blob.pathname.toLowerCase().endsWith('.png') ||
+        blob.pathname.toLowerCase().endsWith('.jpg') ||
+        blob.pathname.toLowerCase().endsWith('.jpeg') ||
+        blob.pathname.toLowerCase().endsWith('.webp') ||
+        blob.pathname.toLowerCase().endsWith('.gif'),
     )
 
-    // Return the first image found (there should be at most 1)
+    // Randomly select one promotion if there are multiple
     const result =
-      imageFiles.length > 0
+      imageBlobs.length > 0
         ? {
             hasPromotion: true,
-            imageUrl: `/current-promotion/${imageFiles[0]}`,
+            imageUrl: imageBlobs[Math.floor(Math.random() * imageBlobs.length)].url,
           }
         : { hasPromotion: false }
 
@@ -58,7 +66,7 @@ export async function GET() {
       },
     })
   } catch (error) {
-    console.error('Error reading promotion folder:', error)
+    console.error('Error reading promotion from blob storage:', error)
     return NextResponse.json(
       { hasPromotion: false },
       {

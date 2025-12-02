@@ -13,13 +13,13 @@ export default function PromotionPopup({ imageUrl }: PromotionPopupProps) {
   const [isOpen, setIsOpen] = useState(false)
 
   useEffect(() => {
-    // Check if user has seen the promotion in the last 2 hours
+    // Check if user has seen the promotion in the last 4 hours
     const checkPromotionStatus = () => {
       const lastSeen = localStorage.getItem('promotionLastSeen')
       const now = Date.now()
-      const twoHoursInMs = 2 * 60 * 60 * 1000 // 2 hours in milliseconds
+      const fourHoursInMs = 4 * 60 * 60 * 1000 // 4 hours in milliseconds
 
-      if (!lastSeen || now - parseInt(lastSeen) > twoHoursInMs) {
+      if (!lastSeen || now - parseInt(lastSeen) > fourHoursInMs) {
         setIsOpen(true)
       }
     }
