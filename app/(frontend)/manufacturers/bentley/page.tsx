@@ -28,7 +28,7 @@ export default function BentleyPage() {
     setOpenService(null)
   }
 
-  const carImage = '/manufacturers/car-images/bentley.png'
+  const carImage = '/manufacturers/car-images/bentley.webp'
   const carAlt = 'Bentley'
 
   return (
@@ -57,7 +57,7 @@ export default function BentleyPage() {
           </div>
           <div className="hero-image">
             <Image
-              src="/manufacturers/car-images/bentley.png"
+              src="/manufacturers/car-images/bentley.webp"
               alt="Bentley"
               width={600}
               height={400}
@@ -164,7 +164,7 @@ export default function BentleyPage() {
           </div>
         </div>
       </section>
-            {openService && serviceDataMap[openService] && (
+      {openService && serviceDataMap[openService] && (
         <ServiceModal
           isOpen={true}
           onClose={handleCloseModal}

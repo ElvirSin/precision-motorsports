@@ -28,7 +28,7 @@ export default function FerrariPage() {
     setOpenService(null)
   }
 
-  const carImage = '/manufacturers/car-images/ferrari.png'
+  const carImage = '/manufacturers/car-images/ferrari.webp'
   const carAlt = 'Ferrari'
 
   return (
@@ -57,7 +57,7 @@ export default function FerrariPage() {
           </div>
           <div className="hero-image">
             <Image
-              src="/manufacturers/car-images/ferrari.png"
+              src="/manufacturers/car-images/ferrari.webp"
               alt="Ferrari"
               width={600}
               height={400}

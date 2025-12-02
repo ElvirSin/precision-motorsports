@@ -28,7 +28,7 @@ export default function BMWPage() {
     setOpenService(null)
   }
 
-  const carImage = '/manufacturers/car-images/bmw.png'
+  const carImage = '/manufacturers/car-images/bmw.webp'
   const carAlt = 'BMW'
 
   return (
@@ -57,7 +57,7 @@ export default function BMWPage() {
           </div>
           <div className="hero-image">
             <Image
-              src="/manufacturers/car-images/bmw.png"
+              src="/manufacturers/car-images/bmw.webp"
               alt="BMW"
               width={600}
               height={400}

@@ -28,7 +28,7 @@ export default function MercedesPage() {
     setOpenService(null)
   }
 
-  const carImage = '/manufacturers/car-images/mercedes.png'
+  const carImage = '/manufacturers/car-images/mercedes.webp'
   const carAlt = 'Mercedes-Benz'
 
   return (
@@ -57,7 +57,7 @@ export default function MercedesPage() {
           </div>
           <div className="hero-image">
             <Image
-              src="/manufacturers/car-images/mercedes.png"
+              src="/manufacturers/car-images/mercedes.webp"
               alt="Mercedes-Benz"
               width={600}
               height={400}
@@ -164,7 +164,7 @@ export default function MercedesPage() {
           </div>
         </div>
       </section>
-            {openService && serviceDataMap[openService] && (
+      {openService && serviceDataMap[openService] && (
         <ServiceModal
           isOpen={true}
           onClose={handleCloseModal}

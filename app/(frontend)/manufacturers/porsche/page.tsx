@@ -28,7 +28,7 @@ export default function PorschePage() {
     setOpenService(null)
   }
 
-  const carImage = '/manufacturers/car-images/porsche.png'
+  const carImage = '/manufacturers/car-images/porsche.webp'
   const carAlt = 'Porsche'
 
   return (
@@ -57,7 +57,7 @@ export default function PorschePage() {
           </div>
           <div className="hero-image">
             <Image
-              src="/manufacturers/car-images/porsche.png"
+              src="/manufacturers/car-images/porsche.webp"
               alt="Porsche"
               width={600}
               height={400}

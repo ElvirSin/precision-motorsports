@@ -28,7 +28,7 @@ export default function AstonMartinPage() {
     setOpenService(null)
   }
 
-  const carImage = '/manufacturers/car-images/aston-martin.png'
+  const carImage = '/manufacturers/car-images/aston-martin.webp'
   const carAlt = 'Aston Martin'
 
   return (
@@ -57,7 +57,7 @@ export default function AstonMartinPage() {
           </div>
           <div className="hero-image">
             <Image
-              src="/manufacturers/car-images/aston-martin.png"
+              src="/manufacturers/car-images/aston-martin.webp"
               alt="Aston Martin"
               width={600}
               height={400}

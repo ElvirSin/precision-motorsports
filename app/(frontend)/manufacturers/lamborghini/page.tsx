@@ -28,7 +28,7 @@ export default function LamborghiniPage() {
     setOpenService(null)
   }
 
-  const carImage = '/manufacturers/car-images/lamborghini.png'
+  const carImage = '/manufacturers/car-images/lamborghini.webp'
   const carAlt = 'Lamborghini'
 
   return (
@@ -57,7 +57,7 @@ export default function LamborghiniPage() {
           </div>
           <div className="hero-image">
             <Image
-              src="/manufacturers/car-images/lamborghini.png"
+              src="/manufacturers/car-images/lamborghini.webp"
               alt="Lamborghini"
               width={600}
               height={400}
@@ -164,7 +164,7 @@ export default function LamborghiniPage() {
           </div>
         </div>
       </section>
-            {openService && serviceDataMap[openService] && (
+      {openService && serviceDataMap[openService] && (
         <ServiceModal
           isOpen={true}
           onClose={handleCloseModal}

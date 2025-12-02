@@ -28,7 +28,7 @@ export default function JaguarPage() {
     setOpenService(null)
   }
 
-  const carImage = '/manufacturers/car-images/jaguar.png'
+  const carImage = '/manufacturers/car-images/jaguar.webp'
   const carAlt = 'Jaguar'
 
   return (
@@ -61,7 +61,7 @@ export default function JaguarPage() {
           </div>
           <div className="hero-image">
             <Image
-              src="/manufacturers/car-images/jaguar.png"
+              src="/manufacturers/car-images/jaguar.webp"
               alt="Jaguar"
               width={600}
               height={400}

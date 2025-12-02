@@ -28,7 +28,7 @@ export default function AudiPage() {
     setOpenService(null)
   }
 
-  const carImage = '/manufacturers/car-images/audi.png'
+  const carImage = '/manufacturers/car-images/audi.webp'
   const carAlt = 'Audi'
 
   return (
@@ -57,7 +57,7 @@ export default function AudiPage() {
           </div>
           <div className="hero-image">
             <Image
-              src="/manufacturers/car-images/audi.png"
+              src="/manufacturers/car-images/audi.webp"
               alt="Audi"
               width={600}
               height={400}
@@ -164,7 +164,7 @@ export default function AudiPage() {
           </div>
         </div>
       </section>
-            {openService && serviceDataMap[openService] && (
+      {openService && serviceDataMap[openService] && (
         <ServiceModal
           isOpen={true}
           onClose={handleCloseModal}

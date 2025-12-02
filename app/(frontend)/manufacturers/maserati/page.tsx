@@ -28,7 +28,7 @@ export default function MaseratiPage() {
     setOpenService(null)
   }
 
-  const carImage = '/manufacturers/car-images/maserati.png'
+  const carImage = '/manufacturers/car-images/maserati.webp'
   const carAlt = 'Maserati'
 
   return (
@@ -57,7 +57,7 @@ export default function MaseratiPage() {
           </div>
           <div className="hero-image">
             <Image
-              src="/manufacturers/car-images/maserati.png"
+              src="/manufacturers/car-images/maserati.webp"
               alt="Maserati"
               width={600}
               height={400}
@@ -164,7 +164,7 @@ export default function MaseratiPage() {
           </div>
         </div>
       </section>
-            {openService && serviceDataMap[openService] && (
+      {openService && serviceDataMap[openService] && (
         <ServiceModal
           isOpen={true}
           onClose={handleCloseModal}

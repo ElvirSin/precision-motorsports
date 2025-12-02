@@ -28,7 +28,7 @@ export default function McLarenPage() {
     setOpenService(null)
   }
 
-  const carImage = '/manufacturers/car-images/mclaren.png'
+  const carImage = '/manufacturers/car-images/mclaren.webp'
   const carAlt = 'McLaren'
 
   return (
@@ -57,7 +57,7 @@ export default function McLarenPage() {
           </div>
           <div className="hero-image">
             <Image
-              src="/manufacturers/car-images/mclaren.png"
+              src="/manufacturers/car-images/mclaren.webp"
               alt="McLaren"
               width={600}
               height={400}
@@ -164,7 +164,7 @@ export default function McLarenPage() {
           </div>
         </div>
       </section>
-            {openService && serviceDataMap[openService] && (
+      {openService && serviceDataMap[openService] && (
         <ServiceModal
           isOpen={true}
           onClose={handleCloseModal}

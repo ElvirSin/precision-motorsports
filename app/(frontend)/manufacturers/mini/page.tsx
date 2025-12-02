@@ -28,7 +28,7 @@ export default function MiniPage() {
     setOpenService(null)
   }
 
-  const carImage = '/manufacturers/car-images/mini.png'
+  const carImage = '/manufacturers/car-images/mini.webp'
   const carAlt = 'Mini'
 
   return (
@@ -57,7 +57,7 @@ export default function MiniPage() {
           </div>
           <div className="hero-image">
             <Image
-              src="/manufacturers/car-images/mini.png"
+              src="/manufacturers/car-images/mini.webp"
               alt="Mini"
               width={600}
               height={400}
@@ -164,7 +164,7 @@ export default function MiniPage() {
           </div>
         </div>
       </section>
-            {openService && serviceDataMap[openService] && (
+      {openService && serviceDataMap[openService] && (
         <ServiceModal
           isOpen={true}
           onClose={handleCloseModal}

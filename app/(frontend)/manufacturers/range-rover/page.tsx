@@ -28,7 +28,7 @@ export default function RangeRoverPage() {
     setOpenService(null)
   }
 
-  const carImage = '/manufacturers/car-images/range-rover.png'
+  const carImage = '/manufacturers/car-images/range-rover.webp'
   const carAlt = 'Range Rover'
 
   return (
@@ -57,7 +57,7 @@ export default function RangeRoverPage() {
           </div>
           <div className="hero-image">
             <Image
-              src="/manufacturers/car-images/range-rover.png"
+              src="/manufacturers/car-images/range-rover.webp"
               alt="Range Rover"
               width={600}
               height={400}
@@ -164,7 +164,7 @@ export default function RangeRoverPage() {
           </div>
         </div>
       </section>
-            {openService && serviceDataMap[openService] && (
+      {openService && serviceDataMap[openService] && (
         <ServiceModal
           isOpen={true}
           onClose={handleCloseModal}
