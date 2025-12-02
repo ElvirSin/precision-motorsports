@@ -94,6 +94,48 @@ export default function RootLayout(props: { children: React.ReactNode }) {
     pathname === '/contact' ||
     pathname === '/book-now'
 
+  // Add preconnect hints for critical third-party domains early (estimated 620ms LCP savings)
+  useEffect(() => {
+    // Check if links already exist to avoid duplicates
+    const existingPreconnects = document.querySelectorAll('link[rel="preconnect"]')
+    const hasVercelStorage = Array.from(existingPreconnects).some(
+      (link) =>
+        link.getAttribute('href') === 'https://e5vpmxtis8psh5vx.public.blob.vercel-storage.com',
+    )
+    const hasGoogle = Array.from(existingPreconnects).some(
+      (link) => link.getAttribute('href') === 'https://www.google.com',
+    )
+
+    // Preconnect to Vercel Blob Storage (for promotion images and media) - 320ms savings
+    if (!hasVercelStorage) {
+      const vercelStorageLink = document.createElement('link')
+      vercelStorageLink.rel = 'preconnect'
+      vercelStorageLink.href = 'https://e5vpmxtis8psh5vx.public.blob.vercel-storage.com'
+      vercelStorageLink.crossOrigin = 'anonymous'
+      document.head.insertBefore(vercelStorageLink, document.head.firstChild)
+
+      // Also add dns-prefetch as fallback
+      const vercelStorageDNS = document.createElement('link')
+      vercelStorageDNS.rel = 'dns-prefetch'
+      vercelStorageDNS.href = 'https://e5vpmxtis8psh5vx.public.blob.vercel-storage.com'
+      document.head.insertBefore(vercelStorageDNS, document.head.firstChild)
+    }
+
+    // Preconnect to Google (for analytics) - 300ms savings
+    if (!hasGoogle) {
+      const googleLink = document.createElement('link')
+      googleLink.rel = 'preconnect'
+      googleLink.href = 'https://www.google.com'
+      googleLink.crossOrigin = 'anonymous'
+      document.head.insertBefore(googleLink, document.head.firstChild)
+
+      const googleDNS = document.createElement('link')
+      googleDNS.rel = 'dns-prefetch'
+      googleDNS.href = 'https://www.google.com'
+      document.head.insertBefore(googleDNS, document.head.firstChild)
+    }
+  }, [])
+
   return (
     <html lang="en" className={poppins.variable}>
       <body className={poppins.className}>

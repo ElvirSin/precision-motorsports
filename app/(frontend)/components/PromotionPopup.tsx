@@ -11,6 +11,7 @@ interface PromotionPopupProps {
 
 export default function PromotionPopup({ imageUrl }: PromotionPopupProps) {
   const [isOpen, setIsOpen] = useState(false)
+  const [shouldShow, setShouldShow] = useState(false)
   const [imageLoaded, setImageLoaded] = useState(false)
   const imageRef = useRef<HTMLImageElement>(null)
 
@@ -22,13 +23,16 @@ export default function PromotionPopup({ imageUrl }: PromotionPopupProps) {
       const fourHoursInMs = 4 * 60 * 60 * 1000 // 4 hours in milliseconds
 
       if (!lastSeen || now - parseInt(lastSeen) > fourHoursInMs) {
+        // Set shouldShow to true immediately to start rendering (reduces rendering delay)
+        setShouldShow(true)
+
         // Preload the image immediately with high priority for LCP optimization
         const link = document.createElement('link')
         link.rel = 'preload'
         link.as = 'image'
         link.href = imageUrl
         link.fetchPriority = 'high'
-        document.head.appendChild(link)
+        document.head.insertBefore(link, document.head.firstChild)
 
         // Also preload with img element for immediate loading
         const img = document.createElement('img')
@@ -40,6 +44,7 @@ export default function PromotionPopup({ imageUrl }: PromotionPopupProps) {
         img.onerror = () => {
           // If image fails to load, don't show popup
           console.error('Failed to load promotion image')
+          setShouldShow(false)
         }
         img.src = imageUrl
       }
@@ -76,10 +81,18 @@ export default function PromotionPopup({ imageUrl }: PromotionPopupProps) {
     }
   }, [isOpen])
 
-  if (!isOpen) return null
+  // Don't render anything if we shouldn't show the promotion
+  if (!shouldShow) return null
 
+  // Render the popup structure early (hidden) to reduce rendering delay
+  // This allows the browser to start processing the image element before it's visible
   return (
-    <div className="promotion-popup-overlay" onClick={handleClose}>
+    <div
+      className="promotion-popup-overlay"
+      onClick={handleClose}
+      style={{ display: isOpen ? 'flex' : 'none' }}
+      aria-hidden={!isOpen}
+    >
       <div className="promotion-popup-content" onClick={(e) => e.stopPropagation()}>
         <div className="promotion-popup-header">
           <h2 className="promotion-popup-title">SPECIAL PROMOTION</h2>
