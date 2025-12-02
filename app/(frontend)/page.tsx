@@ -3,6 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import dynamic from 'next/dynamic'
 import VendorLogo from './components/VendorLogo'
+import ScrollArrow from './components/ScrollArrow'
 import './styles.css'
 
 // Dynamically import heavy components
@@ -30,9 +31,9 @@ export default function HomePage() {
           <Link href="/services" className="cta-button">
             BROWSE SERVICES
           </Link>
-        </div>
-        <div className="hero-scroll-indicator">
-          <div className="hero-scroll-arrow"></div>
+          <div className="hero-scroll-arrow-wrapper">
+            <ScrollArrow />
+          </div>
         </div>
       </section>
 

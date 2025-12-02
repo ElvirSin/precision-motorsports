@@ -1,5 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
+import ScrollArrow from '../components/ScrollArrow'
 import '../styles.css'
 
 export default function AboutPage() {
@@ -24,9 +25,9 @@ export default function AboutPage() {
             <p>EXCELLENCE IN EVERY DETAIL</p>
             <span className="hero-accent-line"></span>
           </div>
-        </div>
-        <div className="about-hero-scroll-indicator">
-          <div className="about-scroll-arrow"></div>
+          <div className="about-hero-scroll-arrow-wrapper">
+            <ScrollArrow />
+          </div>
         </div>
       </section>
 
