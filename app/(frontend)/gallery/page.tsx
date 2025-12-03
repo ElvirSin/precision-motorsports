@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useCallback, useRef, useMemo } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import Image from 'next/image'
 import '../styles.css'
 
@@ -24,12 +24,9 @@ interface CarBrand {
   models: CarModel[]
 }
 
-const BATCH_SIZE = 5
-const BATCH_DELAY = 50
-const INITIAL_LOAD_DELAY = 100
-const PRELOAD_RADIUS = 5 // Preload 5 images ahead and behind current
-
+// Format brand/model names for display
 function formatName(name: string): string {
+  // Convert to title case
   return name
     .split(/[-_\s]/)
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
@@ -49,15 +46,6 @@ export default function GalleryPage() {
   const [selectedModel, setSelectedModel] = useState<CarModel | null>(null)
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
   const [loadedImages, setLoadedImages] = useState<Set<number>>(new Set())
-  const [imageLoadErrors, setImageLoadErrors] = useState<Set<number>>(new Set())
-  const [currentImageLoading, setCurrentImageLoading] = useState(true)
-  const loadingRef = useRef<{
-    timeoutId: NodeJS.Timeout | null
-    images: string[] | null
-  }>({
-    timeoutId: null,
-    images: null,
-  })
 
   // Fetch gallery collections
   useEffect(() => {
@@ -77,268 +65,101 @@ export default function GalleryPage() {
 
   // Fetch cars gallery data
   useEffect(() => {
-    if (activeTab !== 'cars' || carsData.length > 0) return
-
-    let cancelled = false
-
     async function fetchCarsData() {
-      setCarsLoading(true)
-      try {
-        const response = await fetch('/api/gallery/cars')
-        if (!response.ok) {
-          throw new Error(`Failed to fetch cars gallery: ${response.status}`)
+      if (activeTab === 'cars' && carsData.length === 0) {
+        setCarsLoading(true)
+        try {
+          const response = await fetch('/api/gallery/cars')
+          const data = await response.json()
+          // Sort brands and models alphabetically on client side as well
+          const sortedBrands = (data.brands || [])
+            .map((brand: CarBrand) => ({
+              ...brand,
+              models: [...brand.models].sort((a, b) =>
+                a.modelName.toLowerCase().localeCompare(b.modelName.toLowerCase()),
+              ),
+            }))
+            .sort((a: CarBrand, b: CarBrand) =>
+              a.brandName.toLowerCase().localeCompare(b.brandName.toLowerCase()),
+            )
+          setCarsData(sortedBrands)
+        } catch (error) {
+          console.error('Error fetching cars gallery:', error)
+        } finally {
+          setCarsLoading(false)
         }
-        const data = await response.json()
-        if (cancelled) return
-
-        if (!data.brands || !Array.isArray(data.brands)) {
-          console.error('Invalid cars gallery data format:', data)
-          return
-        }
-
-        const sortedBrands = (data.brands || [])
-          .map((brand: CarBrand) => ({
-            ...brand,
-            models: [...brand.models]
-              .filter((model) => model.images && model.images.length > 0) // Filter out models with no images
-              .sort((a, b) => a.modelName.toLowerCase().localeCompare(b.modelName.toLowerCase())),
-          }))
-          .filter((brand: CarBrand) => brand.models.length > 0) // Filter out brands with no valid models
-          .sort((a: CarBrand, b: CarBrand) =>
-            a.brandName.toLowerCase().localeCompare(b.brandName.toLowerCase()),
-          )
-        setCarsData(sortedBrands)
-      } catch (error) {
-        console.error('Error fetching cars gallery:', error)
-      } finally {
-        if (!cancelled) setCarsLoading(false)
       }
     }
 
     fetchCarsData()
-
-    return () => {
-      cancelled = true
-    }
   }, [activeTab, carsData.length])
 
-  // Initialize: Load first image immediately when modal opens, then start batch loading
+  // Load initial 5 images when a collection or model is opened
   useEffect(() => {
-    const currentImages = selectedCollection?.images || selectedModel?.images
-    const isModalOpen = !!(selectedCollection || selectedModel)
-
-    if (!isModalOpen) {
-      if (loadingRef.current.timeoutId) {
-        clearTimeout(loadingRef.current.timeoutId)
-        loadingRef.current.timeoutId = null
+    if (selectedCollection) {
+      const initialImages = new Set<number>()
+      const count = Math.min(5, selectedCollection.images.length)
+      for (let i = 0; i < count; i++) {
+        initialImages.add(i)
       }
-      loadingRef.current.images = null
-      return
-    }
-
-    if (!currentImages?.length) return
-
-    // Stop any existing loading process
-    if (loadingRef.current.timeoutId) {
-      clearTimeout(loadingRef.current.timeoutId)
-      loadingRef.current.timeoutId = null
-    }
-
-    // Reset state and immediately mark first image for loading
-    setLoadedImages(new Set([0]))
-    setCurrentImageIndex(0)
-    setImageLoadErrors(new Set())
-    setCurrentImageLoading(true)
-    loadingRef.current.images = currentImages
-
-    const totalImages = currentImages.length
-
-    // Function to load next batch of images
-    const loadNextBatch = () => {
-      if (!isModalOpen || !loadingRef.current.images) return
-
-      setLoadedImages((prevLoaded) => {
-        // Find the next unloaded image index
-        let nextIndexToLoad = -1
-        for (let i = 0; i < totalImages; i++) {
-          if (!prevLoaded.has(i)) {
-            nextIndexToLoad = i
-            break
-          }
-        }
-
-        // If all images are loaded, stop
-        if (nextIndexToLoad === -1) return prevLoaded
-
-        // Mark images in batch for loading (avoid duplicates)
-        const batchIndices: number[] = []
-        for (let i = 0; i < BATCH_SIZE && nextIndexToLoad + i < totalImages; i++) {
-          const index = nextIndexToLoad + i
-          if (!prevLoaded.has(index)) {
-            batchIndices.push(index)
-          }
-        }
-
-        if (batchIndices.length > 0) {
-          // Preload images into browser cache using native Image objects with error handling
-          batchIndices.forEach((index) => {
-            const img = new window.Image()
-            img.onload = () => {
-              setLoadedImages((prev) => {
-                const updated = new Set(prev)
-                updated.add(index)
-                return updated
-              })
-              // Remove from errors if it was previously marked as error
-              setImageLoadErrors((prev) => {
-                if (prev.has(index)) {
-                  const updated = new Set(prev)
-                  updated.delete(index)
-                  return updated
-                }
-                return prev
-              })
-            }
-            img.onerror = () => {
-              setImageLoadErrors((prev) => new Set(prev).add(index))
-              // Remove from loaded images if it was optimistically added
-              setLoadedImages((prev) => {
-                if (prev.has(index)) {
-                  const updated = new Set(prev)
-                  updated.delete(index)
-                  return updated
-                }
-                return prev
-              })
-            }
-            img.src = currentImages[index]
-          })
-
-          // Create updated set with new loaded images (optimistically - will be confirmed by onload/onerror)
-          const updated = new Set(prevLoaded)
-          batchIndices.forEach((idx) => updated.add(idx))
-
-          // Schedule next batch
-          loadingRef.current.timeoutId = setTimeout(loadNextBatch, BATCH_DELAY)
-
-          return updated
-        }
-
-        return prevLoaded
-      })
-    }
-
-    // Start loading batches after a short delay
-    loadingRef.current.timeoutId = setTimeout(loadNextBatch, INITIAL_LOAD_DELAY)
-
-    return () => {
-      if (loadingRef.current.timeoutId) {
-        clearTimeout(loadingRef.current.timeoutId)
-        loadingRef.current.timeoutId = null
+      setLoadedImages(initialImages)
+      setCurrentImageIndex(0)
+    } else if (selectedModel) {
+      const initialImages = new Set<number>()
+      const count = Math.min(5, selectedModel.images.length)
+      for (let i = 0; i < count; i++) {
+        initialImages.add(i)
       }
+      setLoadedImages(initialImages)
+      setCurrentImageIndex(0)
     }
   }, [selectedCollection, selectedModel])
 
-  // Memoize computed values
-  const currentBrand = useMemo(
-    () => carsData.find((brand) => brand.brandName === selectedBrand),
-    [carsData, selectedBrand],
+  // Lazy load images as user navigates
+  const loadImageIfNeeded = useCallback(
+    (index: number) => {
+      if (!selectedCollection && !selectedModel) return
+      if (!loadedImages.has(index)) {
+        setLoadedImages((prev) => new Set([...prev, index]))
+      }
+    },
+    [selectedCollection, selectedModel, loadedImages],
   )
 
-  const currentImages = useMemo(
-    () => selectedCollection?.images || selectedModel?.images,
-    [selectedCollection, selectedModel],
-  )
+  // Automatically preload images around the current image (for thumbnails)
+  // This ensures the main image can reuse the cached version from thumbnails
 
-  const currentTitle = useMemo(() => {
-    if (selectedCollection) return selectedCollection.folderName
-    if (selectedModel && selectedBrand) {
-      return `${formatName(selectedBrand)} ${formatName(selectedModel.modelName)}`
-    }
-    return ''
-  }, [selectedCollection, selectedModel, selectedBrand])
-
-  // Aggressively preload images around current index for instant navigation
   useEffect(() => {
-    if (!currentImages?.length) return
-    if (!selectedCollection && !selectedModel) return
+    const currentImages = selectedCollection?.images || selectedModel?.images
+    if (!currentImages) return
 
     const totalImages = currentImages.length
-    const indicesToPreload: number[] = []
+    const preloadCount = 3 // Preload 3 images ahead and behind
 
-    // Use functional update to check current state without dependency
-    setLoadedImages((prevLoaded) => {
-      // Preload images around current index (circular)
-      for (let i = -PRELOAD_RADIUS; i <= PRELOAD_RADIUS; i++) {
-        let index = currentImageIndex + i
-        if (index < 0) index = totalImages + index
-        if (index >= totalImages) index = index - totalImages
+    // Ensure current image is loaded (for thumbnail)
+    loadImageIfNeeded(currentImageIndex)
 
-        if (index >= 0 && index < totalImages && !prevLoaded.has(index)) {
-          indicesToPreload.push(index)
-        }
-      }
+    // Preload next images
+    for (let i = 1; i <= preloadCount; i++) {
+      const nextIndex = (currentImageIndex + i) % totalImages
+      loadImageIfNeeded(nextIndex)
+    }
 
-      if (indicesToPreload.length > 0) {
-        // Immediately preload these images with error handling
-        indicesToPreload.forEach((index) => {
-          const img = new window.Image()
-          img.onload = () => {
-            setLoadedImages((prev) => {
-              const updated = new Set(prev)
-              updated.add(index)
-              return updated
-            })
-            // Remove from errors if it was previously marked as error
-            setImageLoadErrors((prev) => {
-              if (prev.has(index)) {
-                const updated = new Set(prev)
-                updated.delete(index)
-                return updated
-              }
-              return prev
-            })
-          }
-          img.onerror = () => {
-            setImageLoadErrors((prev) => new Set(prev).add(index))
-            // Remove from loaded images if it was optimistically added
-            setLoadedImages((prev) => {
-              if (prev.has(index)) {
-                const updated = new Set(prev)
-                updated.delete(index)
-                return updated
-              }
-              return prev
-            })
-          }
-          img.src = currentImages[index]
-        })
-
-        // Create updated set with new loaded images (optimistically)
-        const updated = new Set(prevLoaded)
-        indicesToPreload.forEach((idx) => updated.add(idx))
-        return updated
-      }
-
-      return prevLoaded
-    })
-  }, [currentImageIndex, currentImages, selectedCollection, selectedModel])
+    // Preload previous images
+    for (let i = 1; i <= preloadCount; i++) {
+      const prevIndex =
+        currentImageIndex - i < 0 ? totalImages + (currentImageIndex - i) : currentImageIndex - i
+      loadImageIfNeeded(prevIndex)
+    }
+  }, [selectedCollection, selectedModel, currentImageIndex, loadImageIfNeeded])
 
   const openCollection = useCallback((collection: GalleryCollection) => {
-    if (!collection.images || collection.images.length === 0) {
-      console.error('Cannot open collection with no images:', collection.folderName)
-      return
-    }
     setSelectedCollection(collection)
     setSelectedModel(null)
     document.body.style.overflow = 'hidden'
   }, [])
 
   const openModel = useCallback((model: CarModel) => {
-    if (!model.images || model.images.length === 0) {
-      console.error('Cannot open model with no images:', model.modelName)
-      return
-    }
     setSelectedModel(model)
     setSelectedCollection(null)
     document.body.style.overflow = 'hidden'
@@ -348,24 +169,24 @@ export default function GalleryPage() {
     setSelectedCollection(null)
     setSelectedModel(null)
     setLoadedImages(new Set())
-    setImageLoadErrors(new Set())
-    setCurrentImageLoading(true)
     document.body.style.overflow = 'unset'
   }, [])
 
   const goToPrevious = useCallback(() => {
-    if (!currentImages?.length) return
-    setCurrentImageLoading(true)
-    setCurrentImageIndex((prevIndex) =>
-      prevIndex === 0 ? currentImages.length - 1 : prevIndex - 1,
-    )
-  }, [currentImages])
+    const currentImages = selectedCollection?.images || selectedModel?.images
+    if (!currentImages) return
+    setCurrentImageIndex((prevIndex) => {
+      return prevIndex === 0 ? currentImages.length - 1 : prevIndex - 1
+    })
+  }, [selectedCollection, selectedModel])
 
   const goToNext = useCallback(() => {
-    if (!currentImages?.length) return
-    setCurrentImageLoading(true)
-    setCurrentImageIndex((prevIndex) => (prevIndex + 1) % currentImages.length)
-  }, [currentImages])
+    const currentImages = selectedCollection?.images || selectedModel?.images
+    if (!currentImages) return
+    setCurrentImageIndex((prevIndex) => {
+      return (prevIndex + 1) % currentImages.length
+    })
+  }, [selectedCollection, selectedModel])
 
   useEffect(() => {
     if (!selectedCollection && !selectedModel) return
@@ -383,6 +204,15 @@ export default function GalleryPage() {
     window.addEventListener('keydown', handleKeyDown)
     return () => window.removeEventListener('keydown', handleKeyDown)
   }, [selectedCollection, selectedModel, goToPrevious, goToNext, closeModal])
+
+  // Get current brand's models
+  const currentBrand = carsData.find((brand) => brand.brandName === selectedBrand)
+  const currentImages = selectedCollection?.images || selectedModel?.images
+  const currentTitle = selectedCollection
+    ? selectedCollection.folderName
+    : selectedModel && selectedBrand
+    ? `${formatName(selectedBrand)} ${formatName(selectedModel.modelName)}`
+    : ''
 
   return (
     <div className="gallery-page">
@@ -492,7 +322,6 @@ export default function GalleryPage() {
                             fill
                             style={{ objectFit: 'cover' }}
                             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                            unoptimized={true}
                           />
                         ) : (
                           <div className="gallery-thumbnail-placeholder"></div>
@@ -538,7 +367,6 @@ export default function GalleryPage() {
                           fill
                           style={{ objectFit: 'cover' }}
                           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                          unoptimized={true}
                         />
                       ) : (
                         <div className="gallery-thumbnail-placeholder"></div>
@@ -585,46 +413,15 @@ export default function GalleryPage() {
               </button>
 
               <div className="gallery-modal-image-wrapper">
-                {currentImages[currentImageIndex] && !imageLoadErrors.has(currentImageIndex) ? (
-                  <>
-                    {currentImageLoading && (
-                      <div className="gallery-modal-image-loading">
-                        <div className="gallery-loading-spinner"></div>
-                      </div>
-                    )}
-                    <Image
-                      key={currentImageIndex}
-                      src={currentImages[currentImageIndex]}
-                      alt={`${currentTitle} - Image ${currentImageIndex + 1}`}
-                      fill
-                      style={{ objectFit: 'contain' }}
-                      sizes="90vw"
-                      priority={currentImageIndex === 0}
-                      unoptimized={true}
-                      onLoad={() => setCurrentImageLoading(false)}
-                      onError={() => {
-                        setCurrentImageLoading(false)
-                        setImageLoadErrors((prev) => new Set(prev).add(currentImageIndex))
-                      }}
-                    />
-                  </>
-                ) : (
-                  <div className="gallery-modal-image-error">
-                    <p>Failed to load image</p>
-                    <button
-                      onClick={() => {
-                        setImageLoadErrors((prev) => {
-                          const newSet = new Set(prev)
-                          newSet.delete(currentImageIndex)
-                          return newSet
-                        })
-                        setCurrentImageLoading(true)
-                      }}
-                    >
-                      Retry
-                    </button>
-                  </div>
-                )}
+                <Image
+                  key={`main-${currentImageIndex}`}
+                  src={currentImages[currentImageIndex]}
+                  alt={`${currentTitle} - Image ${currentImageIndex + 1}`}
+                  fill
+                  style={{ objectFit: 'contain' }}
+                  sizes="90vw"
+                  priority={currentImageIndex < 5}
+                />
               </div>
 
               <button
@@ -644,28 +441,19 @@ export default function GalleryPage() {
                     index === currentImageIndex ? 'active' : ''
                   }`}
                   onClick={() => {
-                    setCurrentImageLoading(true)
                     setCurrentImageIndex(index)
                   }}
                 >
-                  {loadedImages.has(index) && !imageLoadErrors.has(index) ? (
+                  {loadedImages.has(index) ? (
                     <Image
                       src={image}
                       alt={`Thumbnail ${index + 1}`}
                       fill
                       style={{ objectFit: 'cover' }}
                       sizes="80px"
-                      unoptimized={true}
-                      onError={() => {
-                        setImageLoadErrors((prev) => new Set(prev).add(index))
-                      }}
                     />
-                  ) : imageLoadErrors.has(index) ? (
-                    <div className="gallery-thumbnail-error" title="Failed to load">
-                      <span>⚠</span>
-                    </div>
                   ) : (
-                    <div className="gallery-thumbnail-placeholder" />
+                    <div className="gallery-thumbnail-placeholder"></div>
                   )}
                 </div>
               ))}
