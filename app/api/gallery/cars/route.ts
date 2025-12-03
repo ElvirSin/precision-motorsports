@@ -3,7 +3,7 @@ import { list } from '@vercel/blob'
 
 // Cache cars gallery data for 1 hour
 let cachedCarsData: { brands: any[]; timestamp: number } | null = null
-const CACHE_DURATION = 60 * 60 * 1000 // 1 hour in milliseconds
+const CACHE_DURATION = 2 * 60 * 60 * 1000 // 2 hours in milliseconds
 
 // Helper function to sort brands alphabetically
 function sortBrands(brands: any[]): any[] {

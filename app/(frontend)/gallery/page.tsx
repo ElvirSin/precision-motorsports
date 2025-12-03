@@ -1,8 +1,9 @@
 'use client'
 
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useState, useEffect, useCallback, useRef } from 'react'
 import Image from 'next/image'
 import '../styles.css'
+import { imageConfigDefault } from 'next/dist/shared/lib/image-config'
 
 interface GalleryCollection {
   folderName: string
@@ -71,18 +72,7 @@ export default function GalleryPage() {
         try {
           const response = await fetch('/api/gallery/cars')
           const data = await response.json()
-          // Sort brands and models alphabetically on client side as well
-          const sortedBrands = (data.brands || [])
-            .map((brand: CarBrand) => ({
-              ...brand,
-              models: [...brand.models].sort((a, b) =>
-                a.modelName.toLowerCase().localeCompare(b.modelName.toLowerCase()),
-              ),
-            }))
-            .sort((a: CarBrand, b: CarBrand) =>
-              a.brandName.toLowerCase().localeCompare(b.brandName.toLowerCase()),
-            )
-          setCarsData(sortedBrands)
+          setCarsData(data.brands)
         } catch (error) {
           console.error('Error fetching cars gallery:', error)
         } finally {
@@ -90,10 +80,10 @@ export default function GalleryPage() {
         }
       }
     }
-
     fetchCarsData()
   }, [activeTab, carsData.length])
 
+  /*
   // Load initial 5 images when a collection or model is opened
   useEffect(() => {
     if (selectedCollection) {
@@ -128,7 +118,6 @@ export default function GalleryPage() {
 
   // Automatically preload images around the current image (for thumbnails)
   // This ensures the main image can reuse the cached version from thumbnails
-
   useEffect(() => {
     const currentImages = selectedCollection?.images || selectedModel?.images
     if (!currentImages) return
@@ -152,6 +141,7 @@ export default function GalleryPage() {
       loadImageIfNeeded(prevIndex)
     }
   }, [selectedCollection, selectedModel, currentImageIndex, loadImageIfNeeded])
+  */
 
   const openCollection = useCallback((collection: GalleryCollection) => {
     setSelectedCollection(collection)
@@ -169,6 +159,7 @@ export default function GalleryPage() {
     setSelectedCollection(null)
     setSelectedModel(null)
     setLoadedImages(new Set())
+    setCurrentImageIndex(0)
     document.body.style.overflow = 'unset'
   }, [])
 
@@ -414,13 +405,12 @@ export default function GalleryPage() {
 
               <div className="gallery-modal-image-wrapper">
                 <Image
-                  key={`main-${currentImageIndex}`}
                   src={currentImages[currentImageIndex]}
                   alt={`${currentTitle} - Image ${currentImageIndex + 1}`}
                   fill
                   style={{ objectFit: 'contain' }}
                   sizes="90vw"
-                  priority={currentImageIndex < 5}
+                  priority={currentImageIndex < 8}
                 />
               </div>
 
@@ -444,7 +434,7 @@ export default function GalleryPage() {
                     setCurrentImageIndex(index)
                   }}
                 >
-                  {loadedImages.has(index) ? (
+                  {image ? (
                     <Image
                       src={image}
                       alt={`Thumbnail ${index + 1}`}
