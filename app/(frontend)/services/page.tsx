@@ -81,7 +81,7 @@ const carData = [
   },
   {
     car: '/manufacturers/car-images/jaguar.webp',
-    logo: '/manufacturers/jaguar.png',
+    logo: '/manufacturers/jaguar.webp',
     name: 'Jaguar',
     slug: 'jaguar',
   },
@@ -360,7 +360,7 @@ export default function ServicesPage() {
             </Link>
             <Link href="/manufacturers/jaguar" className="manufacturer-item">
               <Image
-                src="/manufacturers/jaguar.png"
+                src="/manufacturers/jaguar.webp"
                 alt="Jaguar"
                 width={120}
                 height={80}

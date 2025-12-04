@@ -246,7 +246,7 @@ export default function HomePage() {
             </Link>
             <Link href="/manufacturers/jaguar" className="manufacturer-item">
               <Image
-                src="/manufacturers/jaguar.png"
+                src="/manufacturers/jaguar.webp"
                 alt="Jaguar"
                 width={120}
                 height={80}
