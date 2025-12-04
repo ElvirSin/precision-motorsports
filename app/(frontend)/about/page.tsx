@@ -1,7 +1,16 @@
 import React from 'react'
 import Image from 'next/image'
+import { Metadata } from 'next'
 import ScrollArrow from '../components/ScrollArrow'
 import '../styles.css'
+
+export const metadata: Metadata = {
+  title: 'About Us | BMW, Audi, Porsche & Exotic Car Experts',
+  description:
+    'Learn about the experts at Precision Motorsports—specializing in European, exotic, and performance car service. Trust our master technicians. Visit us today!',
+  keywords:
+    'Learn about Precision Motorsports; expert technicians specializing in BMW, Audi, Porsche, and exotic car service, performance upgrades, and custom builds in Oakland County, MI. Trusted for premium care and precision engineering.',
+}
 
 export default function AboutPage() {
   return (
